@@ -29,7 +29,38 @@ onMounted(() => {
 
       <!-- Contenuto principale -->
       <div class="content-wrapper">
-        <!-- Sezione principale -->
+        <!-- SEZIONE PRINCIPALE - Storia di Enzo e Debora -->
+        <div class="hero-story-section">
+          <div class="story-container">
+            <div class="story-border-tl"></div>
+            <div class="story-border-br"></div>
+
+            <div class="story-ornament-top">◆</div>
+            <h2 class="story-title">Un Grande Amore per il Mare</h2>
+            <div class="story-divider"></div>
+
+            <div class="story-content">
+              <p class="story-main-text">
+                Il Pesce d'Oro di <strong>Enzo e Debora</strong>, storia di un grande amore e
+                ospitalità che si rinnova quotidianamente portando in tavola il meglio del nostro
+                mare.
+              </p>
+              <p class="story-secondary-text">
+                Location perfetta per le specialità ittiche preparate dallo chef Enzo e dai suoi
+                collaboratori, veri e propri percorsi attraverso la Sardegna in cui la materia prima
+                è la protagonista assoluta.
+              </p>
+            </div>
+
+            <div class="story-signature">
+              <div class="signature-line"></div>
+              <span class="signature-text">Enzo & Debora</span>
+              <div class="signature-line"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sezione ospitalità -->
         <div class="intro-section">
           <div class="intro-content">
             <h2 class="section-title">Ospitalità e Cortesia</h2>
@@ -247,12 +278,138 @@ onMounted(() => {
   z-index: 2;
 }
 
+/* ==================== SEZIONE PRINCIPALE - STORIA ==================== */
+.hero-story-section {
+  margin-bottom: 5rem;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: storySlide 1s ease-out 1.4s forwards;
+}
+
+@keyframes storySlide {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.story-container {
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 5rem 4rem;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(218, 165, 32, 0.03));
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  position: relative;
+  text-align: center;
+}
+
+.story-border-tl,
+.story-border-br {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border: 2px solid #d4af37;
+  opacity: 0.6;
+}
+
+.story-border-tl {
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.story-border-br {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+}
+
+.story-ornament-top {
+  color: #d4af37;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+}
+
+.story-title {
+  color: #d4af37;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 400;
+  font-family: 'Playfair Display', 'Georgia', serif;
+  margin-bottom: 1.5rem;
+  letter-spacing: 2px;
+}
+
+.story-divider {
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  margin: 2rem auto;
+}
+
+.story-content {
+  margin-bottom: 3rem;
+}
+
+.story-main-text {
+  color: #e0e0e0;
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  line-height: 2;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  font-family: 'Playfair Display', 'Georgia', serif;
+}
+
+.story-main-text strong {
+  color: #d4af37;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.story-secondary-text {
+  color: rgba(224, 224, 224, 0.85);
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
+  line-height: 1.9;
+  font-weight: 300;
+}
+
+.story-signature {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.signature-line {
+  flex: 1;
+  max-width: 100px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #d4af37);
+}
+
+.signature-line:last-child {
+  background: linear-gradient(90deg, #d4af37, transparent);
+}
+
+.signature-text {
+  color: #d4af37;
+  font-size: 1.3rem;
+  font-weight: 400;
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-style: italic;
+  letter-spacing: 2px;
+}
+
 /* Intro section */
 .intro-section {
   margin-bottom: 4rem;
   opacity: 0;
   transform: translateY(30px);
-  animation: contentSlide 1s ease-out 1.4s forwards;
+  animation: contentSlide 1s ease-out 1.6s forwards;
 }
 
 @keyframes contentSlide {
@@ -337,11 +494,11 @@ onMounted(() => {
 }
 
 .box-1 {
-  animation: boxSlide 1s ease-out 1.6s forwards;
+  animation: boxSlide 1s ease-out 1.8s forwards;
 }
 
 .box-2 {
-  animation: boxSlide 1s ease-out 1.8s forwards;
+  animation: boxSlide 1s ease-out 2s forwards;
 }
 
 @keyframes boxSlide {
@@ -412,7 +569,7 @@ onMounted(() => {
 .cuisine-section {
   opacity: 0;
   transform: translateY(30px);
-  animation: contentSlide 1s ease-out 2s forwards;
+  animation: contentSlide 1s ease-out 2.2s forwards;
 }
 
 .cuisine-content {
@@ -474,7 +631,7 @@ onMounted(() => {
   height: 1px;
   background: linear-gradient(90deg, transparent, #d4af37, transparent);
   opacity: 0;
-  animation: ornamentFade 1s ease-out 2.2s forwards;
+  animation: ornamentFade 1s ease-out 2.4s forwards;
 }
 
 /* Responsive */
@@ -485,6 +642,28 @@ onMounted(() => {
 
   .header-container {
     margin-bottom: 3rem;
+  }
+
+  .story-container {
+    padding: 3rem 2rem;
+  }
+
+  .story-border-tl,
+  .story-border-br {
+    width: 60px;
+    height: 60px;
+  }
+
+  .story-main-text {
+    font-size: 1.15rem;
+  }
+
+  .story-secondary-text {
+    font-size: 1.05rem;
+  }
+
+  .signature-line {
+    max-width: 60px;
   }
 
   .intro-content,
@@ -510,6 +689,31 @@ onMounted(() => {
   .services-list {
     flex-direction: column;
     gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .story-container {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .story-border-tl,
+  .story-border-br {
+    width: 45px;
+    height: 45px;
+  }
+
+  .story-main-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+
+  .story-secondary-text {
+    font-size: 1rem;
+  }
+
+  .signature-text {
+    font-size: 1.1rem;
   }
 }
 </style>

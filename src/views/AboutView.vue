@@ -2,11 +2,91 @@
 import { onMounted, ref } from 'vue'
 
 const isVisible = ref(false)
+const currentReviewIndex = ref(0)
+const slideDirection = ref('slide-left')
+
+const reviews = ref([
+  {
+    text: "L'antipasto della casa è pazzesco: si compone di 10 piccoli assaggi, un connubio di sapori. Come primo abbiamo mangiato spaghetti con vongole perfettamente al dente con vongole grandissime. Il branzino al sale, cotto divinamente e servito magistralmente. Ottimo rapporto qualità/prezzo!",
+    author: 'Marco T.',
+    rating: 5,
+  },
+  {
+    text: "Ogni estate vado ad Alghero e non posso farmi mancare una cena al Ristorante Pesce d'Oro. Qualità ottima, servizio ottimo, tavolini all'aperto e prezzo giusto. Una garanzia che rinnovo ogni anno!",
+    author: 'Giulia S.',
+    rating: 5,
+  },
+  {
+    text: 'Siamo stati in tre persone più la nostra barboncina e siamo rimasti entusiasti! Il pesce è freschissimo, cucinato in maniera sublime e servito con grande cura. Ogni piatto ci ha davvero conquistati per qualità e sapore.',
+    author: 'Andrea P.',
+    rating: 5,
+  },
+  {
+    text: "Una cena a base di pesce eccezionale: una zuppetta di frutti di mare buonissima e abbondante, un'orata fresca da 750gr sotto sale cotta alla perfezione, gamberoni al mirto gustosissimi. Un prezzo che abbiamo pagato con vero piacere. Lo consiglio vivamente!",
+    author: 'Roberto L.',
+    rating: 5,
+  },
+  {
+    text: 'Il talento dello chef lascia soddisfatti i palati. Abbiamo ordinato un antipasto misto di pesce con sei portate diverse ed un gusto veramente squisito. Il filetto di branzino allo zafferano e la pasta al ragù di polpo e mirto sono stati apprezzatissimi!',
+    author: 'Francesca M.',
+    rating: 5,
+  },
+  {
+    text: "Superbo ristorante di pesce a prezzi ragionevoli e gestito molto professionalmente. L'antipasto consigliato dagli chef con 6 assaggiatori e il tonno con salse di frutti di bosco e barbabietole è stato fantastico. Piatti creativi altamente consigliati!",
+    author: 'Thomas K.',
+    rating: 5,
+  },
+  {
+    text: 'Questo ristorante ci è stato consigliato da un residente di Alghero. Locale ben arredato e curato, cibo freschissimo e ben cucinato. Ottima la tartare di tonno e la fregola ai frutti di mare. Durante questa vacanza ci siamo stati per 3 volte!',
+    author: 'Laura B.',
+    rating: 5,
+  },
+  {
+    text: 'La gestione di questo ristorante è vincente: cibo ottimo, ambiente semplice e accogliente, staff cordiale e professionale. Un posto dove torno sempre volentieri! Frequentato quasi esclusivamente dai locals.',
+    author: 'Alessandro V.',
+    rating: 5,
+  },
+])
+
+let autoSlideInterval = null
+
+const nextReview = () => {
+  slideDirection.value = 'slide-left'
+  currentReviewIndex.value = (currentReviewIndex.value + 1) % reviews.value.length
+  resetAutoSlide()
+}
+
+const prevReview = () => {
+  slideDirection.value = 'slide-right'
+  currentReviewIndex.value =
+    currentReviewIndex.value === 0 ? reviews.value.length - 1 : currentReviewIndex.value - 1
+  resetAutoSlide()
+}
+
+const goToReview = (index) => {
+  slideDirection.value = index > currentReviewIndex.value ? 'slide-left' : 'slide-right'
+  currentReviewIndex.value = index
+  resetAutoSlide()
+}
+
+const startAutoSlide = () => {
+  autoSlideInterval = setInterval(() => {
+    nextReview()
+  }, 7000)
+}
+
+const resetAutoSlide = () => {
+  if (autoSlideInterval) {
+    clearInterval(autoSlideInterval)
+  }
+  startAutoSlide()
+}
 
 onMounted(() => {
   setTimeout(() => {
     isVisible.value = true
   }, 300)
+  startAutoSlide()
 })
 </script>
 
@@ -107,6 +187,86 @@ onMounted(() => {
             <div class="feature-icon">❤️</div>
             <h4>Passione</h4>
             <p>Dedizione in ogni piatto servito</p>
+          </div>
+        </div>
+
+        <!-- Reviews Carousel -->
+        <div class="reviews-wrapper">
+          <div class="reviews-intro">
+            <div class="intro-ornament">★</div>
+            <h3>Parola ai Nostri Ospiti</h3>
+            <div class="intro-line"></div>
+            <p class="reviews-description">
+              Scopri le esperienze autentiche di chi ha scelto il Pesce d'Oro
+            </p>
+          </div>
+
+          <div class="carousel-main">
+            <button class="carousel-nav carousel-prev" @click="prevReview" aria-label="Precedente">
+              <span>‹</span>
+            </button>
+
+            <div class="carousel-stage">
+              <transition :name="slideDirection" mode="out-in">
+                <div :key="currentReviewIndex" class="review-showcase">
+                  <div class="showcase-border-tl"></div>
+                  <div class="showcase-border-br"></div>
+
+                  <div class="review-header">
+                    <div class="stars-display">
+                      <span
+                        v-for="star in reviews[currentReviewIndex].rating"
+                        :key="star"
+                        class="star-icon"
+                        >★</span
+                      >
+                    </div>
+                  </div>
+
+                  <div class="review-body">
+                    <div class="quotation-left">"</div>
+                    <p class="review-quote">{{ reviews[currentReviewIndex].text }}</p>
+                    <div class="quotation-right">"</div>
+                  </div>
+
+                  <div class="review-author-section">
+                    <div class="author-line"></div>
+                    <p class="author-name">{{ reviews[currentReviewIndex].author }}</p>
+                    <p class="author-source">via TripAdvisor</p>
+                  </div>
+                </div>
+              </transition>
+            </div>
+
+            <button class="carousel-nav carousel-next" @click="nextReview" aria-label="Successivo">
+              <span>›</span>
+            </button>
+          </div>
+
+          <div class="carousel-pagination">
+            <button
+              v-for="(review, index) in reviews"
+              :key="index"
+              :class="['pagination-dot', { active: index === currentReviewIndex }]"
+              @click="goToReview(index)"
+              :aria-label="`Vai alla recensione ${index + 1}`"
+            ></button>
+          </div>
+
+          <div class="reviews-footer">
+            <div class="tripadvisor-stats">
+              <span class="stat-score">4.2/5</span>
+              <span class="stat-divider">|</span>
+              <span class="stat-reviews">Oltre 2.000 recensioni</span>
+            </div>
+            <a
+              href="https://www.tripadvisor.it/Restaurant_Review-g187880-d1946247-Reviews-Il_Pesce_d_oro-Alghero_Province_of_Sassari_Sardinia.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="tripadvisor-cta"
+            >
+              Leggi tutte le recensioni su TripAdvisor
+            </a>
           </div>
         </div>
 
@@ -563,6 +723,323 @@ onMounted(() => {
   font-weight: 300;
 }
 
+/* ==================== REVIEWS CAROUSEL ==================== */
+.reviews-wrapper {
+  margin-bottom: 5rem;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 2.3s forwards;
+}
+
+.reviews-intro {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.intro-ornament {
+  font-size: 2.5rem;
+  color: #d4af37;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+}
+
+.reviews-intro h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: #d4af37;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+  letter-spacing: 2px;
+}
+
+.intro-line {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  margin: 0 auto 2rem;
+}
+
+.reviews-description {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: rgba(224, 224, 224, 0.65);
+  font-size: 1.05rem;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.5px;
+}
+
+.carousel-main {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.carousel-nav {
+  background: transparent;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  color: #d4af37;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.carousel-nav span {
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1;
+  display: block;
+}
+
+.carousel-nav:hover {
+  border-color: rgba(212, 175, 55, 0.5);
+  background: rgba(212, 175, 55, 0.05);
+}
+
+.carousel-stage {
+  flex: 1;
+  max-width: 900px;
+  overflow: hidden;
+}
+
+.review-showcase {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.04), rgba(218, 165, 32, 0.01));
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  padding: 4rem 3.5rem;
+  position: relative;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.showcase-border-tl,
+.showcase-border-br {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border: 2px solid #d4af37;
+  opacity: 0.4;
+}
+
+.showcase-border-tl {
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.showcase-border-br {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+}
+
+.review-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.stars-display {
+  display: inline-flex;
+  gap: 0.3rem;
+}
+
+.star-icon {
+  color: #d4af37;
+  font-size: 1.3rem;
+  opacity: 0.9;
+}
+
+.review-body {
+  position: relative;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quotation-left,
+.quotation-right {
+  position: absolute;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 5rem;
+  color: rgba(212, 175, 55, 0.1);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.quotation-left {
+  top: -1rem;
+  left: 0;
+}
+
+.quotation-right {
+  bottom: -2rem;
+  right: 0;
+}
+
+.review-quote {
+  font-size: 1.15rem;
+  line-height: 1.95;
+  color: rgba(224, 224, 224, 0.85);
+  font-weight: 300;
+  max-width: 750px;
+  position: relative;
+  z-index: 1;
+}
+
+.review-author-section {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.author-line {
+  width: 50px;
+  height: 1px;
+  background: #d4af37;
+  margin: 0 auto 1.5rem;
+}
+
+.author-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: #d4af37;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-bottom: 0.3rem;
+}
+
+.author-source {
+  color: rgba(224, 224, 224, 0.5);
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+.carousel-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-bottom: 2.5rem;
+}
+
+.pagination-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.2);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.pagination-dot:hover {
+  background: rgba(212, 175, 55, 0.4);
+}
+
+.pagination-dot.active {
+  background: #d4af37;
+  border-color: #d4af37;
+  transform: scale(1.3);
+}
+
+.reviews-footer {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.tripadvisor-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  color: rgba(224, 224, 224, 0.6);
+  font-size: 0.95rem;
+  font-weight: 300;
+}
+
+.stat-score {
+  color: #d4af37;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.stat-divider {
+  opacity: 0.4;
+}
+
+.tripadvisor-cta {
+  display: inline-block;
+  color: #d4af37;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  padding: 0.5rem 0;
+  position: relative;
+  transition: opacity 0.3s ease;
+}
+
+.tripadvisor-cta::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 1px;
+  background: #d4af37;
+  transition: width 0.3s ease;
+}
+
+.tripadvisor-cta:hover::after {
+  width: 100%;
+}
+
+.tripadvisor-cta:hover {
+  opacity: 0.8;
+}
+
+/* Carousel Transitions */
+.slide-left-enter-active,
+.slide-left-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition: all 0.6s ease;
+}
+
+.slide-left-enter-from {
+  opacity: 0;
+  transform: translateX(40px);
+}
+
+.slide-left-leave-to {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+.slide-right-enter-from {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+.slide-right-leave-to {
+  opacity: 0;
+  transform: translateX(40px);
+}
+
 /* CTA Section */
 .cta-section {
   text-align: center;
@@ -570,7 +1047,7 @@ onMounted(() => {
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(218, 165, 32, 0.02));
   border: 1px solid rgba(212, 175, 55, 0.2);
   opacity: 0;
-  animation: fadeInUp 1s ease-out 2.3s forwards;
+  animation: fadeInUp 1s ease-out 2.5s forwards;
 }
 
 .cta-ornament {
@@ -680,6 +1157,47 @@ onMounted(() => {
     padding: 2rem 1rem;
   }
 
+  .reviews-wrapper {
+    margin-bottom: 3rem;
+  }
+
+  .reviews-intro {
+    margin-bottom: 3rem;
+  }
+
+  .carousel-main {
+    gap: 1rem;
+  }
+
+  .carousel-nav {
+    width: 45px;
+    height: 45px;
+  }
+
+  .carousel-nav span {
+    font-size: 1.8rem;
+  }
+
+  .review-showcase {
+    padding: 3rem 2rem;
+    min-height: 400px;
+  }
+
+  .showcase-border-tl,
+  .showcase-border-br {
+    width: 50px;
+    height: 50px;
+  }
+
+  .quotation-left,
+  .quotation-right {
+    font-size: 4rem;
+  }
+
+  .review-quote {
+    font-size: 1.05rem;
+  }
+
   .cta-section {
     padding: 3rem 1.5rem;
   }
@@ -712,6 +1230,65 @@ onMounted(() => {
 
   .features-section {
     grid-template-columns: 1fr;
+  }
+
+  .reviews-intro h3 {
+    font-size: 1.8rem;
+  }
+
+  .carousel-main {
+    gap: 0.5rem;
+  }
+
+  .carousel-nav {
+    width: 40px;
+    height: 40px;
+  }
+
+  .carousel-nav span {
+    font-size: 1.5rem;
+  }
+
+  .review-showcase {
+    padding: 2.5rem 1.5rem;
+    min-height: 420px;
+  }
+
+  .showcase-border-tl,
+  .showcase-border-br {
+    width: 40px;
+    height: 40px;
+  }
+
+  .quotation-left {
+    font-size: 3.5rem;
+    top: -0.5rem;
+    left: -0.5rem;
+  }
+
+  .quotation-right {
+    font-size: 3.5rem;
+    bottom: -1.5rem;
+    right: -0.5rem;
+  }
+
+  .review-quote {
+    font-size: 0.98rem;
+    line-height: 1.8;
+  }
+
+  .pagination-dot {
+    width: 7px;
+    height: 7px;
+  }
+
+  .tripadvisor-stats {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .stat-divider {
+    display: none;
   }
 }
 </style>
