@@ -32,7 +32,7 @@ const reviews = ref([
     rating: 5,
   },
   {
-    text: "Superbo ristorante di pesce a prezzi ragionevoli e gestito molto professionalmente. L'antipasto consigliato dagli chef con 6 assaggiatori e il tonno con salse di frutti di bosco e barbabietole è stato fantastico. Piatti creativi altamente consigliati!",
+    text: "Superbo ristorante di pesce a prezzi ragionevoli e gestito molto professionalmente. L'antipasto consigliato dagli chef con 6 assaggiatori e il tonno con salse di frutti di bossi e barbabietole è stato fantastico. Piatti creativi altamente consigliati!",
     author: 'Thomas K.',
     rating: 5,
   },
@@ -118,26 +118,10 @@ onMounted(() => {
           </p>
         </div>
 
-        <!-- Story Grid -->
-        <div class="story-grid">
-          <!-- Left Column -->
-          <div class="story-block block-left">
-            <div class="block-number">01</div>
-            <h3>La Nuova Gestione</h3>
-            <div class="block-divider"></div>
-            <p>
-              Al "Pesce d'oro" c'è stato un cambio di gestione che ha decisamente rivalutato il
-              locale. La trasformazione è stata, infatti, opera dello chef algherese e della moglie.
-            </p>
-            <p>
-              Il talento dello chef lascerà soddisfatti i vostri palati grazie ai suoi anni di
-              esperienza nel settore.
-            </p>
-          </div>
-
-          <!-- Right Column -->
-          <div class="story-block block-right">
-            <div class="block-number">02</div>
+        <!-- Gli Spazi - Centered Single Block -->
+        <div class="single-story-section">
+          <div class="story-block-centered">
+            <div class="block-number-centered">◆</div>
             <h3>Gli Spazi</h3>
             <div class="block-divider"></div>
             <p>
@@ -307,94 +291,45 @@ onMounted(() => {
   position: relative;
   height: 60vh;
   min-height: 400px;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
+    url('https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=2074') center/cover;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
   overflow: hidden;
-}
-
-.hero-about::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background:
-    radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 70% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
-  animation: heroGlow 8s ease-in-out infinite;
-}
-
-@keyframes heroGlow {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.6;
-  }
 }
 
 .hero-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(212, 175, 55, 0.02) 2px,
-    rgba(212, 175, 55, 0.02) 4px
-  );
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 0%, rgba(10, 10, 10, 0.6) 100%);
 }
 
 .hero-content {
   position: relative;
-  z-index: 2;
   text-align: center;
-  padding: 2rem;
-  animation: heroSlideUp 1s ease-out;
-}
-
-@keyframes heroSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  z-index: 1;
+  opacity: 0;
+  animation: fadeInUp 1.5s ease-out 0.3s forwards;
 }
 
 .ornament {
   color: #d4af37;
-  font-size: 2.5rem;
+  font-size: 3rem;
   margin-bottom: 1rem;
-  opacity: 0;
-  animation: fadeIn 1s ease-out 0.3s forwards;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
+  opacity: 0.8;
+  animation: float 3s ease-in-out infinite;
 }
 
 .main-title {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(3rem, 6vw, 5rem);
+  font-size: clamp(3rem, 8vw, 5rem);
   font-weight: 400;
-  color: #d4af37;
+  color: #ffffff;
+  letter-spacing: 8px;
   margin-bottom: 1rem;
-  letter-spacing: 3px;
-  text-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
-  opacity: 0;
-  animation: fadeIn 1s ease-out 0.5s forwards;
+  text-transform: uppercase;
 }
 
 .title-divider {
@@ -402,34 +337,19 @@ onMounted(() => {
   height: 2px;
   background: linear-gradient(90deg, transparent, #d4af37, transparent);
   margin: 1.5rem auto;
-  opacity: 0;
-  animation: expandLine 1s ease-out 0.7s forwards;
-}
-
-@keyframes expandLine {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    opacity: 1;
-    transform: scaleX(1);
-  }
 }
 
 .subtitle {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-size: 1.3rem;
   color: rgba(224, 224, 224, 0.8);
   font-weight: 300;
+  letter-spacing: 3px;
   font-style: italic;
-  letter-spacing: 2px;
-  opacity: 0;
-  animation: fadeIn 1s ease-out 0.9s forwards;
 }
 
 /* ==================== CONTENT SECTION ==================== */
 .content-section {
-  padding: 5rem 2rem;
+  padding: 4rem 2rem;
 }
 
 .container {
@@ -437,36 +357,25 @@ onMounted(() => {
   margin: 0 auto;
 }
 
-/* Intro Card */
+/* ==================== INTRO CARD ==================== */
 .intro-card {
+  position: relative;
   text-align: center;
   padding: 4rem 3rem;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(218, 165, 32, 0.02));
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.03), rgba(10, 10, 10, 0.5));
   border: 1px solid rgba(212, 175, 55, 0.2);
-  position: relative;
-  margin-bottom: 5rem;
+  margin-bottom: 4rem;
   opacity: 0;
-  animation: fadeInUp 1s ease-out 1.1s forwards;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  animation: fadeInUp 1s ease-out 0.5s forwards;
 }
 
 .intro-card::before,
 .intro-card::after {
   content: '';
   position: absolute;
-  width: 80px;
-  height: 80px;
-  border: 2px solid #d4af37;
+  width: 60px;
+  height: 60px;
+  border: 1px solid rgba(212, 175, 55, 0.4);
 }
 
 .intro-card::before {
@@ -485,13 +394,14 @@ onMounted(() => {
 
 .card-ornament {
   color: #d4af37;
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin-bottom: 1.5rem;
+  opacity: 0.6;
 }
 
 .intro-card h2 {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: 2.5rem;
   color: #d4af37;
   font-weight: 400;
   margin-bottom: 1.5rem;
@@ -499,146 +409,133 @@ onMounted(() => {
 }
 
 .text-divider {
-  width: 60px;
-  height: 2px;
+  width: 80px;
+  height: 1px;
   background: #d4af37;
   margin: 1.5rem auto;
+  opacity: 0.5;
 }
 
 .lead-text {
-  font-size: 1.2rem;
-  line-height: 2;
-  color: rgba(224, 224, 224, 0.8);
+  color: rgba(224, 224, 224, 0.85);
+  font-size: 1.15rem;
+  line-height: 1.9;
   font-weight: 300;
   max-width: 800px;
   margin: 0 auto;
 }
 
-/* Story Grid */
-.story-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 3rem;
-  margin-bottom: 5rem;
-}
-
-.story-block {
-  background: rgba(212, 175, 55, 0.02);
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  padding: 3rem;
-  position: relative;
-  transition: all 0.4s ease;
+/* ==================== CENTERED SINGLE STORY BLOCK ==================== */
+.single-story-section {
+  margin-bottom: 4rem;
+  display: flex;
+  justify-content: center;
   opacity: 0;
+  animation: fadeInUp 1s ease-out 1s forwards;
 }
 
-.block-left {
-  animation: fadeInLeft 1s ease-out 1.3s forwards;
+.story-block-centered {
+  position: relative;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(10, 10, 10, 0.3));
+  padding: 3rem;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  max-width: 700px;
+  width: 100%;
+  text-align: center;
 }
 
-.block-right {
-  animation: fadeInRight 1s ease-out 1.5s forwards;
-}
-
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.story-block:hover {
-  border-color: rgba(212, 175, 55, 0.4);
-  transform: translateY(-5px);
-}
-
-.block-number {
+.story-block-centered::before {
+  content: '';
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  font-size: 3rem;
-  color: rgba(212, 175, 55, 0.15);
-  font-weight: 700;
-  font-family: 'Playfair Display', Georgia, serif;
+  top: -1px;
+  left: -1px;
+  width: 80px;
+  height: 80px;
+  border-top: 2px solid rgba(212, 175, 55, 0.4);
+  border-left: 2px solid rgba(212, 175, 55, 0.4);
 }
 
-.story-block h3 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.8rem;
+.story-block-centered::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 80px;
+  height: 80px;
+  border-bottom: 2px solid rgba(212, 175, 55, 0.4);
+  border-right: 2px solid rgba(212, 175, 55, 0.4);
+}
+
+.block-number-centered {
   color: #d4af37;
-  font-weight: 500;
-  margin-bottom: 1rem;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.5;
+}
+
+.story-block-centered h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2rem;
+  color: #d4af37;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
   letter-spacing: 1px;
 }
 
 .block-divider {
-  width: 40px;
-  height: 2px;
-  background: #d4af37;
-  margin-bottom: 1.5rem;
+  width: 60px;
+  height: 1px;
+  background: rgba(212, 175, 55, 0.5);
+  margin: 1.5rem auto;
 }
 
-.story-block p {
-  color: rgba(224, 224, 224, 0.7);
-  line-height: 1.9;
+.story-block-centered p {
+  color: rgba(224, 224, 224, 0.8);
+  font-size: 1.05rem;
+  line-height: 1.8;
   margin-bottom: 1rem;
-  font-size: 1rem;
   font-weight: 300;
 }
 
-.story-block p:last-child {
+.story-block-centered p:last-child {
   margin-bottom: 0;
 }
 
-.story-block strong {
+.story-block-centered strong {
   color: #d4af37;
   font-weight: 500;
 }
 
-/* Mission Section */
+/* ==================== MISSION SECTION ==================== */
 .mission-section {
-  margin-bottom: 5rem;
+  margin-bottom: 4rem;
   opacity: 0;
-  animation: fadeInUp 1s ease-out 1.7s forwards;
+  animation: fadeInUp 1s ease-out 1.2s forwards;
 }
 
 .mission-content {
-  background: linear-gradient(135deg, rgba(10, 10, 10, 0.8), rgba(20, 20, 20, 0.6));
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  padding: 4rem 3rem;
-  text-align: center;
   position: relative;
+  background: linear-gradient(135deg, rgba(10, 10, 10, 0.8), rgba(212, 175, 55, 0.03));
+  padding: 4rem 3rem;
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  text-align: center;
 }
 
 .mission-content::before {
   content: '';
   position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
-  border: 1px solid rgba(212, 175, 55, 0.1);
-  pointer-events: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
 }
 
 .mission-icon {
-  font-size: 2.5rem;
   color: #d4af37;
+  font-size: 3rem;
   margin-bottom: 1.5rem;
+  opacity: 0.7;
 }
 
 .mission-content h3 {
@@ -651,83 +548,73 @@ onMounted(() => {
 }
 
 .mission-divider {
-  width: 80px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  width: 100px;
+  height: 1px;
+  background: #d4af37;
   margin: 1.5rem auto;
+  opacity: 0.5;
 }
 
 .mission-text {
+  color: rgba(224, 224, 224, 0.85);
   font-size: 1.15rem;
-  line-height: 2;
-  color: rgba(224, 224, 224, 0.8);
-  font-weight: 300;
+  line-height: 1.9;
   max-width: 900px;
   margin: 0 auto;
+  font-weight: 300;
 }
 
-/* Features Section */
+/* ==================== FEATURES SECTION ==================== */
 .features-section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
   margin-bottom: 5rem;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 1.5s forwards;
 }
 
 .feature-item {
   text-align: center;
   padding: 2.5rem 1.5rem;
-  border: 1px solid rgba(212, 175, 55, 0.1);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.03), rgba(10, 10, 10, 0.5));
+  border: 1px solid rgba(212, 175, 55, 0.15);
   transition: all 0.4s ease;
-  opacity: 0;
-  animation: fadeInUp 1s ease-out forwards;
-}
-
-.feature-item:nth-child(1) {
-  animation-delay: 1.9s;
-}
-.feature-item:nth-child(2) {
-  animation-delay: 2s;
-}
-.feature-item:nth-child(3) {
-  animation-delay: 2.1s;
-}
-.feature-item:nth-child(4) {
-  animation-delay: 2.2s;
 }
 
 .feature-item:hover {
-  background: rgba(212, 175, 55, 0.03);
-  border-color: rgba(212, 175, 55, 0.3);
-  transform: translateY(-5px);
+  transform: translateY(-8px);
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
 }
 
 .feature-icon {
-  font-size: 2.5rem;
+  font-size: 3rem;
   margin-bottom: 1rem;
+  filter: grayscale(0.3);
 }
 
 .feature-item h4 {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.3rem;
   color: #d4af37;
-  font-weight: 500;
+  font-size: 1.4rem;
   margin-bottom: 0.8rem;
+  font-weight: 500;
   letter-spacing: 1px;
 }
 
 .feature-item p {
-  color: rgba(224, 224, 224, 0.65);
+  color: rgba(224, 224, 224, 0.7);
   font-size: 0.95rem;
   line-height: 1.6;
   font-weight: 300;
 }
 
-/* ==================== REVIEWS CAROUSEL ==================== */
+/* ==================== REVIEWS SECTION ==================== */
 .reviews-wrapper {
   margin-bottom: 5rem;
   opacity: 0;
-  animation: fadeInUp 1s ease-out 2.3s forwards;
+  animation: fadeInUp 1s ease-out 1.8s forwards;
 }
 
 .reviews-intro {
@@ -736,82 +623,83 @@ onMounted(() => {
 }
 
 .intro-ornament {
-  font-size: 2.5rem;
   color: #d4af37;
-  margin-bottom: 1.5rem;
-  opacity: 0.9;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.6;
 }
 
 .reviews-intro h3 {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-size: 2.5rem;
   color: #d4af37;
   font-weight: 400;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   letter-spacing: 2px;
 }
 
 .intro-line {
-  width: 80px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
-  margin: 0 auto 2rem;
+  width: 100px;
+  height: 1px;
+  background: #d4af37;
+  margin: 1.5rem auto;
+  opacity: 0.5;
 }
 
 .reviews-description {
-  font-family: 'Playfair Display', Georgia, serif;
-  color: rgba(224, 224, 224, 0.65);
-  font-size: 1.05rem;
+  color: rgba(224, 224, 224, 0.7);
+  font-size: 1.1rem;
   font-weight: 300;
   font-style: italic;
-  letter-spacing: 0.5px;
 }
 
 .carousel-main {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .carousel-nav {
-  background: transparent;
-  border: 1px solid rgba(212, 175, 55, 0.25);
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
   color: #d4af37;
   width: 50px;
   height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
   flex-shrink: 0;
-  font-family: 'Playfair Display', Georgia, serif;
 }
 
 .carousel-nav span {
   font-size: 2rem;
-  font-weight: 300;
   line-height: 1;
-  display: block;
 }
 
 .carousel-nav:hover {
+  background: rgba(212, 175, 55, 0.2);
   border-color: rgba(212, 175, 55, 0.5);
-  background: rgba(212, 175, 55, 0.05);
+  transform: scale(1.1);
 }
 
 .carousel-stage {
   flex: 1;
-  max-width: 900px;
-  overflow: hidden;
+  max-width: 800px;
+  min-height: 450px;
+  position: relative;
 }
 
 .review-showcase {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.04), rgba(218, 165, 32, 0.01));
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  padding: 4rem 3.5rem;
   position: relative;
-  min-height: 350px;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(10, 10, 10, 0.6));
+  padding: 4rem 3rem;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  min-height: 450px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -820,10 +708,9 @@ onMounted(() => {
 .showcase-border-tl,
 .showcase-border-br {
   position: absolute;
-  width: 70px;
-  height: 70px;
-  border: 2px solid #d4af37;
-  opacity: 0.4;
+  width: 60px;
+  height: 60px;
+  border: 2px solid rgba(212, 175, 55, 0.4);
 }
 
 .showcase-border-tl {
@@ -841,38 +728,36 @@ onMounted(() => {
 }
 
 .review-header {
-  text-align: center;
+  display: flex;
+  justify-content: center;
   margin-bottom: 2rem;
 }
 
 .stars-display {
-  display: inline-flex;
+  display: flex;
   gap: 0.3rem;
 }
 
 .star-icon {
   color: #d4af37;
-  font-size: 1.3rem;
-  opacity: 0.9;
+  font-size: 1.5rem;
 }
 
 .review-body {
   position: relative;
-  text-align: center;
-  margin-bottom: 2.5rem;
-  flex-grow: 1;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2rem 1rem;
 }
 
 .quotation-left,
 .quotation-right {
   position: absolute;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: Georgia, serif;
   font-size: 5rem;
-  color: rgba(212, 175, 55, 0.1);
-  font-weight: 400;
+  color: rgba(212, 175, 55, 0.2);
   line-height: 1;
 }
 
@@ -887,64 +772,63 @@ onMounted(() => {
 }
 
 .review-quote {
-  font-size: 1.15rem;
-  line-height: 1.95;
-  color: rgba(224, 224, 224, 0.85);
+  color: rgba(224, 224, 224, 0.9);
+  font-size: 1.1rem;
+  line-height: 1.9;
+  text-align: center;
   font-weight: 300;
-  max-width: 750px;
+  font-style: italic;
   position: relative;
   z-index: 1;
 }
 
 .review-author-section {
   text-align: center;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(212, 175, 55, 0.15);
+  margin-top: 2rem;
 }
 
 .author-line {
-  width: 50px;
+  width: 60px;
   height: 1px;
-  background: #d4af37;
-  margin: 0 auto 1.5rem;
+  background: rgba(212, 175, 55, 0.5);
+  margin: 0 auto 1rem;
 }
 
 .author-name {
-  font-family: 'Playfair Display', Georgia, serif;
   color: #d4af37;
   font-size: 1.1rem;
   font-weight: 500;
-  letter-spacing: 1px;
   margin-bottom: 0.3rem;
+  letter-spacing: 0.5px;
 }
 
 .author-source {
   color: rgba(224, 224, 224, 0.5);
   font-size: 0.9rem;
   font-weight: 300;
-  letter-spacing: 0.5px;
 }
 
 .carousel-pagination {
   display: flex;
   justify-content: center;
-  gap: 0.7rem;
+  gap: 0.8rem;
   margin-bottom: 2.5rem;
 }
 
 .pagination-dot {
-  width: 9px;
-  height: 9px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: rgba(212, 175, 55, 0.2);
-  border: 1px solid rgba(212, 175, 55, 0.25);
+  background: rgba(212, 175, 55, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.4);
   cursor: pointer;
   transition: all 0.3s ease;
   padding: 0;
 }
 
 .pagination-dot:hover {
-  background: rgba(212, 175, 55, 0.4);
+  background: rgba(212, 175, 55, 0.5);
+  transform: scale(1.2);
 }
 
 .pagination-dot.active {
@@ -955,8 +839,6 @@ onMounted(() => {
 
 .reviews-footer {
   text-align: center;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(212, 175, 55, 0.1);
 }
 
 .tripadvisor-stats {
@@ -965,23 +847,21 @@ onMounted(() => {
   justify-content: center;
   gap: 1rem;
   margin-bottom: 1.5rem;
-  color: rgba(224, 224, 224, 0.6);
-  font-size: 0.95rem;
-  font-weight: 300;
+  color: rgba(224, 224, 224, 0.8);
+  font-size: 1rem;
 }
 
 .stat-score {
   color: #d4af37;
-  font-weight: 500;
-  font-size: 1.1rem;
+  font-weight: 600;
+  font-size: 1.2rem;
 }
 
 .stat-divider {
-  opacity: 0.4;
+  color: rgba(212, 175, 55, 0.5);
 }
 
 .tripadvisor-cta {
-  display: inline-block;
   color: #d4af37;
   text-decoration: none;
   font-size: 1rem;
@@ -1047,7 +927,7 @@ onMounted(() => {
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(218, 165, 32, 0.02));
   border: 1px solid rgba(212, 175, 55, 0.2);
   opacity: 0;
-  animation: fadeInUp 1s ease-out 2.5s forwards;
+  animation: fadeInUp 1s ease-out 2.2s forwards;
 }
 
 .cta-ornament {
@@ -1112,6 +992,28 @@ onMounted(() => {
   box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
 }
 
+/* ==================== ANIMATIONS ==================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
 /* ==================== RESPONSIVE ==================== */
 @media (max-width: 768px) {
   .content-section {
@@ -1129,13 +1031,11 @@ onMounted(() => {
     height: 50px;
   }
 
-  .story-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  .single-story-section {
     margin-bottom: 3rem;
   }
 
-  .story-block {
+  .story-block-centered {
     padding: 2rem;
   }
 
@@ -1216,7 +1116,7 @@ onMounted(() => {
     font-size: 1rem;
   }
 
-  .story-block h3 {
+  .story-block-centered h3 {
     font-size: 1.5rem;
   }
 

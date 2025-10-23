@@ -65,11 +65,7 @@ onMounted(() => {
               mare al pesce fresco, alla carne, alle gustosissime zuppe passando alla pizza cotta
               nel forno a legna.
             </p>
-            <div class="specialty-badge">
-              <span class="badge-icon">★</span>
-              Scarica il Menù
-              <span class="badge-icon">★</span>
-            </div>
+            <div class="specialty-badge">Scarica il Menù</div>
           </div>
         </div>
 

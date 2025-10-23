@@ -30,7 +30,6 @@ onMounted(() => {
         <div class="info-grid">
           <!-- Contact Info Card -->
           <div class="info-card contact-card">
-            <div class="card-icon">📞</div>
             <h2>Info & Contatti</h2>
             <div class="card-divider"></div>
 
@@ -57,7 +56,6 @@ onMounted(() => {
 
           <!-- Hours Card -->
           <div class="info-card hours-card">
-            <div class="card-icon">🕐</div>
             <h2>Orari di Apertura</h2>
             <div class="card-divider"></div>
 
@@ -97,7 +95,6 @@ onMounted(() => {
                 </p>
 
                 <div class="address-box">
-                  <div class="address-icon">📍</div>
                   <div class="address-content">
                     <h3>Indirizzo</h3>
                     <p class="address">Via Catalogna n°12</p>
@@ -105,10 +102,6 @@ onMounted(() => {
                     <p class="note">A soli 2 passi dal porto</p>
                   </div>
                 </div>
-
-                <p class="accessibility">
-                  Facilmente raggiungibile anche da coloro che usano i mezzi pubblici.
-                </p>
               </div>
             </div>
 
