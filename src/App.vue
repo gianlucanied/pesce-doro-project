@@ -12,19 +12,19 @@ const toggleMobileMenu = () => {
 <template>
   <div class="page-wrapper">
     <header>
+      <div class="header-ornament-top"></div>
       <div class="header-content">
         <div class="logo">
           <RouterLink to="/" @click="mobileMenuOpen = false">
-            <img src="https://i.imgur.com/8ZqK9Xo.png" alt="Il Pesce d'Oro" class="logo-img" />
+            <img src="/public/images.png" alt="Il Pesce d'Oro" class="logo-img" />
           </RouterLink>
         </div>
 
         <nav class="desktop-nav">
           <RouterLink to="/" class="nav-link">Home</RouterLink>
           <RouterLink to="/about" class="nav-link">Chi Siamo</RouterLink>
-          <RouterLink to="/menu" class="nav-link">Menu</RouterLink>
           <RouterLink to="/contacts" class="nav-link">Contatti</RouterLink>
-          <a href="#prenota" class="btn-prenota">Prenota</a>
+          <a href="#prenota" class="btn-prenota">Prenota Ora</a>
         </nav>
 
         <button class="mobile-menu-btn" @click="toggleMobileMenu" aria-label="Menu">
@@ -39,11 +39,10 @@ const toggleMobileMenu = () => {
         <RouterLink to="/about" class="mobile-nav-link" @click="toggleMobileMenu"
           >Chi Siamo</RouterLink
         >
-        <RouterLink to="/menu" class="mobile-nav-link" @click="toggleMobileMenu">Menu</RouterLink>
         <RouterLink to="/contacts" class="mobile-nav-link" @click="toggleMobileMenu"
           >Contatti</RouterLink
         >
-        <a href="#prenota" class="mobile-nav-link" @click="toggleMobileMenu">Prenota</a>
+        <a href="#prenota" class="mobile-nav-link" @click="toggleMobileMenu">Prenota Ora</a>
       </div>
     </header>
 
@@ -52,101 +51,108 @@ const toggleMobileMenu = () => {
     </main>
 
     <footer>
-      <div class="footer-top">
-        <div class="footer-content">
-          <div class="footer-brand">
-            <img src="https://i.imgur.com/8ZqK9Xo.png" alt="Il Pesce d'Oro" class="footer-logo" />
-            <p class="footer-tagline">Tradizione e autenticità dal 1985</p>
+      <div class="footer-ornament">⚜</div>
+
+      <div class="footer-content">
+        <div class="footer-section footer-brand">
+          <img src="/public/images.png" alt="Il Pesce d'Oro" class="footer-logo" />
+          <p class="footer-tagline">Tradizione e sapori mediterranei dal 1985</p>
+          <div class="footer-divider"></div>
+        </div>
+
+        <div class="footer-grid">
+          <div class="footer-column">
+            <h4>Navigazione</h4>
+            <div class="column-divider"></div>
+            <RouterLink to="/">Home</RouterLink>
+            <RouterLink to="/about">Chi Siamo</RouterLink>
+            <RouterLink to="/contacts">Contatti</RouterLink>
           </div>
 
-          <div class="footer-links">
-            <div class="footer-column">
-              <h4>Navigazione</h4>
-              <RouterLink to="/">Home</RouterLink>
-              <RouterLink to="/about">Chi Siamo</RouterLink>
-              <RouterLink to="/menu">Menu</RouterLink>
-              <RouterLink to="/contacts">Contatti</RouterLink>
-            </div>
+          <div class="footer-column">
+            <h4>Orari di Apertura</h4>
+            <div class="column-divider"></div>
+            <p class="day-range">Martedì - Domenica</p>
+            <p class="hours">12:00 - 15:00</p>
+            <p class="hours">19:00 - 23:00</p>
+            <p class="closed">◆ Lunedì chiuso</p>
+          </div>
 
-            <div class="footer-column">
-              <h4>Orari</h4>
-              <p>Martedì - Domenica</p>
-              <p class="hours">12:00 - 15:00</p>
-              <p class="hours">19:00 - 23:00</p>
-              <p class="closed">Lunedì chiuso</p>
-            </div>
+          <div class="footer-column">
+            <h4>Dove Trovarci</h4>
+            <div class="column-divider"></div>
+            <p>Via Roma, 123</p>
+            <p>07041 Alghero (SS)</p>
+            <p class="contact-info">☎ +39 079 123 4567</p>
+            <p class="contact-info">✉ info@pescedoro.it</p>
+          </div>
 
-            <div class="footer-column">
-              <h4>Contatti</h4>
-              <p>Via Roma, 123</p>
-              <p>10100 Torino</p>
-              <p class="contact-info">+39 011 123 4567</p>
-              <p class="contact-info">info@pescedoro.it</p>
+          <div class="footer-column">
+            <h4>Seguici</h4>
+            <div class="column-divider"></div>
+            <div class="social-links">
+              <a href="#" aria-label="Facebook" class="social-link">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                </svg>
+              </a>
+              <a href="#" aria-label="Instagram" class="social-link">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                </svg>
+              </a>
+              <a href="#" aria-label="TripAdvisor" class="social-link">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              </a>
             </div>
-
-            <div class="footer-column">
-              <h4>Seguici</h4>
-              <div class="social-links">
-                <a href="#" aria-label="Facebook">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-                  </svg>
-                </a>
-                <a href="#" aria-label="Instagram">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-                  </svg>
-                </a>
-                <a href="#" aria-label="TripAdvisor">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <circle cx="12" cy="12" r="10" />
-                    <circle cx="12" cy="12" r="3" />
-                  </svg>
-                </a>
-              </div>
-            </div>
+            <p class="social-text">Condividi la tua esperienza</p>
           </div>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; 2025 Il Pesce d'Oro - Alghero. Tutti i diritti riservati. | P.IVA 12345678901</p>
+        <div class="footer-bottom-divider"></div>
+        <p>&copy; 2025 Il Pesce d'Oro - Ristorante Pizzeria Alghero</p>
+        <p class="legal">Tutti i diritti riservati | P.IVA 12345678901</p>
       </div>
     </footer>
   </div>
 </template>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&display=swap');
 
 * {
   margin: 0;
@@ -158,29 +164,29 @@ const toggleMobileMenu = () => {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #000;
+  background-color: #0a0a0a;
   color: #fff;
-  font-family:
-    'Inter',
-    -apple-system,
-    BlinkMacSystemFont,
-    sans-serif;
+  font-family: 'Playfair Display', 'Georgia', serif;
 }
 
-/* HEADER */
+/* ==================== HEADER ==================== */
 header {
-  background: rgba(0, 0, 0, 0.95);
-  backdrop-filter: blur(20px);
+  background: #0a0a0a;
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 1px solid rgba(220, 152, 28, 0.15);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.header-ornament-top {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
 }
 
 .header-content {
-  max-width: 1600px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 1.2rem 3rem;
+  padding: 1.5rem 3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -188,91 +194,108 @@ header {
 
 .logo a {
   display: block;
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .logo a:hover {
   opacity: 0.85;
-  transform: scale(1.02);
 }
 
 .logo-img {
-  height: 60px;
+  height: 65px;
   width: auto;
   display: block;
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2));
 }
 
 .desktop-nav {
   display: flex;
-  gap: 2.5rem;
+  gap: 3rem;
   align-items: center;
 }
 
 .nav-link {
-  color: rgba(255, 255, 255, 0.85);
+  color: #e0e0e0;
   text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 1px;
   position: relative;
   padding: 0.5rem 0;
   transition: color 0.3s ease;
-  letter-spacing: 0.3px;
 }
 
-.nav-link::after {
+.nav-link::before {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
   width: 0;
-  height: 2px;
-  background: #dc981c;
+  height: 1px;
+  background: #d4af37;
   transition: width 0.3s ease;
 }
 
 .nav-link:hover {
-  color: #dc981c;
+  color: #d4af37;
 }
 
-.nav-link:hover::after {
+.nav-link:hover::before {
   width: 100%;
 }
 
 .nav-link.router-link-active {
-  color: #dc981c;
+  color: #d4af37;
 }
 
-.nav-link.router-link-active::after {
+.nav-link.router-link-active::before {
   width: 100%;
 }
 
 .btn-prenota {
-  background: linear-gradient(135deg, #dc981c 0%, #b8761a 100%);
-  color: #000;
-  padding: 0.75rem 1.8rem;
-  border-radius: 6px;
+  background: linear-gradient(135deg, #d4af37, #c9a028);
+  color: #0a0a0a;
+  padding: 0.8rem 2rem;
+  border: none;
   text-decoration: none;
   font-weight: 600;
   font-size: 0.9rem;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(220, 152, 28, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-prenota::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.5s ease,
+    height 0.5s ease;
+}
+
+.btn-prenota:hover::before {
+  width: 300px;
+  height: 300px;
 }
 
 .btn-prenota:hover {
-  background: linear-gradient(135deg, #ffa500 0%, #dc981c 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(220, 152, 28, 0.35);
+  box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
 }
 
 /* Mobile Menu Button */
 .mobile-menu-btn {
   display: none;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
   background: none;
   border: none;
   cursor: pointer;
@@ -280,15 +303,14 @@ header {
 }
 
 .mobile-menu-btn span {
-  width: 26px;
+  width: 28px;
   height: 2px;
-  background: #dc981c;
-  border-radius: 2px;
+  background: #d4af37;
   transition: all 0.3s ease;
 }
 
 .mobile-menu-btn span.open:nth-child(1) {
-  transform: rotate(45deg) translate(7px, 7px);
+  transform: rotate(45deg) translate(6px, 6px);
 }
 
 .mobile-menu-btn span.open:nth-child(2) {
@@ -304,171 +326,241 @@ header {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  background: rgba(0, 0, 0, 0.98);
+  background: #0a0a0a;
+  border-top: 1px solid rgba(212, 175, 55, 0.1);
 }
 
 .mobile-nav.open {
   max-height: 500px;
-  border-top: 1px solid rgba(220, 152, 28, 0.15);
 }
 
 .mobile-nav-link {
   display: block;
-  color: rgba(255, 255, 255, 0.85);
+  color: #e0e0e0;
   text-decoration: none;
   padding: 1.2rem 3rem;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 400;
+  letter-spacing: 1px;
   transition: all 0.3s ease;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.05);
 }
 
 .mobile-nav-link:hover {
-  background: rgba(220, 152, 28, 0.08);
-  color: #dc981c;
+  background: rgba(212, 175, 55, 0.05);
+  color: #d4af37;
   padding-left: 3.5rem;
 }
 
 .mobile-nav-link.router-link-active {
-  background: rgba(220, 152, 28, 0.12);
-  color: #dc981c;
+  background: rgba(212, 175, 55, 0.08);
+  color: #d4af37;
 }
 
-/* MAIN CONTENT */
+/* ==================== MAIN ==================== */
 main {
   flex: 1;
   width: 100%;
 }
 
-/* FOOTER */
+/* ==================== FOOTER ==================== */
 footer {
-  background: #000;
+  background: #0a0a0a;
   margin-top: auto;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  position: relative;
 }
 
-.footer-top {
-  border-top: 1px solid rgba(220, 152, 28, 0.2);
-  padding: 4rem 0 2rem;
+.footer-ornament {
+  text-align: center;
+  color: #d4af37;
+  font-size: 2rem;
+  padding: 2rem 0 1rem;
+  opacity: 0.6;
 }
 
 .footer-content {
-  max-width: 1600px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 3rem;
-  display: grid;
-  grid-template-columns: 1.2fr 2fr;
-  gap: 4rem;
-  align-items: start;
+  padding: 2rem 3rem 3rem;
+}
+
+.footer-section {
+  margin-bottom: 3rem;
 }
 
 .footer-brand {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  text-align: center;
 }
 
 .footer-logo {
-  height: 80px;
+  height: 90px;
   width: auto;
+  margin: 0 auto 1.5rem;
+  display: block;
+  filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.2));
 }
 
 .footer-tagline {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.9rem;
-  font-weight: 400;
-  letter-spacing: 0.3px;
+  color: rgba(224, 224, 224, 0.7);
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 0.5px;
   line-height: 1.6;
-  max-width: 300px;
+  font-style: italic;
 }
 
-.footer-links {
+.footer-divider {
+  width: 100px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  margin: 2rem auto 3rem;
+}
+
+.footer-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 3rem;
 }
 
+.footer-column {
+  text-align: left;
+}
+
 .footer-column h4 {
-  color: #dc981c;
-  font-size: 0.85rem;
-  margin-bottom: 1.2rem;
+  color: #d4af37;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
+}
+
+.column-divider {
+  width: 40px;
+  height: 1px;
+  background: #d4af37;
+  margin-bottom: 1.2rem;
 }
 
 .footer-column a,
 .footer-column p {
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(224, 224, 224, 0.65);
   text-decoration: none;
   font-size: 0.9rem;
-  line-height: 2.2;
-  font-weight: 400;
-  transition: color 0.3s ease;
+  line-height: 2;
+  font-weight: 300;
+  transition: all 0.3s ease;
   display: block;
 }
 
 .footer-column a:hover {
-  color: #dc981c;
-  padding-left: 5px;
+  color: #d4af37;
+  padding-left: 8px;
+}
+
+.day-range {
+  color: rgba(224, 224, 224, 0.8);
+  font-weight: 400;
+  margin-bottom: 0.5rem;
 }
 
 .footer-column .hours {
-  color: rgba(255, 255, 255, 0.75);
-  font-weight: 500;
+  color: rgba(224, 224, 224, 0.7);
+  font-weight: 300;
   line-height: 1.8;
 }
 
 .footer-column .closed {
-  color: rgba(220, 152, 28, 0.8);
+  color: #d4af37;
   font-style: italic;
-  margin-top: 0.5rem;
+  margin-top: 0.8rem;
+  font-size: 0.85rem;
 }
 
 .footer-column .contact-info {
-  color: rgba(255, 255, 255, 0.75);
-  font-weight: 500;
+  color: rgba(224, 224, 224, 0.75);
+  font-weight: 400;
 }
 
 .social-links {
   display: flex;
   gap: 0.8rem;
-  margin-top: 0.5rem;
+  margin-bottom: 1rem;
 }
 
-.social-links a {
-  color: rgba(255, 255, 255, 0.65);
-  width: 40px;
-  height: 40px;
+.social-link {
+  color: #d4af37;
+  width: 38px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(220, 152, 28, 0.3);
-  border-radius: 8px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
   transition: all 0.3s ease;
+  position: relative;
 }
 
-.social-links a:hover {
-  background: #dc981c;
-  border-color: #dc981c;
-  color: #000;
-  transform: translateY(-3px);
+.social-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #d4af37;
+  transform: scale(0);
+  transition: transform 0.3s ease;
 }
 
+.social-link:hover {
+  border-color: #d4af37;
+}
+
+.social-link:hover::before {
+  transform: scale(1);
+}
+
+.social-link:hover svg {
+  position: relative;
+  z-index: 1;
+  color: #0a0a0a;
+}
+
+.social-text {
+  font-size: 0.8rem;
+  color: rgba(224, 224, 224, 0.5);
+  font-style: italic;
+}
+
+/* Footer Bottom */
 .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding: 2rem 3rem;
   text-align: center;
 }
 
-.footer-bottom p {
-  color: rgba(255, 255, 255, 0.4);
-  font-size: 0.85rem;
-  font-weight: 400;
+.footer-bottom-divider {
+  width: 200px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+  margin: 0 auto 2rem;
 }
 
-/* RESPONSIVE */
+.footer-bottom p {
+  color: rgba(224, 224, 224, 0.45);
+  font-size: 0.85rem;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+.footer-bottom .legal {
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  color: rgba(224, 224, 224, 0.35);
+}
+
+/* ==================== RESPONSIVE ==================== */
 @media (max-width: 1200px) {
-  .footer-links {
+  .footer-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 2.5rem;
   }
@@ -484,20 +576,18 @@ footer {
   }
 
   .header-content {
-    padding: 1rem 2rem;
+    padding: 1.2rem 2rem;
   }
 
   .logo-img {
-    height: 50px;
+    height: 55px;
   }
 
   .footer-content {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    padding: 0 2rem;
+    padding: 2rem 2rem 3rem;
   }
 
-  .footer-links {
+  .footer-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
   }
@@ -521,33 +611,29 @@ footer {
   }
 
   .logo-img {
-    height: 45px;
-  }
-
-  .footer-top {
-    padding: 3rem 0 1.5rem;
+    height: 50px;
   }
 
   .footer-content {
-    padding: 0 1.5rem;
+    padding: 2rem 1.5rem 2rem;
   }
 
-  .footer-links {
+  .footer-logo {
+    height: 70px;
+  }
+
+  .footer-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 2.5rem;
   }
 
   .footer-column {
     text-align: center;
   }
 
-  .footer-brand {
-    align-items: center;
-    text-align: center;
-  }
-
-  .footer-tagline {
-    max-width: 100%;
+  .column-divider {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .social-links {
@@ -559,7 +645,7 @@ footer {
   }
 
   .footer-bottom p {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     line-height: 1.6;
   }
 }
