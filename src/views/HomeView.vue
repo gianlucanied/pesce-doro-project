@@ -51,11 +51,24 @@ onMounted(() => {
                 è la protagonista assoluta.
               </p>
             </div>
+          </div>
+        </div>
 
-            <div class="story-signature">
-              <div class="signature-line"></div>
-              <span class="signature-text">Enzo & Debora</span>
-              <div class="signature-line"></div>
+        <!-- Sezione cucina -->
+        <div class="cuisine-section">
+          <div class="cuisine-content">
+            <h2 class="section-title">La Nostra Cucina</h2>
+            <div class="divider"></div>
+            <p class="cuisine-text">
+              Proponiamo piatti molto legati alla tradizione locale con sapori tipicamente
+              mediterranei e con una varietà di pietanze che variano: dagli sfiziosi antipasti di
+              mare al pesce fresco, alla carne, alle gustosissime zuppe passando alla pizza cotta
+              nel forno a legna.
+            </p>
+            <div class="specialty-badge">
+              <span class="badge-icon">★</span>
+              Scarica il Menù
+              <span class="badge-icon">★</span>
             </div>
           </div>
         </div>
@@ -97,26 +110,6 @@ onMounted(() => {
               Al Ristorante Pesce d'oro trionfano i sapori mediterranei e l'atmosfera del locale è
               elegante, accogliente e piacevole.
             </p>
-          </div>
-        </div>
-
-        <!-- Sezione cucina -->
-        <div class="cuisine-section">
-          <div class="cuisine-content">
-            <h2 class="section-title">La Nostra Cucina</h2>
-            <div class="divider"></div>
-            <p class="cuisine-text">
-              Proponiamo piatti molto legati alla tradizione locale con sapori tipicamente
-              mediterranei e con una varietà di pietanze che variano: dagli sfiziosi antipasti di
-              mare al pesce fresco, alla carne, alle gustosissime zuppe passando alla pizza cotta
-              nel forno a legna.
-            </p>
-            <div class="specialty-badge">
-              <span class="badge-icon">★</span>
-              Tutto rigorosamente accompagnato da pane preparato quotidianamente nel nostro forno a
-              legna
-              <span class="badge-icon">★</span>
-            </div>
           </div>
         </div>
       </div>
@@ -350,7 +343,7 @@ onMounted(() => {
 }
 
 .story-content {
-  margin-bottom: 3rem;
+  margin-bottom: 0;
 }
 
 .story-main-text {
@@ -373,39 +366,11 @@ onMounted(() => {
   font-size: clamp(1.1rem, 2vw, 1.25rem);
   line-height: 1.9;
   font-weight: 300;
+  margin-bottom: 0;
 }
 
-.story-signature {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-  padding-top: 2.5rem;
-  border-top: 1px solid rgba(212, 175, 55, 0.2);
-}
-
-.signature-line {
-  flex: 1;
-  max-width: 100px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #d4af37);
-}
-
-.signature-line:last-child {
-  background: linear-gradient(90deg, #d4af37, transparent);
-}
-
-.signature-text {
-  color: #d4af37;
-  font-size: 1.3rem;
-  font-weight: 400;
-  font-family: 'Playfair Display', 'Georgia', serif;
-  font-style: italic;
-  letter-spacing: 2px;
-}
-
-/* Intro section */
-.intro-section {
+/* Cuisine section */
+.cuisine-section {
   margin-bottom: 4rem;
   opacity: 0;
   transform: translateY(30px);
@@ -417,6 +382,82 @@ onMounted(() => {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.cuisine-content {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem;
+  background: linear-gradient(135deg, rgba(10, 10, 10, 0.8), rgba(20, 20, 20, 0.6));
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  position: relative;
+}
+
+.cuisine-content::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  pointer-events: none;
+}
+
+.section-title {
+  color: #d4af37;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 400;
+  font-family: 'Playfair Display', 'Georgia', serif;
+  margin-bottom: 1rem;
+}
+
+.divider {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  margin: 1.5rem auto;
+}
+
+.cuisine-text {
+  color: #e0e0e0;
+  font-size: 1.1rem;
+  line-height: 1.9;
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+
+.specialty-badge {
+  background: linear-gradient(135deg, #d4af37, #c9a028);
+  color: #0a0a0a;
+  padding: 1.5rem 2rem;
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  position: relative;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.specialty-badge:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+}
+
+.badge-icon {
+  color: #0a0a0a;
+  font-size: 1.2rem;
+  margin: 0 0.5rem;
+}
+
+/* Intro section */
+.intro-section {
+  margin-bottom: 4rem;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: contentSlide 1s ease-out 1.8s forwards;
 }
 
 .intro-content {
@@ -453,21 +494,6 @@ onMounted(() => {
   border-top: none;
 }
 
-.section-title {
-  color: #d4af37;
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
-  font-weight: 400;
-  font-family: 'Playfair Display', 'Georgia', serif;
-  margin-bottom: 1rem;
-}
-
-.divider {
-  width: 80px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
-  margin: 1.5rem auto;
-}
-
 .intro-text {
   color: #e0e0e0;
   font-size: 1.1rem;
@@ -494,11 +520,11 @@ onMounted(() => {
 }
 
 .box-1 {
-  animation: boxSlide 1s ease-out 1.8s forwards;
+  animation: boxSlide 1s ease-out 2s forwards;
 }
 
 .box-2 {
-  animation: boxSlide 1s ease-out 2s forwards;
+  animation: boxSlide 1s ease-out 2.2s forwards;
 }
 
 @keyframes boxSlide {
@@ -565,59 +591,6 @@ onMounted(() => {
   letter-spacing: 1px;
 }
 
-/* Cuisine section */
-.cuisine-section {
-  opacity: 0;
-  transform: translateY(30px);
-  animation: contentSlide 1s ease-out 2.2s forwards;
-}
-
-.cuisine-content {
-  text-align: center;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 3rem;
-  background: linear-gradient(135deg, rgba(10, 10, 10, 0.8), rgba(20, 20, 20, 0.6));
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  position: relative;
-}
-
-.cuisine-content::before {
-  content: '';
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
-  border: 1px solid rgba(212, 175, 55, 0.1);
-  pointer-events: none;
-}
-
-.cuisine-text {
-  color: #e0e0e0;
-  font-size: 1.1rem;
-  line-height: 1.9;
-  font-weight: 300;
-  margin-bottom: 2rem;
-}
-
-.specialty-badge {
-  background: linear-gradient(135deg, #d4af37, #c9a028);
-  color: #0a0a0a;
-  padding: 1.5rem 2rem;
-  font-weight: 500;
-  font-size: 1rem;
-  line-height: 1.6;
-  position: relative;
-  border-radius: 2px;
-}
-
-.badge-icon {
-  color: #0a0a0a;
-  font-size: 1.2rem;
-  margin: 0 0.5rem;
-}
-
 /* Footer ornament */
 .footer-ornament {
   position: absolute;
@@ -625,6 +598,7 @@ onMounted(() => {
   left: 50%;
   transform: translateX(-50%);
   width: 200px;
+  z-index: 1;
 }
 
 .ornament-line {
@@ -660,10 +634,6 @@ onMounted(() => {
 
   .story-secondary-text {
     font-size: 1.05rem;
-  }
-
-  .signature-line {
-    max-width: 60px;
   }
 
   .intro-content,
@@ -710,10 +680,6 @@ onMounted(() => {
 
   .story-secondary-text {
     font-size: 1rem;
-  }
-
-  .signature-text {
-    font-size: 1.1rem;
   }
 }
 </style>
