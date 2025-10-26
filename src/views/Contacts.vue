@@ -30,6 +30,22 @@ onMounted(() => {
         <div class="info-grid">
           <!-- Contact Info Card -->
           <div class="info-card contact-card">
+            <div class="card-icon">
+              <svg
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                />
+              </svg>
+            </div>
             <h2>Info & Contatti</h2>
             <div class="card-divider"></div>
 
@@ -56,6 +72,21 @@ onMounted(() => {
 
           <!-- Hours Card -->
           <div class="info-card hours-card">
+            <div class="card-icon">
+              <svg
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </div>
             <h2>Orari di Apertura</h2>
             <div class="card-divider"></div>
 
@@ -95,6 +126,21 @@ onMounted(() => {
                 </p>
 
                 <div class="address-box">
+                  <div class="address-icon">
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
+                  </div>
                   <div class="address-content">
                     <h3>Indirizzo</h3>
                     <p class="address">Via Catalogna n°12</p>
@@ -102,6 +148,10 @@ onMounted(() => {
                     <p class="note">A soli 2 passi dal porto</p>
                   </div>
                 </div>
+
+                <p class="accessibility">
+                  Facilmente raggiungibile anche da coloro che usano i mezzi pubblici.
+                </p>
               </div>
             </div>
 
@@ -347,8 +397,14 @@ onMounted(() => {
 }
 
 .card-icon {
-  font-size: 2.5rem;
+  color: #d4af37;
   margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.card-icon svg {
+  color: #d4af37;
 }
 
 .info-card h2 {
@@ -525,8 +581,14 @@ onMounted(() => {
 }
 
 .address-icon {
-  font-size: 2.5rem;
+  color: #d4af37;
   flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+}
+
+.address-icon svg {
+  color: #d4af37;
 }
 
 .address-content h3 {
@@ -791,6 +853,10 @@ onMounted(() => {
     padding: 1.5rem;
     flex-direction: column;
     text-align: center;
+  }
+
+  .address-icon {
+    justify-content: center;
   }
 
   .map-container {

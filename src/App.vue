@@ -23,8 +23,7 @@ const toggleMobileMenu = () => {
         <nav class="desktop-nav">
           <RouterLink to="/" class="nav-link">Home</RouterLink>
           <RouterLink to="/about" class="nav-link">Chi Siamo</RouterLink>
-          <RouterLink to="/contacts" class="nav-link">Contatti</RouterLink>
-          <a href="#prenota" class="btn-prenota">Prenota Ora</a>
+          <RouterLink to="/contacts" class="btn-prenota">Contatti</RouterLink>
         </nav>
 
         <button class="mobile-menu-btn" @click="toggleMobileMenu" aria-label="Menu">

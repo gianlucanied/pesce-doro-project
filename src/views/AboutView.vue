@@ -259,7 +259,7 @@ onMounted(() => {
           <div class="cta-ornament">⚜</div>
           <h3>Vieni a Trovarci</h3>
           <p>Scopri il gusto dell'autentica cucina mediterranea</p>
-          <a href="#prenota" class="cta-button">Prenota un Tavolo</a>
+          <RouterLink to="/contacts" class="cta-button">Prenota un Tavolo</RouterLink>
         </div>
       </div>
     </section>
