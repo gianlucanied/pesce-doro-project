@@ -1,13 +1,61 @@
 <script setup>
 import { onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const isVisible = ref(false)
+const currentSlide = ref(0)
+const totalSlides = 7
+const isAutoPlaying = ref(true)
+let autoPlayInterval = null
 
 onMounted(() => {
   setTimeout(() => {
     isVisible.value = true
   }, 300)
+
+  // Avvia autoplay
+  startAutoPlay()
 })
+
+const startAutoPlay = () => {
+  autoPlayInterval = setInterval(() => {
+    if (isAutoPlaying.value) {
+      nextSlide()
+    }
+  }, 4000) // Cambia slide ogni 4 secondi
+}
+
+const stopAutoPlay = () => {
+  isAutoPlaying.value = false
+  if (autoPlayInterval) {
+    clearInterval(autoPlayInterval)
+  }
+}
+
+const nextSlide = () => {
+  currentSlide.value = (currentSlide.value + 1) % totalSlides
+}
+
+const prevSlide = () => {
+  currentSlide.value = (currentSlide.value - 1 + totalSlides) % totalSlides
+}
+
+const handlePrevClick = () => {
+  prevSlide()
+  stopAutoPlay()
+}
+
+const handleNextClick = () => {
+  nextSlide()
+  stopAutoPlay()
+}
+
+const goToSlide = (index) => {
+  currentSlide.value = index
+  stopAutoPlay()
+}
 </script>
 
 <template>
@@ -20,9 +68,9 @@ onMounted(() => {
       <div class="header-container">
         <div class="ornament-top">⚜</div>
         <h1 class="main-title">
-          <span class="title-line">Ristorante Pizzeria</span>
-          <span class="title-highlight">Il Pesce d'Oro</span>
-          <span class="title-location">Alghero</span>
+          <span class="title-line">{{ t('home.mainTitle') }}</span>
+          <span class="title-highlight">{{ t('home.restaurantName') }}</span>
+          <span class="title-location">{{ t('home.location') }}</span>
         </h1>
         <div class="ornament-bottom">⚜</div>
       </div>
@@ -36,20 +84,49 @@ onMounted(() => {
             <div class="story-border-br"></div>
 
             <div class="story-ornament-top">◆</div>
-            <h2 class="story-title">Un Grande Amore per il Mare</h2>
+            <h2 class="story-title">{{ t('home.storyTitle') }}</h2>
             <div class="story-divider"></div>
 
             <div class="story-content">
-              <p class="story-main-text">
-                Il Pesce d'Oro di <strong>Enzo e Debora</strong>, storia di un grande amore e
-                ospitalità che si rinnova quotidianamente portando in tavola il meglio del nostro
-                mare.
-              </p>
-              <p class="story-secondary-text">
-                Location perfetta per le specialità ittiche preparate dallo chef Enzo e dai suoi
-                collaboratori, veri e propri percorsi attraverso la Sardegna in cui la materia prima
-                è la protagonista assoluta.
-              </p>
+              <p class="story-main-text" v-html="t('home.storyMain')"></p>
+              <p class="story-secondary-text">{{ t('home.storySecondary') }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- JUMBOTRON FOTO -->
+        <div class="jumbotron-section">
+          <div class="jumbotron-container">
+            <div class="jumbotron-border-tl"></div>
+            <div class="jumbotron-border-br"></div>
+
+            <!-- Immagine principale grande -->
+            <div class="jumbotron-main">
+              <img
+                :src="`src/assets/${currentSlide + 1}.jpg`"
+                :alt="`Il Pesce d'Oro - ${t('common.image')} ${currentSlide + 1}`"
+                class="jumbotron-image"
+              />
+              <div class="jumbotron-overlay"></div>
+            </div>
+
+            <!-- Thumbnails sotto -->
+            <div class="jumbotron-thumbnails">
+              <button
+                v-for="i in totalSlides"
+                :key="i"
+                class="thumbnail"
+                :class="{ active: currentSlide === i - 1 }"
+                @click="goToSlide(i - 1)"
+                :aria-label="`${t('common.goToImage')} ${i}`"
+              >
+                <img
+                  :src="`src/assets/${i}.jpg`"
+                  :alt="`${t('common.thumbnail')} ${i}`"
+                  class="thumbnail-image"
+                />
+                <div class="thumbnail-overlay"></div>
+              </button>
             </div>
           </div>
         </div>
@@ -57,27 +134,19 @@ onMounted(() => {
         <!-- Sezione cucina -->
         <div class="cuisine-section">
           <div class="cuisine-content">
-            <h2 class="section-title">La Nostra Cucina</h2>
+            <h2 class="section-title">{{ t('home.cuisineTitle') }}</h2>
             <div class="divider"></div>
-            <p class="cuisine-text">
-              Proponiamo piatti molto legati alla tradizione locale con sapori tipicamente
-              mediterranei e con una varietà di pietanze che variano: dagli sfiziosi antipasti di
-              mare al pesce fresco, alla carne, alle gustosissime zuppe passando alla pizza cotta
-              nel forno a legna.
-            </p>
-            <div class="specialty-badge">Scarica il Menù</div>
+            <p class="cuisine-text">{{ t('home.cuisineText') }}</p>
+            <div class="specialty-badge">{{ t('home.downloadMenu') }}</div>
           </div>
         </div>
 
         <!-- Sezione ospitalità -->
         <div class="intro-section">
           <div class="intro-content">
-            <h2 class="section-title">Ospitalità e Cortesia</h2>
+            <h2 class="section-title">{{ t('home.hospitalityTitle') }}</h2>
             <div class="divider"></div>
-            <p class="intro-text">
-              Un ambiente confortevole per tutti dove potrete trovare ottime pizze, gustosissimi
-              piatti del ristorante con pasta e dolci fatti in casa.
-            </p>
+            <p class="intro-text">{{ t('home.hospitalityText') }}</p>
           </div>
         </div>
 
@@ -86,26 +155,20 @@ onMounted(() => {
           <!-- Eventi -->
           <div class="feature-box box-1">
             <div class="box-icon">◆</div>
-            <h3>Eventi & Cerimonie</h3>
-            <p>
-              Il locale è ideale anche per compagnie che vogliono festeggiare compleanni, addii al
-              celibato, lauree. Puoi festeggiare un evento riservando il ristorante anche a pranzo.
-            </p>
+            <h3>{{ t('home.eventsTitle') }}</h3>
+            <p>{{ t('home.eventsText') }}</p>
             <div class="services-list">
-              <span>Compleanni</span>
-              <span>Comunioni</span>
-              <span>Pranzi di lavoro</span>
+              <span>{{ t('home.birthdays') }}</span>
+              <span>{{ t('home.communions') }}</span>
+              <span>{{ t('home.businessLunches') }}</span>
             </div>
           </div>
 
           <!-- Atmosfera -->
           <div class="feature-box box-2">
             <div class="box-icon">◆</div>
-            <h3>Atmosfera Mediterranea</h3>
-            <p>
-              Al Ristorante Pesce d'oro trionfano i sapori mediterranei e l'atmosfera del locale è
-              elegante, accogliente e piacevole.
-            </p>
+            <h3>{{ t('home.atmosphereTitle') }}</h3>
+            <p>{{ t('home.atmosphereText') }}</p>
           </div>
         </div>
       </div>
@@ -351,7 +414,7 @@ onMounted(() => {
   font-family: 'Playfair Display', 'Georgia', serif;
 }
 
-.story-main-text strong {
+.story-main-text :deep(strong) {
   color: #d4af37;
   font-weight: 500;
   font-style: italic;
@@ -365,12 +428,245 @@ onMounted(() => {
   margin-bottom: 0;
 }
 
+/* ==================== JUMBOTRON ==================== */
+.jumbotron-section {
+  margin-bottom: 5rem;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: storySlide 1s ease-out 1.6s forwards;
+}
+
+.jumbotron-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(218, 165, 32, 0.02));
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.jumbotron-border-tl,
+.jumbotron-border-br {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border: 2px solid #d4af37;
+  opacity: 0.5;
+  z-index: 2;
+}
+
+.jumbotron-border-tl {
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.jumbotron-border-br {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+}
+
+.jumbotron-main {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  background: #000;
+}
+
+.jumbotron-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.jumbotron-main:hover .jumbotron-image {
+  transform: scale(1.05);
+}
+
+.jumbotron-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  pointer-events: none;
+}
+
+.jumbotron-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 3rem;
+  text-align: center;
+  z-index: 3;
+}
+
+.jumbotron-ornament {
+  color: #d4af37;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.jumbotron-title {
+  color: #ffffff;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 400;
+  font-family: 'Playfair Display', 'Georgia', serif;
+  margin-bottom: 1rem;
+  letter-spacing: 3px;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.7);
+}
+
+.jumbotron-divider {
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  margin: 1.5rem auto;
+}
+
+.jumbotron-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Thumbnails */
+.jumbotron-thumbnails {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+.thumbnail {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  cursor: pointer;
+  transition: all 0.4s ease;
+  background: #000;
+  padding: 0;
+}
+
+.thumbnail:hover {
+  border-color: #d4af37;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+}
+
+.thumbnail.active {
+  border-color: #d4af37;
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+}
+
+.thumbnail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.thumbnail:hover .thumbnail-image {
+  transform: scale(1.1);
+}
+
+.thumbnail-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  transition: background 0.4s ease;
+  pointer-events: none;
+}
+
+.thumbnail:hover .thumbnail-overlay {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.thumbnail.active .thumbnail-overlay {
+  background: rgba(212, 175, 55, 0.2);
+}
+
+/* Responsive Jumbotron */
+@media (max-width: 768px) {
+  .jumbotron-container {
+    padding: 1rem;
+  }
+
+  .jumbotron-border-tl,
+  .jumbotron-border-br {
+    width: 60px;
+    height: 60px;
+  }
+
+  .jumbotron-main {
+    height: 400px;
+  }
+
+  .jumbotron-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .jumbotron-thumbnails {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 0.75rem;
+    padding: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .jumbotron-main {
+    height: 300px;
+  }
+
+  .jumbotron-content {
+    padding: 1.5rem 1rem;
+  }
+
+  .jumbotron-title {
+    font-size: 2rem;
+  }
+
+  .jumbotron-thumbnails {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .jumbotron-border-tl,
+  .jumbotron-border-br {
+    width: 45px;
+    height: 45px;
+  }
+}
+
 /* Cuisine section */
 .cuisine-section {
   margin-bottom: 4rem;
   opacity: 0;
   transform: translateY(30px);
-  animation: contentSlide 1s ease-out 1.6s forwards;
+  animation: contentSlide 1s ease-out 1.8s forwards;
 }
 
 @keyframes contentSlide {
@@ -442,18 +738,12 @@ onMounted(() => {
   box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
 }
 
-.badge-icon {
-  color: #0a0a0a;
-  font-size: 1.2rem;
-  margin: 0 0.5rem;
-}
-
 /* Intro section */
 .intro-section {
   margin-bottom: 4rem;
   opacity: 0;
   transform: translateY(30px);
-  animation: contentSlide 1s ease-out 1.8s forwards;
+  animation: contentSlide 1s ease-out 2s forwards;
 }
 
 .intro-content {
@@ -516,11 +806,11 @@ onMounted(() => {
 }
 
 .box-1 {
-  animation: boxSlide 1s ease-out 2s forwards;
+  animation: boxSlide 1s ease-out 2.2s forwards;
 }
 
 .box-2 {
-  animation: boxSlide 1s ease-out 2.2s forwards;
+  animation: boxSlide 1s ease-out 2.4s forwards;
 }
 
 @keyframes boxSlide {
@@ -601,7 +891,7 @@ onMounted(() => {
   height: 1px;
   background: linear-gradient(90deg, transparent, #d4af37, transparent);
   opacity: 0;
-  animation: ornamentFade 1s ease-out 2.4s forwards;
+  animation: ornamentFade 1s ease-out 2.6s forwards;
 }
 
 /* Responsive */
@@ -622,6 +912,43 @@ onMounted(() => {
   .story-border-br {
     width: 60px;
     height: 60px;
+  }
+
+  .carousel-container {
+    padding: 1rem;
+  }
+
+  .carousel-border-tl,
+  .carousel-border-br {
+    width: 50px;
+    height: 50px;
+  }
+
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .carousel-btn span {
+    font-size: 1.5rem;
+  }
+
+  .carousel-btn-prev {
+    left: 0.5rem;
+  }
+
+  .carousel-btn-next {
+    right: 0.5rem;
+  }
+
+  .carousel-indicators {
+    bottom: 1rem;
+    gap: 0.6rem;
+  }
+
+  .indicator {
+    width: 10px;
+    height: 10px;
   }
 
   .story-main-text {
@@ -667,6 +994,10 @@ onMounted(() => {
   .story-border-br {
     width: 45px;
     height: 45px;
+  }
+
+  .carousel-wrapper {
+    aspect-ratio: 4 / 3;
   }
 
   .story-main-text {

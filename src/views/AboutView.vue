@@ -1,9 +1,24 @@
 <script setup>
 import { onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const isVisible = ref(false)
 const currentReviewIndex = ref(0)
 const slideDirection = ref('slide-left')
+const currentHeroImage = ref(0)
+const isHoveringReview = ref(false) // Nuova variabile
+
+const heroImages = [
+  new URL('@/assets/8.jpg', import.meta.url).href,
+  new URL('@/assets/9.jpg', import.meta.url).href,
+  new URL('@/assets/10.jpg', import.meta.url).href,
+  new URL('@/assets/11.jpg', import.meta.url).href,
+  new URL('@/assets/12.jpg', import.meta.url).href,
+  new URL('@/assets/13.jpg', import.meta.url).href,
+  new URL('@/assets/14.jpg', import.meta.url).href,
+]
 
 const reviews = ref([
   {
@@ -49,6 +64,7 @@ const reviews = ref([
 ])
 
 let autoSlideInterval = null
+let heroSlideInterval = null
 
 const nextReview = () => {
   slideDirection.value = 'slide-left'
@@ -70,9 +86,14 @@ const goToReview = (index) => {
 }
 
 const startAutoSlide = () => {
-  autoSlideInterval = setInterval(() => {
-    nextReview()
-  }, 7000)
+  // Avvia solo se non siamo in hover
+  if (!isHoveringReview.value) {
+    autoSlideInterval = setInterval(() => {
+      if (!isHoveringReview.value) {
+        nextReview()
+      }
+    }, 2000)
+  }
 }
 
 const resetAutoSlide = () => {
@@ -82,24 +103,54 @@ const resetAutoSlide = () => {
   startAutoSlide()
 }
 
+// Nuove funzioni per gestire l'hover
+const handleMouseEnter = () => {
+  isHoveringReview.value = true
+  if (autoSlideInterval) {
+    clearInterval(autoSlideInterval)
+    autoSlideInterval = null
+  }
+}
+
+const handleMouseLeave = () => {
+  isHoveringReview.value = false
+  startAutoSlide()
+}
+
+const startHeroSlide = () => {
+  heroSlideInterval = setInterval(() => {
+    currentHeroImage.value = (currentHeroImage.value + 1) % heroImages.length
+  }, 2000)
+}
+
 onMounted(() => {
   setTimeout(() => {
     isVisible.value = true
-  }, 300)
+  }, 150)
   startAutoSlide()
+  startHeroSlide()
 })
 </script>
 
 <template>
   <div class="about-page" :class="{ visible: isVisible }">
-    <!-- Hero Section -->
+    <!-- Hero Section with Image Carousel -->
     <section class="hero-about">
+      <div class="hero-images-container">
+        <transition name="hero-fade" mode="out-in">
+          <div
+            :key="currentHeroImage"
+            class="hero-image"
+            :style="{ backgroundImage: `url(${heroImages[currentHeroImage]})` }"
+          ></div>
+        </transition>
+      </div>
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <div class="ornament">⚜</div>
-        <h1 class="main-title">Chi Siamo</h1>
+        <h1 class="main-title">{{ t('about.title') }}</h1>
         <div class="title-divider"></div>
-        <p class="subtitle">La nostra storia, la nostra passione</p>
+        <p class="subtitle">{{ t('about.subtitle') }}</p>
       </div>
     </section>
 
@@ -109,29 +160,19 @@ onMounted(() => {
         <!-- Intro Card -->
         <div class="intro-card">
           <div class="card-ornament">◆</div>
-          <h2>Un Angolo di Sapori</h2>
+          <h2>{{ t('about.introTitle') }}</h2>
           <div class="text-divider"></div>
-          <p class="lead-text">
-            Il Ristorante Pesce d'Oro è uno fra i locali più antichi di Alghero, ormai sta
-            diventando una meta obbligatoria per il turismo e un punto d'incontro per i cittadini di
-            Alghero e dintorni.
-          </p>
+          <p class="lead-text">{{ t('about.introText') }}</p>
         </div>
 
         <!-- Gli Spazi - Centered Single Block -->
         <div class="single-story-section">
           <div class="story-block-centered">
             <div class="block-number-centered">◆</div>
-            <h3>Gli Spazi</h3>
+            <h3>{{ t('about.spacesTitle') }}</h3>
             <div class="block-divider"></div>
-            <p>
-              Il locale dispone di <strong>100 posti a sedere</strong> che si dividono in 2 sale
-              interne accoglienti e munite di aria condizionata.
-            </p>
-            <p>
-              Altri <strong>20 posti</strong> sono situati nella sala esterna, immersi nel giardino
-              dell'isola pedonale.
-            </p>
+            <p v-html="t('about.spacesText1')"></p>
+            <p v-html="t('about.spacesText2')"></p>
           </div>
         </div>
 
@@ -139,38 +180,29 @@ onMounted(() => {
         <div class="mission-section">
           <div class="mission-content">
             <div class="mission-icon">★</div>
-            <h3>La Nostra Missione</h3>
+            <h3>{{ t('about.missionTitle') }}</h3>
             <div class="mission-divider"></div>
-            <p class="mission-text">
-              Il nostro ristorante, in cui emergono serietà e dedizione per questo tipo di lavoro, è
-              un punto di riferimento nella zona di Alghero per gli appassionati del buon cibo e di
-              un menù che spazia dal piatto più semplice al più raffinato e per soddisfare ogni tipo
-              di occasione… e di palato!
-            </p>
+            <p class="mission-text">{{ t('about.missionText') }}</p>
           </div>
         </div>
 
         <!-- Features -->
         <div class="features-section">
           <div class="feature-item">
-            <div class="feature-icon">🍽️</div>
-            <h4>Tradizione</h4>
-            <p>Ricette autentiche tramandate nel tempo</p>
+            <h4>{{ t('about.tradition') }}</h4>
+            <p>{{ t('about.traditionText') }}</p>
           </div>
           <div class="feature-item">
-            <div class="feature-icon">👨‍🍳</div>
-            <h4>Esperienza</h4>
-            <p>Chef con anni di esperienza nel settore</p>
+            <h4>{{ t('about.experience') }}</h4>
+            <p>{{ t('about.experienceText') }}</p>
           </div>
           <div class="feature-item">
-            <div class="feature-icon">🌿</div>
-            <h4>Qualità</h4>
-            <p>Ingredienti freschi e selezionati</p>
+            <h4>{{ t('about.quality') }}</h4>
+            <p>{{ t('about.qualityText') }}</p>
           </div>
           <div class="feature-item">
-            <div class="feature-icon">❤️</div>
-            <h4>Passione</h4>
-            <p>Dedizione in ogni piatto servito</p>
+            <h4>{{ t('about.passion') }}</h4>
+            <p>{{ t('about.passionText') }}</p>
           </div>
         </div>
 
@@ -178,15 +210,17 @@ onMounted(() => {
         <div class="reviews-wrapper">
           <div class="reviews-intro">
             <div class="intro-ornament">★</div>
-            <h3>Parola ai Nostri Ospiti</h3>
+            <h3>{{ t('about.reviewsTitle') }}</h3>
             <div class="intro-line"></div>
-            <p class="reviews-description">
-              Scopri le esperienze autentiche di chi ha scelto il Pesce d'Oro
-            </p>
+            <p class="reviews-description">{{ t('about.reviewsDescription') }}</p>
           </div>
 
-          <div class="carousel-main">
-            <button class="carousel-nav carousel-prev" @click="prevReview" aria-label="Precedente">
+          <div class="carousel-main" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
+            <button
+              class="carousel-nav carousel-prev"
+              @click="prevReview"
+              :aria-label="t('common.previous')"
+            >
               <span>‹</span>
             </button>
 
@@ -216,13 +250,17 @@ onMounted(() => {
                   <div class="review-author-section">
                     <div class="author-line"></div>
                     <p class="author-name">{{ reviews[currentReviewIndex].author }}</p>
-                    <p class="author-source">via TripAdvisor</p>
+                    <p class="author-source">{{ t('about.viaTripAdvisor') }}</p>
                   </div>
                 </div>
               </transition>
             </div>
 
-            <button class="carousel-nav carousel-next" @click="nextReview" aria-label="Successivo">
+            <button
+              class="carousel-nav carousel-next"
+              @click="nextReview"
+              :aria-label="t('common.next')"
+            >
               <span>›</span>
             </button>
           </div>
@@ -233,23 +271,24 @@ onMounted(() => {
               :key="index"
               :class="['pagination-dot', { active: index === currentReviewIndex }]"
               @click="goToReview(index)"
-              :aria-label="`Vai alla recensione ${index + 1}`"
+              :aria-label="`${t('common.goToReview')} ${index + 1}`"
             ></button>
           </div>
 
           <div class="reviews-footer">
             <div class="tripadvisor-stats">
-              <span class="stat-score">4.2/5</span>
+              <span class="stat-score">{{ t('about.rating') }}</span>
               <span class="stat-divider">|</span>
-              <span class="stat-reviews">Oltre 2.000 recensioni</span>
+              <span class="stat-reviews">{{ t('about.reviewsCount') }}</span>
             </div>
+
             <a
               href="https://www.tripadvisor.it/Restaurant_Review-g187880-d1946247-Reviews-Il_Pesce_d_oro-Alghero_Province_of_Sassari_Sardinia.html"
               target="_blank"
               rel="noopener noreferrer"
               class="tripadvisor-cta"
             >
-              Leggi tutte le recensioni su TripAdvisor
+              {{ t('about.readAllReviews') }}
             </a>
           </div>
         </div>
@@ -257,9 +296,9 @@ onMounted(() => {
         <!-- CTA Section -->
         <div class="cta-section">
           <div class="cta-ornament">⚜</div>
-          <h3>Vieni a Trovarci</h3>
-          <p>Scopri il gusto dell'autentica cucina mediterranea</p>
-          <RouterLink to="/contacts" class="cta-button">Prenota un Tavolo</RouterLink>
+          <h3>{{ t('about.ctaTitle') }}</h3>
+          <p>{{ t('about.ctaText') }}</p>
+          <RouterLink to="/contacts" class="cta-button">{{ t('about.bookTable') }}</RouterLink>
         </div>
       </div>
     </section>
@@ -286,30 +325,58 @@ onMounted(() => {
   opacity: 1;
 }
 
-/* ==================== HERO SECTION ==================== */
+/* ==================== HERO SECTION WITH IMAGE CAROUSEL ==================== */
 .hero-about {
   position: relative;
   height: 60vh;
   min-height: 400px;
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
-    url('https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=2074') center/cover;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
 }
 
+.hero-images-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-fade-enter-active,
+.hero-fade-leave-active {
+  transition: opacity 2s ease;
+}
+
+.hero-fade-enter-from {
+  opacity: 0;
+}
+
+.hero-fade-leave-to {
+  opacity: 0;
+}
+
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, transparent 0%, rgba(10, 10, 10, 0.6) 100%);
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
+  z-index: 1;
 }
 
 .hero-content {
   position: relative;
   text-align: center;
-  z-index: 1;
+  z-index: 2;
   opacity: 0;
   animation: fadeInUp 1.5s ease-out 0.3s forwards;
 }
@@ -501,7 +568,7 @@ onMounted(() => {
   margin-bottom: 0;
 }
 
-.story-block-centered strong {
+.story-block-centered :deep(strong) {
   color: #d4af37;
   font-weight: 500;
 }

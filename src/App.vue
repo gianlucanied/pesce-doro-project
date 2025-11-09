@@ -1,12 +1,28 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { RouterLink, RouterView } from 'vue-router'
 
 const mobileMenuOpen = ref(false)
+const { locale, t } = useI18n()
 
 const toggleMobileMenu = () => {
   mobileMenuOpen.value = !mobileMenuOpen.value
 }
+
+const changeLanguage = (lang) => {
+  locale.value = lang
+  localStorage.setItem('language', lang)
+  mobileMenuOpen.value = false
+}
+
+// Carica lingua salvata al mount
+onMounted(() => {
+  const savedLanguage = localStorage.getItem('language')
+  if (savedLanguage) {
+    locale.value = savedLanguage
+  }
+})
 </script>
 
 <template>
@@ -21,12 +37,40 @@ const toggleMobileMenu = () => {
         </div>
 
         <nav class="desktop-nav">
-          <RouterLink to="/" class="nav-link">Home</RouterLink>
-          <RouterLink to="/about" class="nav-link">Chi Siamo</RouterLink>
-          <RouterLink to="/contacts" class="btn-prenota">Contatti</RouterLink>
+          <RouterLink to="/" class="nav-link">{{ t('nav.home') }}</RouterLink>
+          <RouterLink to="/about" class="nav-link">{{ t('nav.about') }}</RouterLink>
+          <RouterLink to="/contacts" class="btn-prenota">{{ t('nav.contacts') }}</RouterLink>
+
+          <!-- Language Selector -->
+          <div class="language-selector">
+            <button
+              @click="changeLanguage('it')"
+              :class="{ active: locale === 'it' }"
+              class="lang-btn"
+              aria-label="Italiano"
+            >
+              🇮🇹
+            </button>
+            <button
+              @click="changeLanguage('en')"
+              :class="{ active: locale === 'en' }"
+              class="lang-btn"
+              aria-label="English"
+            >
+              🇬🇧
+            </button>
+            <button
+              @click="changeLanguage('es')"
+              :class="{ active: locale === 'es' }"
+              class="lang-btn"
+              aria-label="Español"
+            >
+              🇪🇸
+            </button>
+          </div>
         </nav>
 
-        <button class="mobile-menu-btn" @click="toggleMobileMenu" aria-label="Menu">
+        <button class="mobile-menu-btn" @click="toggleMobileMenu" :aria-label="t('common.menu')">
           <span :class="{ open: mobileMenuOpen }"></span>
           <span :class="{ open: mobileMenuOpen }"></span>
           <span :class="{ open: mobileMenuOpen }"></span>
@@ -34,14 +78,40 @@ const toggleMobileMenu = () => {
       </div>
 
       <div class="mobile-nav" :class="{ open: mobileMenuOpen }">
-        <RouterLink to="/" class="mobile-nav-link" @click="toggleMobileMenu">Home</RouterLink>
-        <RouterLink to="/about" class="mobile-nav-link" @click="toggleMobileMenu"
-          >Chi Siamo</RouterLink
-        >
-        <RouterLink to="/contacts" class="mobile-nav-link" @click="toggleMobileMenu"
-          >Contatti</RouterLink
-        >
-        <a href="#prenota" class="mobile-nav-link" @click="toggleMobileMenu">Prenota Ora</a>
+        <RouterLink to="/" class="mobile-nav-link" @click="toggleMobileMenu">
+          {{ t('nav.home') }}
+        </RouterLink>
+        <RouterLink to="/about" class="mobile-nav-link" @click="toggleMobileMenu">
+          {{ t('nav.about') }}
+        </RouterLink>
+        <RouterLink to="/contacts" class="mobile-nav-link" @click="toggleMobileMenu">
+          {{ t('nav.contacts') }}
+        </RouterLink>
+
+        <!-- Language Selector Mobile -->
+        <div class="mobile-language-selector">
+          <button
+            @click="changeLanguage('it')"
+            :class="{ active: locale === 'it' }"
+            class="mobile-lang-btn"
+          >
+            🇮🇹 Italiano
+          </button>
+          <button
+            @click="changeLanguage('en')"
+            :class="{ active: locale === 'en' }"
+            class="mobile-lang-btn"
+          >
+            🇬🇧 English
+          </button>
+          <button
+            @click="changeLanguage('es')"
+            :class="{ active: locale === 'es' }"
+            class="mobile-lang-btn"
+          >
+            🇪🇸 Español
+          </button>
+        </div>
       </div>
     </header>
 
@@ -55,39 +125,39 @@ const toggleMobileMenu = () => {
       <div class="footer-content">
         <div class="footer-section footer-brand">
           <img src="/public/images.png" alt="Il Pesce d'Oro" class="footer-logo" />
-          <p class="footer-tagline">Tradizione e sapori mediterranei dal 1985</p>
+          <p class="footer-tagline">{{ t('footer.tagline') }}</p>
           <div class="footer-divider"></div>
         </div>
 
         <div class="footer-grid">
           <div class="footer-column">
-            <h4>Navigazione</h4>
+            <h4>{{ t('footer.navigation') }}</h4>
             <div class="column-divider"></div>
-            <RouterLink to="/">Home</RouterLink>
-            <RouterLink to="/about">Chi Siamo</RouterLink>
-            <RouterLink to="/contacts">Contatti</RouterLink>
+            <RouterLink to="/">{{ t('nav.home') }}</RouterLink>
+            <RouterLink to="/about">{{ t('nav.about') }}</RouterLink>
+            <RouterLink to="/contacts">{{ t('nav.contacts') }}</RouterLink>
           </div>
 
           <div class="footer-column">
-            <h4>Orari di Apertura</h4>
+            <h4>{{ t('footer.openingHours') }}</h4>
             <div class="column-divider"></div>
-            <p class="day-range">Martedì - Domenica</p>
-            <p class="hours">12:00 - 15:00</p>
-            <p class="hours">19:00 - 23:00</p>
-            <p class="closed">◆ Lunedì chiuso</p>
+            <p class="day-range">{{ t('footer.tuesdaySunday') }}</p>
+            <p class="hours">{{ t('footer.lunch') }}</p>
+            <p class="hours">{{ t('footer.dinner') }}</p>
+            <p class="closed">{{ t('footer.mondayClosed') }}</p>
           </div>
 
           <div class="footer-column">
-            <h4>Dove Trovarci</h4>
+            <h4>{{ t('footer.whereToFindUs') }}</h4>
             <div class="column-divider"></div>
-            <p>Via Roma, 123</p>
-            <p>07041 Alghero (SS)</p>
-            <p class="contact-info">☎ +39 079 123 4567</p>
-            <p class="contact-info">✉ info@pescedoro.it</p>
+            <p>{{ t('footer.address') }}</p>
+            <p>{{ t('footer.city') }}</p>
+            <p class="contact-info">☎ +39 079 952 602</p>
+            <p class="contact-info">✉ info@pescedoroalghero.it</p>
           </div>
 
           <div class="footer-column">
-            <h4>Seguici</h4>
+            <h4>{{ t('footer.followUs') }}</h4>
             <div class="column-divider"></div>
             <div class="social-links">
               <a href="#" aria-label="Facebook" class="social-link">
@@ -136,15 +206,15 @@ const toggleMobileMenu = () => {
                 </svg>
               </a>
             </div>
-            <p class="social-text">Condividi la tua esperienza</p>
+            <p class="social-text">{{ t('footer.shareExperience') }}</p>
           </div>
         </div>
       </div>
 
       <div class="footer-bottom">
         <div class="footer-bottom-divider"></div>
-        <p>&copy; 2025 Il Pesce d'Oro - Ristorante Pizzeria Alghero</p>
-        <p class="legal">Tutti i diritti riservati | P.IVA 12345678901</p>
+        <p>{{ t('footer.copyright') }}</p>
+        <p class="legal">{{ t('footer.rights') }}</p>
       </div>
     </footer>
   </div>
@@ -290,6 +360,75 @@ header {
   box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
 }
 
+/* ==================== LANGUAGE SELECTOR ==================== */
+.language-selector {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding-left: 1rem;
+  border-left: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.lang-btn {
+  background: transparent;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  color: #e0e0e0;
+  padding: 0.5rem 0.7rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.lang-btn:hover {
+  border-color: #d4af37;
+  background: rgba(212, 175, 55, 0.1);
+  transform: translateY(-2px);
+}
+
+.lang-btn.active {
+  border-color: #d4af37;
+  background: rgba(212, 175, 55, 0.15);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+/* Mobile Language Selector */
+.mobile-language-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+
+.mobile-lang-btn {
+  background: transparent;
+  border: none;
+  color: #e0e0e0;
+  padding: 1rem 3rem;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.05);
+  font-family: 'Playfair Display', 'Georgia', serif;
+}
+
+.mobile-lang-btn:hover {
+  background: rgba(212, 175, 55, 0.05);
+  color: #d4af37;
+  padding-left: 3.5rem;
+}
+
+.mobile-lang-btn.active {
+  background: rgba(212, 175, 55, 0.1);
+  color: #d4af37;
+  border-left: 3px solid #d4af37;
+}
+
 /* Mobile Menu Button */
 .mobile-menu-btn {
   display: none;
@@ -330,7 +469,7 @@ header {
 }
 
 .mobile-nav.open {
-  max-height: 500px;
+  max-height: 700px;
 }
 
 .mobile-nav-link {
@@ -606,6 +745,14 @@ footer {
   }
 
   .mobile-nav-link:hover {
+    padding-left: 2rem;
+  }
+
+  .mobile-lang-btn {
+    padding: 1rem 1.5rem;
+  }
+
+  .mobile-lang-btn:hover {
     padding-left: 2rem;
   }
 

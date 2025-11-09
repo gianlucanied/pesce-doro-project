@@ -1,5 +1,8 @@
 <script setup>
 import { onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const isVisible = ref(false)
 
@@ -17,9 +20,9 @@ onMounted(() => {
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <div class="ornament">⚜</div>
-        <h1 class="main-title">Contatti</h1>
+        <h1 class="main-title">{{ t('contacts.title') }}</h1>
         <div class="title-divider"></div>
-        <p class="subtitle">Siamo qui per voi</p>
+        <p class="subtitle">{{ t('contacts.subtitle') }}</p>
       </div>
     </section>
 
@@ -46,26 +49,28 @@ onMounted(() => {
                 />
               </svg>
             </div>
-            <h2>Info & Contatti</h2>
+            <h2>{{ t('contacts.infoContactsTitle') }}</h2>
             <div class="card-divider"></div>
 
             <div class="contact-item">
-              <h4>Telefono</h4>
+              <h4>{{ t('contacts.phone') }}</h4>
               <a href="tel:+39079952602" class="contact-link">+39 079 952 602</a>
             </div>
 
             <div class="contact-item">
-              <h4>Email</h4>
+              <h4>{{ t('contacts.email') }}</h4>
               <a href="mailto:info@pescedoroalghero.it" class="contact-link"
                 >info@pescedoroalghero.it</a
               >
             </div>
 
             <div class="contact-item">
-              <h4>Giorni di Chiusura</h4>
+              <h4>{{ t('contacts.closureDays') }}</h4>
               <p class="closure-info">
-                <span class="closure-day">Mercoledì</span> tutto il giorno<br />
-                <span class="closure-day">Giovedì</span> la mattina
+                <span class="closure-day">{{ t('contacts.wednesday') }}</span>
+                {{ t('contacts.allDay') }}<br />
+                <span class="closure-day">{{ t('contacts.thursday') }}</span>
+                {{ t('contacts.morning') }}
               </p>
             </div>
           </div>
@@ -87,24 +92,24 @@ onMounted(() => {
                 <polyline points="12 6 12 12 16 14" />
               </svg>
             </div>
-            <h2>Orari di Apertura</h2>
+            <h2>{{ t('contacts.openingHoursTitle') }}</h2>
             <div class="card-divider"></div>
 
             <div class="hours-item">
-              <div class="day-label">Martedì - Domenica</div>
+              <div class="day-label">{{ t('contacts.tuesdaySunday') }}</div>
               <div class="time-slots">
                 <div class="time-slot">
-                  <span class="slot-label">Pranzo</span>
-                  <span class="slot-time">12:00 - 15:00</span>
+                  <span class="slot-label">{{ t('contacts.lunch') }}</span>
+                  <span class="slot-time">{{ t('contacts.lunchTime') }}</span>
                 </div>
                 <div class="time-slot">
-                  <span class="slot-label">Cena</span>
-                  <span class="slot-time">19:00 - 23:00</span>
+                  <span class="slot-label">{{ t('contacts.dinner') }}</span>
+                  <span class="slot-time">{{ t('contacts.dinnerTime') }}</span>
                 </div>
               </div>
             </div>
 
-            <div class="closed-notice">◆ Lunedì chiuso</div>
+            <div class="closed-notice">{{ t('contacts.mondayClosed') }}</div>
           </div>
         </div>
 
@@ -112,7 +117,7 @@ onMounted(() => {
         <div class="location-section">
           <div class="location-header">
             <div class="header-ornament">◆</div>
-            <h2>Dove Siamo</h2>
+            <h2>{{ t('contacts.whereWeAre') }}</h2>
             <div class="header-divider"></div>
           </div>
 
@@ -120,10 +125,7 @@ onMounted(() => {
             <!-- Location Info -->
             <div class="location-info">
               <div class="location-text">
-                <p class="intro-text">
-                  La posizione del nostro Ristorante è ideale per chi vuole cercare un tranquillo
-                  punto di ristoro all'insegna della genuinità e della cucina casereccia.
-                </p>
+                <p class="intro-text">{{ t('contacts.locationIntro') }}</p>
 
                 <div class="address-box">
                   <div class="address-icon">
@@ -142,16 +144,14 @@ onMounted(() => {
                     </svg>
                   </div>
                   <div class="address-content">
-                    <h3>Indirizzo</h3>
-                    <p class="address">Via Catalogna n°12</p>
-                    <p class="city">07041 Alghero (SS)</p>
-                    <p class="note">A soli 2 passi dal porto</p>
+                    <h3>{{ t('contacts.addressTitle') }}</h3>
+                    <p class="address">{{ t('contacts.address') }}</p>
+                    <p class="city">{{ t('contacts.city') }}</p>
+                    <p class="note">{{ t('contacts.nearPort') }}</p>
                   </div>
                 </div>
 
-                <p class="accessibility">
-                  Facilmente raggiungibile anche da coloro che usano i mezzi pubblici.
-                </p>
+                <p class="accessibility">{{ t('contacts.accessibility') }}</p>
               </div>
             </div>
 
@@ -174,25 +174,22 @@ onMounted(() => {
         <div class="tradition-section">
           <div class="tradition-content">
             <div class="tradition-icon">★</div>
-            <h3>Itinerari del Gusto</h3>
+            <h3>{{ t('contacts.traditionTitle') }}</h3>
             <div class="tradition-divider"></div>
-            <p class="tradition-text">
-              Al Pesce d'oro è facile lasciarsi incantare dai sapori della Terra di Sardegna
-              mediante degustazioni guidate e selezionate, alla scoperta dei prodotti tipici locali
-              e di produzione; insomma dei veri e propri "Itinerari del Gusto", per richiamare
-              suggestioni, profumi antichi e far rivivere la tradizione.
-            </p>
+            <p class="tradition-text">{{ t('contacts.traditionText') }}</p>
           </div>
         </div>
 
         <!-- CTA Section -->
         <div class="cta-section">
           <div class="cta-ornament">⚜</div>
-          <h3>Prenota il Tuo Tavolo</h3>
-          <p>Vivi un'esperienza culinaria indimenticabile</p>
+          <h3>{{ t('contacts.bookTableTitle') }}</h3>
+          <p>{{ t('contacts.bookTableText') }}</p>
           <div class="cta-buttons">
-            <a href="tel:+39079952602" class="cta-button primary">Chiama Ora</a>
-            <a href="mailto:info@pescedoroalghero.it" class="cta-button secondary">Invia Email</a>
+            <a href="tel:+39079952602" class="cta-button primary">{{ t('contacts.callNow') }}</a>
+            <a href="mailto:info@pescedoroalghero.it" class="cta-button secondary">{{
+              t('contacts.sendEmail')
+            }}</a>
           </div>
         </div>
       </div>
