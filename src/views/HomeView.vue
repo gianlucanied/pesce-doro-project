@@ -66,13 +66,13 @@ const goToSlide = (index) => {
 
       <!-- Header elegante -->
       <div class="header-container">
-        <div class="ornament-top">⚜</div>
+        <div class="ornament-top"></div>
         <h1 class="main-title">
           <span class="title-line">{{ t('home.mainTitle') }}</span>
           <span class="title-highlight">{{ t('home.restaurantName') }}</span>
           <span class="title-location">{{ t('home.location') }}</span>
         </h1>
-        <div class="ornament-bottom">⚜</div>
+        <div class="ornament-bottom"></div>
       </div>
 
       <!-- Contenuto principale -->

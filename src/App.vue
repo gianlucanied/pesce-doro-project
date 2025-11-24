@@ -32,7 +32,7 @@ onMounted(() => {
       <div class="header-content">
         <div class="logo">
           <RouterLink to="/" @click="mobileMenuOpen = false">
-            <img src="/public/images.png" alt="Il Pesce d'Oro" class="logo-img" />
+            <img src="/images.png" alt="Il Pesce d'Oro" class="logo-img" />
           </RouterLink>
         </div>
 
@@ -120,11 +120,11 @@ onMounted(() => {
     </main>
 
     <footer>
-      <div class="footer-ornament">⚜</div>
+      <div class="footer-ornament"></div>
 
       <div class="footer-content">
         <div class="footer-section footer-brand">
-          <img src="/public/images.png" alt="Il Pesce d'Oro" class="footer-logo" />
+          <img src="/images.png" alt="Il Pesce d'Oro" class="footer-logo" />
           <p class="footer-tagline">{{ t('footer.tagline') }}</p>
           <div class="footer-divider"></div>
         </div>
@@ -141,7 +141,6 @@ onMounted(() => {
           <div class="footer-column">
             <h4>{{ t('footer.openingHours') }}</h4>
             <div class="column-divider"></div>
-            <p class="day-range">{{ t('footer.tuesdaySunday') }}</p>
             <p class="hours">{{ t('footer.lunch') }}</p>
             <p class="hours">{{ t('footer.dinner') }}</p>
             <p class="closed">{{ t('footer.mondayClosed') }}</p>

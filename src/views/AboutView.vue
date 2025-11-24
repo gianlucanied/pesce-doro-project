@@ -147,7 +147,7 @@ onMounted(() => {
       </div>
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <div class="ornament">⚜</div>
+        <div class="ornament"></div>
         <h1 class="main-title">{{ t('about.title') }}</h1>
         <div class="title-divider"></div>
         <p class="subtitle">{{ t('about.subtitle') }}</p>
@@ -295,7 +295,7 @@ onMounted(() => {
 
         <!-- CTA Section -->
         <div class="cta-section">
-          <div class="cta-ornament">⚜</div>
+          <div class="cta-ornament"></div>
           <h3>{{ t('about.ctaTitle') }}</h3>
           <p>{{ t('about.ctaText') }}</p>
           <RouterLink to="/contacts" class="cta-button">{{ t('about.bookTable') }}</RouterLink>

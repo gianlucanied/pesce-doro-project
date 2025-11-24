@@ -19,7 +19,7 @@ onMounted(() => {
     <section class="hero-contacts">
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <div class="ornament">⚜</div>
+        <div class="ornament"></div>
         <h1 class="main-title">{{ t('contacts.title') }}</h1>
         <div class="title-divider"></div>
         <p class="subtitle">{{ t('contacts.subtitle') }}</p>
@@ -96,7 +96,6 @@ onMounted(() => {
             <div class="card-divider"></div>
 
             <div class="hours-item">
-              <div class="day-label">{{ t('contacts.tuesdaySunday') }}</div>
               <div class="time-slots">
                 <div class="time-slot">
                   <span class="slot-label">{{ t('contacts.lunch') }}</span>
@@ -182,7 +181,7 @@ onMounted(() => {
 
         <!-- CTA Section -->
         <div class="cta-section">
-          <div class="cta-ornament">⚜</div>
+          <div class="cta-ornament"></div>
           <h3>{{ t('contacts.bookTableTitle') }}</h3>
           <p>{{ t('contacts.bookTableText') }}</p>
           <div class="cta-buttons">
