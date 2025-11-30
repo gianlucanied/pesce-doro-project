@@ -23,10 +23,16 @@ const headerImages = [
   new URL('@/assets/7.jpg', import.meta.url).href,
 ]
 
-// Funzione helper per ottenere l'URL delle immagini del jumbotron
-const getImageUrl = (index) => {
-  return new URL(`@/assets/${index}.jpg`, import.meta.url).href
-}
+// Array di immagini per il jumbotron (stesso array)
+const jumbotronImages = [
+  new URL('@/assets/1.jpg', import.meta.url).href,
+  new URL('@/assets/2.jpg', import.meta.url).href,
+  new URL('@/assets/3.jpg', import.meta.url).href,
+  new URL('@/assets/4.jpg', import.meta.url).href,
+  new URL('@/assets/5.jpg', import.meta.url).href,
+  new URL('@/assets/6.jpg', import.meta.url).href,
+  new URL('@/assets/7.jpg', import.meta.url).href,
+]
 
 onMounted(() => {
   setTimeout(() => {
@@ -137,10 +143,9 @@ const goToSlide = (index) => {
             <div class="jumbotron-border-br"></div>
 
             <!-- Immagine principale grande -->
-            <!-- Immagine principale grande -->
             <div class="jumbotron-main">
               <img
-                :src="getImageUrl(currentSlide + 1)"
+                :src="jumbotronImages[currentSlide]"
                 :alt="`Il Pesce d'Oro - ${t('common.image')} ${currentSlide + 1}`"
                 class="jumbotron-image"
               />
@@ -150,16 +155,16 @@ const goToSlide = (index) => {
             <!-- Thumbnails sotto -->
             <div class="jumbotron-thumbnails">
               <button
-                v-for="i in totalSlides"
-                :key="i"
+                v-for="(image, index) in jumbotronImages"
+                :key="index"
                 class="thumbnail"
-                :class="{ active: currentSlide === i - 1 }"
-                @click="goToSlide(i - 1)"
-                :aria-label="`${t('common.goToImage')} ${i}`"
+                :class="{ active: currentSlide === index }"
+                @click="goToSlide(index)"
+                :aria-label="`${t('common.goToImage')} ${index + 1}`"
               >
                 <img
-                  :src="getImageUrl(i)"
-                  :alt="`${t('common.thumbnail')} ${i}`"
+                  :src="image"
+                  :alt="`${t('common.thumbnail')} ${index + 1}`"
                   class="thumbnail-image"
                 />
                 <div class="thumbnail-overlay"></div>
