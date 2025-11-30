@@ -8,15 +8,15 @@ const isVisible = ref(false)
 const currentHeroImage = ref(0)
 let heroImageInterval = null
 
-// Array di immagini per l'hero
+// Array di immagini per l'hero - USA NEW URL INVECE DI PERCORSI RELATIVI
 const heroImages = [
-  'src/assets/8.jpg',
-  'src/assets/9.jpg',
-  'src/assets/10.jpg',
-  'src/assets/11.jpg',
-  'src/assets/12.jpg',
-  'src/assets/13.jpg',
-  'src/assets/14.jpg',
+  new URL('@/assets/8.jpg', import.meta.url).href,
+  new URL('@/assets/9.jpg', import.meta.url).href,
+  new URL('@/assets/10.jpg', import.meta.url).href,
+  new URL('@/assets/11.jpg', import.meta.url).href,
+  new URL('@/assets/12.jpg', import.meta.url).href,
+  new URL('@/assets/13.jpg', import.meta.url).href,
+  new URL('@/assets/14.jpg', import.meta.url).href,
 ]
 
 onMounted(() => {

@@ -6,31 +6,34 @@ const { t } = useI18n()
 
 const isVisible = ref(false)
 const currentSlide = ref(0)
-const currentHeaderImage = ref(0) // Nuova ref per header
+const currentHeaderImage = ref(0)
 const totalSlides = 7
 const isAutoPlaying = ref(true)
 let autoPlayInterval = null
-let headerImageInterval = null // Nuovo interval per header
+let headerImageInterval = null
 
 // Array di immagini per l'header
 const headerImages = [
-  'src/assets/1.jpg',
-  'src/assets/2.jpg',
-  'src/assets/3.jpg',
-  'src/assets/4.jpg',
-  'src/assets/5.jpg',
-  'src/assets/6.jpg',
-  'src/assets/7.jpg',
+  new URL('@/assets/1.jpg', import.meta.url).href,
+  new URL('@/assets/2.jpg', import.meta.url).href,
+  new URL('@/assets/3.jpg', import.meta.url).href,
+  new URL('@/assets/4.jpg', import.meta.url).href,
+  new URL('@/assets/5.jpg', import.meta.url).href,
+  new URL('@/assets/6.jpg', import.meta.url).href,
+  new URL('@/assets/7.jpg', import.meta.url).href,
 ]
+
+// Funzione helper per ottenere l'URL delle immagini del jumbotron
+const getImageUrl = (index) => {
+  return new URL(`@/assets/${index}.jpg`, import.meta.url).href
+}
 
 onMounted(() => {
   setTimeout(() => {
     isVisible.value = true
   }, 300)
 
-  // Avvia autoplay
   startAutoPlay()
-  // Avvia cambio immagini header
   startHeaderImageSlide()
 })
 
@@ -45,7 +48,7 @@ const startAutoPlay = () => {
 const startHeaderImageSlide = () => {
   headerImageInterval = setInterval(() => {
     currentHeaderImage.value = (currentHeaderImage.value + 1) % headerImages.length
-  }, 5000) // Cambia immagine ogni 3 secondi
+  }, 5000)
 }
 
 const stopAutoPlay = () => {
@@ -134,9 +137,10 @@ const goToSlide = (index) => {
             <div class="jumbotron-border-br"></div>
 
             <!-- Immagine principale grande -->
+            <!-- Immagine principale grande -->
             <div class="jumbotron-main">
               <img
-                :src="`src/assets/${currentSlide + 1}.jpg`"
+                :src="getImageUrl(currentSlide + 1)"
                 :alt="`Il Pesce d'Oro - ${t('common.image')} ${currentSlide + 1}`"
                 class="jumbotron-image"
               />
@@ -154,7 +158,7 @@ const goToSlide = (index) => {
                 :aria-label="`${t('common.goToImage')} ${i}`"
               >
                 <img
-                  :src="`src/assets/${i}.jpg`"
+                  :src="getImageUrl(i)"
                   :alt="`${t('common.thumbnail')} ${i}`"
                   class="thumbnail-image"
                 />
