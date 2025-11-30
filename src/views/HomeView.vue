@@ -940,7 +940,7 @@ const goToSlide = (index) => {
   .header-container {
     margin-bottom: 3rem;
     padding: 3rem 1.5rem;
-    min-height: 350px;
+    min-height: 80vh;
   }
 
   .story-container {
@@ -1010,7 +1010,7 @@ const goToSlide = (index) => {
 @media (max-width: 480px) {
   .header-container {
     padding: 2.5rem 1rem;
-    min-height: 300px;
+    border: 0;
   }
 
   .story-container {
