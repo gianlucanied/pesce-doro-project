@@ -363,10 +363,6 @@ const startHeroImageSlide = () => {
   text-align: center;
   padding: 3rem;
   animation: heroSlideUp 1s ease-out;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
-  border-radius: 4px;
-  border: 2px solid rgba(212, 175, 55, 0.3);
-  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.2);
 }
 
 @keyframes heroSlideUp {
