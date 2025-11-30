@@ -61,31 +61,50 @@ onMounted(() => {
           <RouterLink to="/contacts" class="btn-prenota">{{ t('nav.contacts') }}</RouterLink>
 
           <!-- Language Selector -->
+          <!-- Language Selector - Desktop con Dropdown -->
           <div class="language-selector">
-            <button
-              @click="changeLanguage('it')"
-              :class="{ active: locale === 'it' }"
-              class="lang-btn"
-              aria-label="Italiano"
-            >
-              🇮🇹
-            </button>
-            <button
-              @click="changeLanguage('en')"
-              :class="{ active: locale === 'en' }"
-              class="lang-btn"
-              aria-label="English"
-            >
-              🇬🇧
-            </button>
-            <button
-              @click="changeLanguage('es')"
-              :class="{ active: locale === 'es' }"
-              class="lang-btn"
-              aria-label="Español"
-            >
-              🇪🇸
-            </button>
+            <div class="language-dropdown">
+              <button class="current-lang-btn" aria-label="Select language">
+                <span v-if="locale === 'it'">🇮🇹</span>
+                <span v-if="locale === 'en'">🇬🇧</span>
+                <span v-if="locale === 'es'">🇪🇸</span>
+                <svg
+                  class="dropdown-arrow"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <div class="language-dropdown-menu">
+                <button
+                  v-if="locale !== 'it'"
+                  @click="changeLanguage('it')"
+                  class="dropdown-lang-btn"
+                >
+                  🇮🇹 <span>Italiano</span>
+                </button>
+                <button
+                  v-if="locale !== 'en'"
+                  @click="changeLanguage('en')"
+                  class="dropdown-lang-btn"
+                >
+                  🇬🇧 <span>English</span>
+                </button>
+                <button
+                  v-if="locale !== 'es'"
+                  @click="changeLanguage('es')"
+                  class="dropdown-lang-btn"
+                >
+                  🇪🇸 <span>Español</span>
+                </button>
+              </div>
+            </div>
           </div>
         </nav>
 
@@ -458,20 +477,24 @@ header {
   box-shadow: 0 6px 25px rgba(212, 175, 55, 0.5);
 }
 
-/* ==================== LANGUAGE SELECTOR ==================== */
+/* ==================== LANGUAGE SELECTOR WITH DROPDOWN ==================== */
 .language-selector {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
   padding-left: 1rem;
   border-left: 2px solid rgba(212, 175, 55, 0.3);
 }
 
-.lang-btn {
+.language-dropdown {
+  position: relative;
+}
+
+.current-lang-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), transparent);
   border: 2px solid rgba(212, 175, 55, 0.3);
   color: #e6c77f;
-  padding: 0.5rem 0.7rem;
+  padding: 0.5rem 0.9rem;
   font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -479,20 +502,82 @@ header {
   box-shadow: 0 2px 8px rgba(212, 175, 55, 0.1);
 }
 
-.lang-btn:hover {
+.dropdown-arrow {
+  color: #e19b1d;
+  transition: transform 0.3s ease;
+}
+
+.current-lang-btn:hover {
   border-color: #e19b1d;
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.1));
-  transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25);
 }
 
-.lang-btn.active {
-  border-color: #e19b1d;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(218, 165, 32, 0.15));
-  box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+.language-dropdown:hover .dropdown-arrow {
+  transform: rotate(180deg);
 }
 
-/* Mobile Language Selector */
+/* Dropdown Menu */
+.language-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  background: linear-gradient(135deg, #0a0a0a, #1a1410);
+  border: 2px solid rgba(212, 175, 55, 0.4);
+  border-radius: 2px;
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(212, 175, 55, 0.2);
+  min-width: 150px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.language-dropdown:hover .language-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-lang-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: #e6c77f;
+  padding: 0.9rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+  font-family: 'Lora', 'Georgia', serif;
+}
+
+.dropdown-lang-btn:last-child {
+  border-bottom: none;
+}
+
+.dropdown-lang-btn span {
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+.dropdown-lang-btn:hover {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.1));
+  color: #e19b1d;
+  padding-left: 1.5rem;
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+}
+
+/* Mobile Language Selector (invariato) */
 .mobile-language-selector {
   display: flex;
   flex-direction: column;
