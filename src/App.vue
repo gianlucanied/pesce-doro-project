@@ -32,9 +32,28 @@ onMounted(() => {
       <div class="header-content">
         <div class="logo">
           <RouterLink to="/" @click="mobileMenuOpen = false">
-            <img src="/images.png" alt="Il Pesce d'Oro" class="logo-img" />
+            <img src="/image-copia.jpg" alt="Il Pesce d'Oro" class="logo-img" />
           </RouterLink>
         </div>
+
+        <!-- Pulsante Download Menu - Desktop -->
+        <a href="/menu.pdf" download class="btn-menu-download desktop-menu-btn">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          <span>{{ t('nav.downloadMenu') }}</span>
+        </a>
 
         <nav class="desktop-nav">
           <RouterLink to="/" class="nav-link">{{ t('nav.home') }}</RouterLink>
@@ -78,6 +97,25 @@ onMounted(() => {
       </div>
 
       <div class="mobile-nav" :class="{ open: mobileMenuOpen }">
+        <!-- Pulsante Download Menu - Mobile -->
+        <a href="/menu.pdf" download class="mobile-menu-download" @click="mobileMenuOpen = false">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          <span>{{ t('nav.downloadMenu') }}</span>
+        </a>
+
         <RouterLink to="/" class="mobile-nav-link" @click="toggleMobileMenu">
           {{ t('nav.home') }}
         </RouterLink>
@@ -124,7 +162,7 @@ onMounted(() => {
 
       <div class="footer-content">
         <div class="footer-section footer-brand">
-          <img src="/images.png" alt="Il Pesce d'Oro" class="footer-logo" />
+          <img src="/images1.png" alt="Il Pesce d'Oro" class="footer-logo" />
           <p class="footer-tagline">{{ t('footer.tagline') }}</p>
           <div class="footer-divider"></div>
         </div>
@@ -188,21 +226,6 @@ onMounted(() => {
                   <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                 </svg>
               </a>
-              <!-- <a href="#" aria-label="TripAdvisor" class="social-link">
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <circle cx="12" cy="12" r="10" />
-                  <circle cx="12" cy="12" r="3" />
-                </svg>
-              </a> -->
             </div>
             <p class="social-text">{{ t('footer.shareExperience') }}</p>
           </div>
@@ -219,8 +242,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap');
 * {
   margin: 0;
   padding: 0;
@@ -233,7 +255,7 @@ onMounted(() => {
   flex-direction: column;
   background: linear-gradient(135deg, #0a0a0a 0%, #1a1410 50%, #0a0a0a 100%);
   color: #fff;
-  font-family: 'Playfair Display', 'Georgia', serif;
+  font-family: 'Lora', 'Georgia', serif;
 }
 
 /* ==================== HEADER ==================== */
@@ -253,13 +275,15 @@ header {
 }
 
 .header-content {
-  max-width: 1400px;
+  /* max-width: 1400px; */
+  height: 100px;
   margin: 0 auto;
-  padding: 1.5rem 3rem;
+  padding: 0 3rem;
   display: flex;
+  background-color: black;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.03), transparent);
+  /* background: linear-gradient(135deg, rgba(212, 175, 55, 0.03), transparent); */
 }
 
 .logo a {
@@ -273,10 +297,78 @@ header {
 }
 
 .logo-img {
-  height: 65px;
+  height: 85px;
   width: auto;
   display: block;
-  filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
+}
+
+/* ==================== DOWNLOAD MENU BUTTON ==================== */
+.btn-menu-download {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(218, 165, 32, 0.06));
+  border: 2px solid rgba(212, 175, 55, 0.4);
+  color: #e19b1d;
+  padding: 0.7rem 1.5rem;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+  box-shadow: 0 2px 10px rgba(212, 175, 55, 0.15);
+}
+
+.btn-menu-download svg {
+  transition: transform 0.3s ease;
+}
+
+.btn-menu-download:hover {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(218, 165, 32, 0.12));
+  border-color: #e19b1d;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+  color: #ffa500;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+
+.btn-menu-download:hover svg {
+  transform: translateY(3px);
+}
+
+/* Mobile Menu Download Button */
+.mobile-menu-download {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
+  border: none;
+  border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+  color: #e19b1d;
+  padding: 1.5rem 3rem;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  font-family: 'Lora', 'Georgia', serif;
+}
+
+.mobile-menu-download:hover {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(218, 165, 32, 0.15));
+  color: #ffa500;
+  padding-left: 3.5rem;
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+}
+
+.mobile-menu-download svg {
+  transition: transform 0.3s ease;
+}
+
+.mobile-menu-download:hover svg {
+  transform: translateY(3px);
 }
 
 .desktop-nav {
@@ -423,7 +515,7 @@ header {
   text-align: left;
   transition: all 0.3s ease;
   border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-  font-family: 'Playfair Display', 'Georgia', serif;
+  font-family: 'Lora', 'Georgia', serif;
 }
 
 .mobile-lang-btn:hover {
@@ -440,7 +532,7 @@ header {
   box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.2);
 }
 
-/* Mobile Menu Button - MODIFICATO */
+/* Mobile Menu Button */
 .mobile-menu-btn {
   display: none;
   flex-direction: column;
@@ -513,7 +605,7 @@ header {
 }
 
 .mobile-nav.open {
-  max-height: 700px;
+  max-height: 800px;
   box-shadow: inset 0 10px 20px rgba(212, 175, 55, 0.1);
 }
 
@@ -791,12 +883,16 @@ footer::before {
     display: flex;
   }
 
+  .desktop-menu-btn {
+    display: none;
+  }
+
   .header-content {
     padding: 1.2rem 2rem;
   }
 
   .logo-img {
-    height: 55px;
+    height: 70px;
   }
 
   .footer-content {
@@ -834,8 +930,16 @@ footer::before {
     padding-left: 2rem;
   }
 
+  .mobile-menu-download {
+    padding: 1.5rem 1.5rem;
+  }
+
+  .mobile-menu-download:hover {
+    padding-left: 2rem;
+  }
+
   .logo-img {
-    height: 50px;
+    height: 60px;
   }
 
   .footer-content {
@@ -876,6 +980,10 @@ footer::before {
 
 @media (min-width: 969px) {
   .mobile-nav {
+    display: none;
+  }
+
+  .mobile-menu-download {
     display: none;
   }
 }

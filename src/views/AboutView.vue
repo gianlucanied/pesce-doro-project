@@ -63,59 +63,23 @@ const reviews = ref([
   },
 ])
 
-let autoSlideInterval = null
 let heroSlideInterval = null
 
 const nextReview = () => {
   slideDirection.value = 'slide-left'
   currentReviewIndex.value = (currentReviewIndex.value + 1) % reviews.value.length
-  // Rimosso resetAutoSlide() dato che non usiamo più l'autoplay
 }
 
 const prevReview = () => {
   slideDirection.value = 'slide-right'
   currentReviewIndex.value =
     currentReviewIndex.value === 0 ? reviews.value.length - 1 : currentReviewIndex.value - 1
-  // Rimosso resetAutoSlide() dato che non usiamo più l'autoplay
 }
 
 const goToReview = (index) => {
   slideDirection.value = index > currentReviewIndex.value ? 'slide-left' : 'slide-right'
   currentReviewIndex.value = index
-  // Rimosso resetAutoSlide() dato che non usiamo più l'autoplay
 }
-
-// Puoi rimuovere o commentare queste funzioni se non le usi più
-// const startAutoSlide = () => {
-//   if (!isHoveringReview.value) {
-//     autoSlideInterval = setInterval(() => {
-//       if (!isHoveringReview.value) {
-//         nextReview()
-//       }
-//     }, 2000)
-//   }
-// }
-
-// const resetAutoSlide = () => {
-//   if (autoSlideInterval) {
-//     clearInterval(autoSlideInterval)
-//   }
-//   startAutoSlide()
-// }
-
-// Puoi anche rimuovere queste funzioni per l'hover
-// const handleMouseEnter = () => {
-//   isHoveringReview.value = true
-//   if (autoSlideInterval) {
-//     clearInterval(autoSlideInterval)
-//     autoSlideInterval = null
-//   }
-// }
-
-// const handleMouseLeave = () => {
-//   isHoveringReview.value = false
-//   startAutoSlide()
-// }
 
 const startHeroSlide = () => {
   heroSlideInterval = setInterval(() => {
@@ -127,8 +91,7 @@ onMounted(() => {
   setTimeout(() => {
     isVisible.value = true
   }, 150)
-  // startAutoSlide() // ← COMMENTATO: rimuove lo scorrimento automatico delle recensioni
-  startHeroSlide() // ← Mantiene lo scorrimento automatico delle immagini hero
+  startHeroSlide()
 })
 </script>
 
@@ -165,14 +128,25 @@ onMounted(() => {
           <p class="lead-text">{{ t('about.introText') }}</p>
         </div>
 
-        <!-- Gli Spazi - Centered Single Block -->
+        <!-- Gli Spazi - With Image -->
         <div class="single-story-section">
-          <div class="story-block-centered">
-            <div class="block-number-centered">◆</div>
-            <h3>{{ t('about.spacesTitle') }}</h3>
-            <div class="block-divider"></div>
-            <p v-html="t('about.spacesText1')"></p>
-            <p v-html="t('about.spacesText2')"></p>
+          <div class="story-grid">
+            <!-- Text Block -->
+            <div class="story-block-centered">
+              <div class="block-number-centered">◆</div>
+              <h3>{{ t('about.spacesTitle') }}</h3>
+              <div class="block-divider"></div>
+              <p v-html="t('about.spacesText1')"></p>
+              <p v-html="t('about.spacesText2')"></p>
+            </div>
+
+            <!-- Image Block -->
+            <div class="story-image-block">
+              <div class="image-border-tl"></div>
+              <div class="image-border-br"></div>
+              <img :src="heroImages[0]" alt="Il Pesce d'Oro - Gli Spazi" class="story-image" />
+              <div class="image-overlay"></div>
+            </div>
           </div>
         </div>
 
@@ -186,36 +160,15 @@ onMounted(() => {
           </div>
         </div>
 
-        <!-- Features -->
-        <!-- <div class="features-section">
-          <div class="feature-item">
-            <h4>{{ t('about.tradition') }}</h4>
-            <p>{{ t('about.traditionText') }}</p>
-          </div>
-          <div class="feature-item">
-            <h4>{{ t('about.experience') }}</h4>
-            <p>{{ t('about.experienceText') }}</p>
-          </div>
-          <div class="feature-item">
-            <h4>{{ t('about.quality') }}</h4>
-            <p>{{ t('about.qualityText') }}</p>
-          </div>
-          <div class="feature-item">
-            <h4>{{ t('about.passion') }}</h4>
-            <p>{{ t('about.passionText') }}</p>
-          </div>
-        </div> -->
-
         <!-- Reviews Carousel -->
         <div class="reviews-wrapper">
           <div class="reviews-intro">
-            <div class="intro-ornament">★</div>
+            <!-- <div class="intro-ornament">★</div> -->
             <h3>{{ t('about.reviewsTitle') }}</h3>
             <div class="intro-line"></div>
             <p class="reviews-description">{{ t('about.reviewsDescription') }}</p>
           </div>
 
-          <!-- RIMOSSI @mouseenter e @mouseleave -->
           <div class="carousel-main">
             <button
               class="carousel-nav carousel-prev"
@@ -307,8 +260,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap');
 * {
   margin: 0;
   padding: 0;
@@ -316,7 +268,7 @@ onMounted(() => {
 }
 
 .about-page {
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1410 50%, #0a0a0a 100%);
+  background: linear-gradient(135deg, #f8f6f2 0%, #ebe8e1 50%, #f8f6f2 100%);
   min-height: 100vh;
   opacity: 0;
   transition: opacity 1s ease-out;
@@ -370,7 +322,7 @@ onMounted(() => {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(rgba(212, 175, 55, 0.15), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8));
+  background: linear-gradient(rgba(212, 175, 55, 0.1), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
   z-index: 1;
 }
 
@@ -394,13 +346,12 @@ onMounted(() => {
 }
 
 .main-title {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Lora', Georgia, serif;
   font-size: clamp(3rem, 8vw, 5rem);
   font-weight: 400;
   color: #ffffff;
   letter-spacing: 8px;
   margin-bottom: 1rem;
-  text-transform: uppercase;
   text-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
 }
 
@@ -422,7 +373,7 @@ onMounted(() => {
 
 /* ==================== CONTENT SECTION ==================== */
 .content-section {
-  padding: 4rem 2rem;
+  padding: 6rem 2rem;
   position: relative;
 }
 
@@ -434,8 +385,8 @@ onMounted(() => {
   right: 0;
   bottom: 0;
   background:
-    radial-gradient(circle at 30% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 70% 80%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
+    radial-gradient(circle at 30% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
   pointer-events: none;
 }
 
@@ -450,13 +401,15 @@ onMounted(() => {
 .intro-card {
   position: relative;
   text-align: center;
-  padding: 4rem 3rem;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(218, 165, 32, 0.06));
-  border: 2px solid rgba(212, 175, 55, 0.4);
-  margin-bottom: 4rem;
+  padding: 5rem 4rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 246, 242, 0.9));
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  margin-bottom: 6rem;
   opacity: 0;
   animation: fadeInUp 1s ease-out 0.5s forwards;
-  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(212, 175, 55, 0.1) inset;
 }
 
 .intro-card::before,
@@ -465,7 +418,8 @@ onMounted(() => {
   position: absolute;
   width: 60px;
   height: 60px;
-  border: 2px solid #e19b1d;
+  border: 2px solid #c9a028;
+  opacity: 0.5;
 }
 
 .intro-card::before {
@@ -483,33 +437,30 @@ onMounted(() => {
 }
 
 .card-ornament {
-  color: #e19b1d;
+  color: #c9a028;
   font-size: 2rem;
   margin-bottom: 1.5rem;
   opacity: 1;
-  text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
 }
 
 .intro-card h2 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Lora', Georgia, serif;
   font-size: 2.5rem;
-  color: #e19b1d;
+  color: #8b6914;
   font-weight: 400;
   margin-bottom: 1.5rem;
   letter-spacing: 2px;
-  text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 .text-divider {
   width: 80px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
+  background: linear-gradient(90deg, transparent, #c9a028, transparent);
   margin: 1.5rem auto;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .lead-text {
-  color: #f0f0f0;
+  color: #2c2416;
   font-size: 1.15rem;
   line-height: 1.9;
   font-weight: 300;
@@ -517,24 +468,32 @@ onMounted(() => {
   margin: 0 auto;
 }
 
-/* ==================== CENTERED SINGLE STORY BLOCK ==================== */
+/* ==================== CENTERED SINGLE STORY BLOCK WITH IMAGE ==================== */
 .single-story-section {
-  margin-bottom: 4rem;
-  display: flex;
-  justify-content: center;
+  margin-bottom: 6rem;
   opacity: 0;
   animation: fadeInUp 1s ease-out 1s forwards;
 }
 
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
 .story-block-centered {
   position: relative;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(218, 165, 32, 0.05));
-  padding: 3rem;
-  border: 2px solid rgba(212, 175, 55, 0.4);
-  max-width: 700px;
-  width: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 246, 242, 0.85));
+  padding: 4rem 3rem;
+  border: 2px solid rgba(212, 175, 55, 0.3);
   text-align: center;
-  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(212, 175, 55, 0.1) inset;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .story-block-centered::before {
@@ -544,8 +503,9 @@ onMounted(() => {
   left: -1px;
   width: 80px;
   height: 80px;
-  border-top: 2px solid #e19b1d;
-  border-left: 2px solid #e19b1d;
+  border-top: 2px solid #c9a028;
+  border-left: 2px solid #c9a028;
+  opacity: 0.5;
 }
 
 .story-block-centered::after {
@@ -555,38 +515,36 @@ onMounted(() => {
   right: -1px;
   width: 80px;
   height: 80px;
-  border-bottom: 2px solid #e19b1d;
-  border-right: 2px solid #e19b1d;
+  border-bottom: 2px solid #c9a028;
+  border-right: 2px solid #c9a028;
+  opacity: 0.5;
 }
 
 .block-number-centered {
-  color: #e19b1d;
+  color: #c9a028;
   font-size: 2rem;
   margin-bottom: 1.5rem;
   opacity: 1;
-  text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
 }
 
 .story-block-centered h3 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Lora', Georgia, serif;
   font-size: 2rem;
-  color: #e19b1d;
+  color: #8b6914;
   font-weight: 400;
   margin-bottom: 1.5rem;
   letter-spacing: 1px;
-  text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
 }
 
 .block-divider {
   width: 60px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
+  background: linear-gradient(90deg, transparent, #c9a028, transparent);
   margin: 1.5rem auto;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .story-block-centered p {
-  color: #f0f0f0;
+  color: #2c2416;
   font-size: 1.05rem;
   line-height: 1.8;
   margin-bottom: 1rem;
@@ -598,25 +556,89 @@ onMounted(() => {
 }
 
 .story-block-centered :deep(strong) {
-  color: #e19b1d;
+  color: #8b6914;
   font-weight: 500;
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+/* Image Block */
+.story-image-block {
+  position: relative;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 246, 242, 0.85));
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  overflow: hidden;
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(212, 175, 55, 0.1) inset;
+}
+
+.image-border-tl,
+.image-border-br {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border: 2px solid #c9a028;
+  opacity: 0.5;
+  z-index: 2;
+}
+
+.image-border-tl {
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.image-border-br {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+}
+
+.story-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.story-image-block:hover .story-image {
+  transform: scale(1.05);
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(212, 175, 55, 0.08) 0%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(0, 0, 0, 0.25) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* ==================== MISSION SECTION ==================== */
 .mission-section {
-  margin-bottom: 4rem;
+  margin-bottom: 6rem;
   opacity: 0;
   animation: fadeInUp 1s ease-out 1.2s forwards;
 }
 
 .mission-content {
   position: relative;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(218, 165, 32, 0.06));
-  padding: 4rem 3rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 246, 242, 0.9));
+  padding: 5rem 4rem;
   border: 2px solid rgba(212, 175, 55, 0.3);
   text-align: center;
-  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(212, 175, 55, 0.1) inset;
 }
 
 .mission-content::before {
@@ -626,38 +648,34 @@ onMounted(() => {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
-  box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+  background: linear-gradient(90deg, transparent, #c9a028, transparent);
 }
 
 .mission-icon {
-  color: #e19b1d;
+  color: #c9a028;
   font-size: 3rem;
   margin-bottom: 1.5rem;
   opacity: 1;
-  text-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
 }
 
 .mission-content h3 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Lora', Georgia, serif;
   font-size: 2.5rem;
-  color: #e19b1d;
+  color: #8b6914;
   font-weight: 400;
   margin-bottom: 1.5rem;
   letter-spacing: 2px;
-  text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 .mission-divider {
   width: 100px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
+  background: linear-gradient(90deg, transparent, #c9a028, transparent);
   margin: 1.5rem auto;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .mission-text {
-  color: #f0f0f0;
+  color: #2c2416;
   font-size: 1.15rem;
   line-height: 1.9;
   max-width: 900px;
@@ -665,58 +683,9 @@ onMounted(() => {
   font-weight: 300;
 }
 
-/* ==================== FEATURES SECTION ==================== */
-.features-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  margin-bottom: 5rem;
-  opacity: 0;
-  animation: fadeInUp 1s ease-out 1.5s forwards;
-}
-
-.feature-item {
-  text-align: center;
-  padding: 2.5rem 1.5rem;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(218, 165, 32, 0.05));
-  border: 2px solid rgba(212, 175, 55, 0.3);
-  transition: all 0.4s ease;
-  box-shadow: 0 5px 20px rgba(212, 175, 55, 0.1);
-}
-
-.feature-item:hover {
-  transform: translateY(-8px);
-  border-color: #e19b1d;
-  box-shadow: 0 15px 40px rgba(212, 175, 55, 0.25);
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
-}
-
-.feature-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  filter: grayscale(0.3);
-}
-
-.feature-item h4 {
-  font-family: 'Playfair Display', Georgia, serif;
-  color: #e19b1d;
-  font-size: 1.4rem;
-  margin-bottom: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
-}
-
-.feature-item p {
-  color: #e0e0e0;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  font-weight: 300;
-}
-
 /* ==================== REVIEWS SECTION ==================== */
 .reviews-wrapper {
-  margin-bottom: 5rem;
+  margin-bottom: 6rem;
   opacity: 0;
   animation: fadeInUp 1s ease-out 1.8s forwards;
 }
@@ -727,33 +696,30 @@ onMounted(() => {
 }
 
 .intro-ornament {
-  color: #e19b1d;
+  color: #c9a028;
   font-size: 3rem;
   margin-bottom: 1rem;
   opacity: 1;
-  text-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
 }
 
 .reviews-intro h3 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Lora', Georgia, serif;
   font-size: 2.5rem;
-  color: #e19b1d;
+  color: #8b6914;
   font-weight: 400;
   margin-bottom: 1rem;
   letter-spacing: 2px;
-  text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 .intro-line {
   width: 100px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
+  background: linear-gradient(90deg, transparent, #c9a028, transparent);
   margin: 1.5rem auto;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .reviews-description {
-  color: #e6c77f;
+  color: #8b6914;
   font-size: 1.1rem;
   font-weight: 300;
   font-style: italic;
@@ -768,9 +734,9 @@ onMounted(() => {
 }
 
 .carousel-nav {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.1));
-  border: 2px solid rgba(212, 175, 55, 0.4);
-  color: #e19b1d;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 246, 242, 0.85));
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  color: #8b6914;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -780,20 +746,19 @@ onMounted(() => {
   cursor: pointer;
   transition: all 0.3s ease;
   flex-shrink: 0;
-  box-shadow: 0 3px 15px rgba(212, 175, 55, 0.2);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
 }
 
 .carousel-nav span {
   font-size: 2rem;
   line-height: 1;
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 .carousel-nav:hover {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(218, 165, 32, 0.15));
-  border-color: #e19b1d;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(248, 246, 242, 0.95));
+  border-color: #c9a028;
   transform: scale(1.1);
-  box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
 }
 
 .carousel-stage {
@@ -805,14 +770,16 @@ onMounted(() => {
 
 .review-showcase {
   position: relative;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(218, 165, 32, 0.06));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 246, 242, 0.9));
   padding: 4rem 3rem;
-  border: 2px solid rgba(212, 175, 55, 0.4);
+  border: 2px solid rgba(212, 175, 55, 0.3);
   min-height: 450px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(212, 175, 55, 0.1) inset;
 }
 
 .showcase-border-tl,
@@ -820,7 +787,8 @@ onMounted(() => {
   position: absolute;
   width: 60px;
   height: 60px;
-  border: 2px solid #e19b1d;
+  border: 2px solid #c9a028;
+  opacity: 0.5;
 }
 
 .showcase-border-tl {
@@ -849,9 +817,8 @@ onMounted(() => {
 }
 
 .star-icon {
-  color: #e19b1d;
+  color: #c9a028;
   font-size: 1.5rem;
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .review-body {
@@ -868,9 +835,8 @@ onMounted(() => {
   position: absolute;
   font-family: Georgia, serif;
   font-size: 5rem;
-  color: rgba(212, 175, 55, 0.25);
+  color: rgba(201, 160, 40, 0.15);
   line-height: 1;
-  text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 .quotation-left {
@@ -884,7 +850,7 @@ onMounted(() => {
 }
 
 .review-quote {
-  color: #f0f0f0;
+  color: #2c2416;
   font-size: 1.1rem;
   line-height: 1.9;
   text-align: center;
@@ -902,22 +868,20 @@ onMounted(() => {
 .author-line {
   width: 60px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
+  background: linear-gradient(90deg, transparent, #c9a028, transparent);
   margin: 0 auto 1rem;
-  box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
 }
 
 .author-name {
-  color: #e19b1d;
+  color: #8b6914;
   font-size: 1.1rem;
   font-weight: 500;
   margin-bottom: 0.3rem;
   letter-spacing: 0.5px;
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 .author-source {
-  color: #e6c77f;
+  color: #8b6914;
   font-size: 0.9rem;
   font-weight: 300;
 }
@@ -933,24 +897,24 @@ onMounted(() => {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: rgba(212, 175, 55, 0.3);
-  border: 2px solid rgba(212, 175, 55, 0.5);
+  background: rgba(201, 160, 40, 0.2);
+  border: 2px solid rgba(201, 160, 40, 0.4);
   cursor: pointer;
   transition: all 0.3s ease;
   padding: 0;
 }
 
 .pagination-dot:hover {
-  background: rgba(212, 175, 55, 0.6);
+  background: rgba(201, 160, 40, 0.5);
   transform: scale(1.2);
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+  box-shadow: 0 0 10px rgba(201, 160, 40, 0.3);
 }
 
 .pagination-dot.active {
-  background: #e19b1d;
-  border-color: #e19b1d;
+  background: #c9a028;
+  border-color: #c9a028;
   transform: scale(1.3);
-  box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+  box-shadow: 0 0 15px rgba(201, 160, 40, 0.4);
 }
 
 .reviews-footer {
@@ -963,23 +927,22 @@ onMounted(() => {
   justify-content: center;
   gap: 1rem;
   margin-bottom: 1.5rem;
-  color: #e0e0e0;
+  color: #4a4032;
   font-size: 1rem;
 }
 
 .stat-score {
-  color: #e19b1d;
+  color: #8b6914;
   font-weight: 600;
   font-size: 1.2rem;
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 .stat-divider {
-  color: rgba(212, 175, 55, 0.6);
+  color: rgba(139, 105, 20, 0.4);
 }
 
 .tripadvisor-cta {
-  color: #e19b1d;
+  color: #8b6914;
   text-decoration: none;
   font-size: 1rem;
   font-weight: 300;
@@ -997,17 +960,12 @@ onMounted(() => {
   transform: translateX(-50%);
   width: 0;
   height: 1px;
-  background: #e19b1d;
+  background: #8b6914;
   transition: width 0.3s ease;
-  box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
 }
 
 .tripadvisor-cta:hover::after {
   width: 100%;
-}
-
-.tripadvisor-cta:hover {
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
 }
 
 /* Carousel Transitions */
@@ -1041,34 +999,34 @@ onMounted(() => {
 /* CTA Section */
 .cta-section {
   text-align: center;
-  padding: 4rem 2rem;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
-  border: 2px solid rgba(212, 175, 55, 0.4);
+  padding: 5rem 3rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 246, 242, 0.9));
+  border: 2px solid rgba(212, 175, 55, 0.3);
   opacity: 0;
   animation: fadeInUp 1s ease-out 2.2s forwards;
-  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(212, 175, 55, 0.1) inset;
 }
 
 .cta-ornament {
-  color: #e19b1d;
+  color: #c9a028;
   font-size: 2rem;
   margin-bottom: 1.5rem;
   opacity: 1;
-  text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
 }
 
 .cta-section h3 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Lora', Georgia, serif;
   font-size: 2.5rem;
-  color: #e19b1d;
+  color: #8b6914;
   font-weight: 400;
   margin-bottom: 1rem;
   letter-spacing: 2px;
-  text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 .cta-section p {
-  color: #e0e0e0;
+  color: #4a4032;
   font-size: 1.1rem;
   margin-bottom: 2.5rem;
   font-weight: 300;
@@ -1077,7 +1035,7 @@ onMounted(() => {
 .cta-button {
   display: inline-block;
   background: linear-gradient(135deg, #e19b1d, #c9a028);
-  color: #0a0a0a;
+  color: #ffffff;
   padding: 1rem 3rem;
   text-decoration: none;
   font-weight: 600;
@@ -1086,7 +1044,7 @@ onMounted(() => {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 5px 20px rgba(201, 160, 40, 0.3);
 }
 
 .cta-button::before {
@@ -1111,7 +1069,7 @@ onMounted(() => {
 
 .cta-button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 35px rgba(212, 175, 55, 0.5);
+  box-shadow: 0 10px 35px rgba(201, 160, 40, 0.4);
 }
 
 /* ==================== ANIMATIONS ==================== */
@@ -1137,6 +1095,17 @@ onMounted(() => {
 }
 
 /* ==================== RESPONSIVE ==================== */
+@media (max-width: 968px) {
+  .story-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .story-image-block {
+    min-height: 400px;
+  }
+}
+
 @media (max-width: 768px) {
   .content-section {
     padding: 3rem 1.5rem;
@@ -1158,7 +1127,11 @@ onMounted(() => {
   }
 
   .story-block-centered {
-    padding: 2rem;
+    padding: 3rem 2rem;
+  }
+
+  .story-image-block {
+    min-height: 350px;
   }
 
   .mission-content {
@@ -1167,16 +1140,6 @@ onMounted(() => {
 
   .mission-section {
     margin-bottom: 3rem;
-  }
-
-  .features-section {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-  }
-
-  .feature-item {
-    padding: 2rem 1rem;
   }
 
   .reviews-wrapper {
@@ -1227,7 +1190,7 @@ onMounted(() => {
 
 @media (max-width: 480px) {
   .hero-about {
-    height: 80vh;
+    height: 70vh;
   }
 
   .intro-card h2 {
@@ -1242,16 +1205,22 @@ onMounted(() => {
     font-size: 1.5rem;
   }
 
+  .story-image-block {
+    min-height: 300px;
+  }
+
+  .image-border-tl,
+  .image-border-br {
+    width: 60px;
+    height: 60px;
+  }
+
   .mission-content h3 {
     font-size: 2rem;
   }
 
   .mission-text {
     font-size: 1rem;
-  }
-
-  .features-section {
-    grid-template-columns: 1fr;
   }
 
   .reviews-intro h3 {

@@ -94,16 +94,6 @@ const startHeroImageSlide = () => {
                 >info@pescedoroalghero.it</a
               >
             </div>
-
-            <div class="contact-item">
-              <h4>{{ t('contacts.closureDays') }}</h4>
-              <p class="closure-info">
-                <span class="closure-day">{{ t('contacts.wednesday') }}</span>
-                {{ t('contacts.allDay') }}<br />
-                <span class="closure-day">{{ t('contacts.thursday') }}</span>
-                {{ t('contacts.morning') }}
-              </p>
-            </div>
           </div>
 
           <!-- Hours Card -->
@@ -138,6 +128,16 @@ const startHeroImageSlide = () => {
                 </div>
               </div>
             </div>
+
+            <div class="contact-item">
+              <h4>{{ t('contacts.closureDays') }}</h4>
+              <p class="closure-info">
+                <span class="closure-day">{{ t('contacts.wednesday') }}</span>
+                {{ t('contacts.allDay') }}<br />
+                <span class="closure-day">{{ t('contacts.thursday') }}</span>
+                {{ t('contacts.morning') }}
+              </p>
+            </div>
           </div>
         </div>
 
@@ -152,29 +152,27 @@ const startHeroImageSlide = () => {
           <div class="location-grid">
             <!-- Location Info -->
             <div class="location-info">
-              <div class="location-text">
-                <div class="address-box">
-                  <div class="address-icon">
-                    <svg
-                      width="32"
-                      height="32"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                      <circle cx="12" cy="10" r="3" />
-                    </svg>
-                  </div>
-                  <div class="address-content">
-                    <h3>{{ t('contacts.addressTitle') }}</h3>
-                    <p class="address">{{ t('contacts.address') }}</p>
-                    <p class="city">{{ t('contacts.city') }}</p>
-                    <p class="note">{{ t('contacts.nearPort') }}</p>
-                  </div>
+              <div class="address-box">
+                <div class="address-icon">
+                  <svg
+                    width="48"
+                    height="48"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </div>
+                <div class="address-content">
+                  <h3>{{ t('contacts.addressTitle') }}</h3>
+                  <p class="address">{{ t('contacts.address') }}</p>
+                  <p class="city">{{ t('contacts.city') }}</p>
+                  <p class="note">{{ t('contacts.nearPort') }}</p>
                 </div>
               </div>
             </div>
@@ -194,16 +192,6 @@ const startHeroImageSlide = () => {
           </div>
         </div>
 
-        <!-- Tradition Section -->
-        <!-- <div class="tradition-section">
-          <div class="tradition-content">
-            <div class="tradition-icon">★</div>
-            <h3>{{ t('contacts.traditionTitle') }}</h3>
-            <div class="tradition-divider"></div>
-            <p class="tradition-text">{{ t('contacts.traditionText') }}</p>
-          </div>
-        </div> -->
-
         <!-- CTA Section -->
         <div class="cta-section">
           <div class="cta-ornament"></div>
@@ -219,8 +207,7 @@ const startHeroImageSlide = () => {
 </template>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap');
 * {
   margin: 0;
   padding: 0;
@@ -228,7 +215,7 @@ const startHeroImageSlide = () => {
 }
 
 .contacts-page {
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1410 50%, #0a0a0a 100%);
+  background: linear-gradient(135deg, #f8f6f2 0%, #ebe8e1 50%, #f8f6f2 100%);
   min-height: 100vh;
   opacity: 0;
   transition: opacity 1s ease-out;
@@ -243,8 +230,8 @@ const startHeroImageSlide = () => {
   right: 0;
   bottom: 0;
   background:
-    radial-gradient(circle at 25% 30%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 75% 70%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+    radial-gradient(circle at 25% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 75% 70%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
   pointer-events: none;
 }
 
@@ -275,7 +262,6 @@ const startHeroImageSlide = () => {
 
 .hero-bg-image {
   position: absolute;
-
   top: 0;
   left: 0;
   right: 0;
@@ -293,12 +279,11 @@ const startHeroImageSlide = () => {
   bottom: 0;
   background: linear-gradient(
     135deg,
-    rgba(10, 10, 10, 0.5) 0%,
-    rgba(26, 20, 16, 0.6) 50%,
-    rgba(10, 10, 10, 0.5) 100%
+    rgba(212, 175, 55, 0.1) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.7) 100%
   );
   backdrop-filter: blur(1px);
-  box-shadow: inset 0 0 100px rgba(212, 175, 55, 0.1);
 }
 
 /* Transizione fade per le immagini hero */
@@ -315,31 +300,6 @@ const startHeroImageSlide = () => {
   opacity: 0;
 }
 
-.hero-contacts::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background:
-    radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 70% 50%, rgba(212, 175, 55, 0.15) 0%, transparent 50%);
-  animation: heroGlow 8s ease-in-out infinite;
-  z-index: 1;
-  pointer-events: none;
-}
-
-@keyframes heroGlow {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.6;
-  }
-}
-
 .hero-overlay {
   position: absolute;
   top: 0;
@@ -350,8 +310,8 @@ const startHeroImageSlide = () => {
     0deg,
     transparent,
     transparent 2px,
-    rgba(212, 175, 55, 0.04) 2px,
-    rgba(212, 175, 55, 0.04) 4px
+    rgba(212, 175, 55, 0.02) 2px,
+    rgba(212, 175, 55, 0.02) 4px
   );
   z-index: 1;
   pointer-events: none;
@@ -383,9 +343,8 @@ const startHeroImageSlide = () => {
   opacity: 0;
   animation: fadeIn 1s ease-out 0.3s forwards;
   text-shadow:
-    0 0 30px rgba(212, 175, 55, 0.8),
-    0 0 50px rgba(212, 175, 55, 0.5),
-    0 2px 4px rgba(0, 0, 0, 0.8);
+    0 0 30px rgba(212, 175, 55, 0.6),
+    0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes fadeIn {
@@ -395,16 +354,15 @@ const startHeroImageSlide = () => {
 }
 
 .main-title {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Lora', Georgia, serif;
   font-size: clamp(3rem, 6vw, 5rem);
   font-weight: 400;
-  color: #e19b1d;
+  color: #ffffff;
   margin-bottom: 1rem;
   letter-spacing: 3px;
   text-shadow:
-    0 0 40px rgba(212, 175, 55, 0.8),
-    0 0 60px rgba(212, 175, 55, 0.5),
-    0 4px 8px rgba(0, 0, 0, 0.9);
+    0 0 40px rgba(212, 175, 55, 0.5),
+    0 4px 8px rgba(0, 0, 0, 0.6);
   opacity: 0;
   animation: fadeIn 1s ease-out 0.5s forwards;
 }
@@ -429,23 +387,9 @@ const startHeroImageSlide = () => {
   }
 }
 
-.subtitle {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(1.2rem, 2vw, 1.5rem);
-  color: #ffd700;
-  font-weight: 300;
-  font-style: italic;
-  letter-spacing: 2px;
-  opacity: 0;
-  animation: fadeIn 1s ease-out 0.9s forwards;
-  text-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.8),
-    0 0 20px rgba(212, 175, 55, 0.4);
-}
-
 /* ==================== CONTENT SECTION ==================== */
 .content-section {
-  padding: 5rem 2rem;
+  padding: 6rem 2rem;
   position: relative;
   z-index: 1;
 }
@@ -460,17 +404,20 @@ const startHeroImageSlide = () => {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2.5rem;
-  margin-bottom: 5rem;
+  margin-bottom: 6rem;
 }
 
 .info-card {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(218, 165, 32, 0.05));
-  border: 2px solid rgba(212, 175, 55, 0.4);
-  padding: 3rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 246, 242, 0.9));
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  padding: 4rem 3rem;
   transition: all 0.4s ease;
   opacity: 0;
   animation: fadeInUp 1s ease-out forwards;
-  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.12);
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(212, 175, 55, 0.1) inset;
+  text-align: center;
 }
 
 .contact-card {
@@ -493,40 +440,38 @@ const startHeroImageSlide = () => {
 }
 
 .info-card:hover {
-  border-color: #e19b1d;
+  border-color: #c9a028;
   transform: translateY(-5px);
-  box-shadow: 0 12px 40px rgba(212, 175, 55, 0.25);
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
+  box-shadow:
+    0 15px 50px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(212, 175, 55, 0.15) inset;
 }
 
 .card-icon {
-  color: #e19b1d;
+  color: #c9a028;
   margin-bottom: 1.5rem;
   display: flex;
   justify-content: center;
-  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
 }
 
 .card-icon svg {
-  color: #e19b1d;
+  color: #c9a028;
 }
 
 .info-card h2 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Lora', Georgia, serif;
   font-size: 2rem;
-  color: #e19b1d;
+  color: #8b6914;
   font-weight: 500;
   margin-bottom: 1rem;
   letter-spacing: 1px;
-  text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
 }
 
 .card-divider {
-  width: 50px;
+  width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
+  background: linear-gradient(90deg, transparent, #c9a028, transparent);
   margin-bottom: 2rem;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .contact-item {
@@ -538,7 +483,7 @@ const startHeroImageSlide = () => {
 }
 
 .contact-item h4 {
-  color: #e6c77f;
+  color: #8b6914;
   font-size: 0.85rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -547,7 +492,7 @@ const startHeroImageSlide = () => {
 }
 
 .contact-link {
-  color: #e19b1d;
+  color: #8b6914;
   text-decoration: none;
   font-size: 1.3rem;
   font-weight: 400;
@@ -556,34 +501,25 @@ const startHeroImageSlide = () => {
 }
 
 .contact-link:hover {
-  color: #ffa500;
+  color: #c9a028;
   transform: translateX(5px);
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
 }
 
 .closure-info {
-  color: #e0e0e0;
+  color: #2c2416;
   font-size: 1.05rem;
   line-height: 1.8;
   font-weight: 300;
 }
 
 .closure-day {
-  color: #e19b1d;
+  color: #8b6914;
   font-weight: 500;
-  text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
 }
 
 /* Hours Card */
 .hours-item {
   margin-bottom: 2rem;
-}
-
-.day-label {
-  color: #e0e0e0;
-  font-size: 1.1rem;
-  font-weight: 400;
-  margin-bottom: 1rem;
 }
 
 .time-slots {
@@ -597,44 +533,35 @@ const startHeroImageSlide = () => {
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(218, 165, 32, 0.06));
-  border-left: 3px solid #e19b1d;
-  box-shadow: 0 2px 10px rgba(212, 175, 55, 0.1);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 246, 242, 0.85));
+  border-left: 3px solid #c9a028;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
 }
 
 .time-slot:hover {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.18), rgba(218, 165, 32, 0.1));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(248, 246, 242, 0.95));
   transform: translateX(5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 .slot-label {
-  color: #e6c77f;
+  color: #8b6914;
   font-size: 0.95rem;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .slot-time {
-  color: #e19b1d;
+  color: #8b6914;
   font-size: 1.1rem;
   font-weight: 500;
   font-family: 'Courier New', monospace;
-  text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
-}
-
-.closed-notice {
-  color: #e19b1d;
-  font-size: 0.95rem;
-  font-style: italic;
-  text-align: center;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(212, 175, 55, 0.3);
 }
 
 /* Location Section */
 .location-section {
-  margin-bottom: 5rem;
+  margin-bottom: 6rem;
   opacity: 0;
   animation: fadeInUp 1s ease-out 1.5s forwards;
 }
@@ -645,34 +572,31 @@ const startHeroImageSlide = () => {
 }
 
 .header-ornament {
-  color: #e19b1d;
+  color: #c9a028;
   font-size: 1.8rem;
   margin-bottom: 1rem;
-  text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
 }
 
 .location-header h2 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Lora', Georgia, serif;
   font-size: 2.5rem;
-  color: #e19b1d;
+  color: #8b6914;
   font-weight: 400;
   margin-bottom: 1rem;
   letter-spacing: 2px;
-  text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 .header-divider {
   width: 80px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
+  background: linear-gradient(90deg, transparent, #c9a028, transparent);
   margin: 0 auto;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .location-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 3rem;
+  grid-template-columns: 1fr 1.5fr;
+  /* gap: 2rem; */
   align-items: stretch;
 }
 
@@ -682,81 +606,86 @@ const startHeroImageSlide = () => {
   justify-content: center;
 }
 
-.intro-text {
-  color: #e0e0e0;
-  font-size: 1.05rem;
-  line-height: 1.9;
-  font-weight: 300;
-  margin-bottom: 2rem;
-}
-
 .address-box {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
-  border: 2px solid rgba(212, 175, 55, 0.4);
-  padding: 2rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 246, 242, 0.9));
+  /* border: 2px solid rgba(212, 175, 55, 0.3); */
+  padding: 3rem;
   display: flex;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 5px 20px rgba(212, 175, 55, 0.15);
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2rem;
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(212, 175, 55, 0.1) inset;
+  height: 100%;
+  justify-content: center;
 }
 
 .address-icon {
-  color: #e19b1d;
+  color: #c9a028;
   flex-shrink: 0;
   display: flex;
-  align-items: flex-start;
-  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
 
 .address-icon svg {
-  color: #e19b1d;
+  color: #c9a028;
+  width: 48px;
+  height: 48px;
+}
+
+.address-content {
+  width: 100%;
 }
 
 .address-content h3 {
-  font-family: 'Playfair Display', Georgia, serif;
-  color: #e19b1d;
-  font-size: 1.3rem;
+  font-family: 'Lora', Georgia, serif;
+  color: #8b6914;
+  font-size: 1.8rem;
   font-weight: 500;
-  margin-bottom: 0.8rem;
+  margin-bottom: 1.5rem;
   letter-spacing: 1px;
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 .address-content p {
-  color: #e0e0e0;
-  font-size: 1.05rem;
-  line-height: 1.6;
+  color: #2c2416;
+  font-size: 1.1rem;
+  line-height: 1.8;
   font-weight: 300;
+  margin-bottom: 0.5rem;
 }
 
 .address {
-  font-size: 1.2rem;
-  color: #e19b1d;
-  font-weight: 400;
-  text-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
+  font-size: 1.3rem;
+  color: #8b6914;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+}
+
+.city {
+  font-size: 1.15rem;
+  color: #4a4032;
+  margin-bottom: 1rem;
 }
 
 .note {
   font-style: italic;
-  color: #e6c77f;
-  margin-top: 0.5rem;
-}
-
-.accessibility {
-  color: #e0e0e0;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  font-weight: 300;
-  font-style: italic;
+  color: #8b6914;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 /* Map */
 .map-container {
-  min-height: 400px;
-  border: 3px solid rgba(212, 175, 55, 0.4);
+  min-height: 450px;
+  /* border: 3px solid rgba(212, 175, 55, 0.3); */
   overflow: hidden;
   position: relative;
-  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
 .map-container::before {
@@ -766,103 +695,42 @@ const startHeroImageSlide = () => {
   left: 0;
   right: 0;
   bottom: 0;
-  border: 10px solid rgba(212, 175, 55, 0.05);
+  border: 10px solid rgba(212, 175, 55, 0.03);
   pointer-events: none;
   z-index: 1;
-}
-
-/* Tradition Section */
-.tradition-section {
-  margin-bottom: 5rem;
-  opacity: 0;
-  animation: fadeInUp 1s ease-out 1.7s forwards;
-}
-
-.tradition-content {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(218, 165, 32, 0.06));
-  border: 2px solid rgba(212, 175, 55, 0.4);
-  padding: 4rem 3rem;
-  text-align: center;
-  position: relative;
-  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
-}
-
-.tradition-content::before {
-  content: '';
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  pointer-events: none;
-}
-
-.tradition-icon {
-  font-size: 2.5rem;
-  color: #e19b1d;
-  margin-bottom: 1.5rem;
-  text-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
-}
-
-.tradition-content h3 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 2.5rem;
-  color: #e19b1d;
-  font-weight: 400;
-  margin-bottom: 1.5rem;
-  letter-spacing: 2px;
-  text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-}
-
-.tradition-divider {
-  width: 80px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
-  margin: 1.5rem auto;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-}
-
-.tradition-text {
-  font-size: 1.15rem;
-  line-height: 2;
-  color: #f0f0f0;
-  font-weight: 300;
-  max-width: 900px;
-  margin: 0 auto;
 }
 
 /* CTA Section */
 .cta-section {
   text-align: center;
-  padding: 4rem 2rem;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
-  border: 2px solid rgba(212, 175, 55, 0.4);
+  padding: 5rem 3rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 246, 242, 0.9));
+  border: 2px solid rgba(212, 175, 55, 0.3);
   opacity: 0;
   animation: fadeInUp 1s ease-out 1.9s forwards;
-  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(212, 175, 55, 0.1) inset;
 }
 
 .cta-ornament {
-  color: #e19b1d;
+  color: #c9a028;
   font-size: 2rem;
   margin-bottom: 1.5rem;
   opacity: 1;
-  text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
 }
 
 .cta-section h3 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Lora', Georgia, serif;
   font-size: 2.5rem;
-  color: #e19b1d;
+  color: #8b6914;
   font-weight: 400;
   margin-bottom: 1rem;
   letter-spacing: 2px;
-  text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 .cta-section p {
-  color: #e0e0e0;
+  color: #4a4032;
   font-size: 1.1rem;
   margin-bottom: 2.5rem;
   font-weight: 300;
@@ -889,15 +757,15 @@ const startHeroImageSlide = () => {
 
 .cta-button.primary {
   background: linear-gradient(135deg, #e19b1d, #c9a028);
-  color: #0a0a0a;
-  box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+  color: #ffffff;
+  box-shadow: 0 5px 20px rgba(201, 160, 40, 0.3);
 }
 
 .cta-button.secondary {
   background: transparent;
-  color: #e19b1d;
-  border: 2px solid #e19b1d;
-  box-shadow: 0 3px 15px rgba(212, 175, 55, 0.2);
+  color: #8b6914;
+  border: 2px solid #c9a028;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
 }
 
 .cta-button::before {
@@ -925,12 +793,12 @@ const startHeroImageSlide = () => {
 }
 
 .cta-button.primary:hover {
-  box-shadow: 0 10px 35px rgba(212, 175, 55, 0.5);
+  box-shadow: 0 10px 35px rgba(201, 160, 40, 0.4);
 }
 
 .cta-button.secondary:hover {
-  background: rgba(212, 175, 55, 0.15);
-  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+  background: rgba(201, 160, 40, 0.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
 /* ==================== RESPONSIVE ==================== */
@@ -948,14 +816,11 @@ const startHeroImageSlide = () => {
   .location-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
+    border: 3px solid rgba(212, 175, 55, 0.3);
   }
 
   .map-container {
     min-height: 350px;
-  }
-
-  .tradition-content {
-    padding: 3rem 2rem;
   }
 
   .cta-buttons {
@@ -972,7 +837,7 @@ const startHeroImageSlide = () => {
 
 @media (max-width: 640px) {
   .hero-contacts {
-    height: 80vh;
+    height: 70vh;
   }
 
   .hero-content {
@@ -980,7 +845,7 @@ const startHeroImageSlide = () => {
   }
 
   .info-card {
-    padding: 2rem;
+    padding: 3rem 2rem;
   }
 
   .contact-link {
@@ -988,29 +853,28 @@ const startHeroImageSlide = () => {
   }
 
   .address-box {
-    padding: 1.5rem;
-    flex-direction: column;
-    text-align: center;
+    padding: 2rem 1.5rem;
   }
 
-  .address-icon {
-    justify-content: center;
+  .address-icon svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .address-content h3 {
+    font-size: 1.5rem;
+  }
+
+  .address {
+    font-size: 1.1rem;
+  }
+
+  .city {
+    font-size: 1rem;
   }
 
   .map-container {
     min-height: 300px;
-  }
-
-  .tradition-content {
-    padding: 2.5rem 1.5rem;
-  }
-
-  .tradition-content h3 {
-    font-size: 2rem;
-  }
-
-  .tradition-text {
-    font-size: 1rem;
   }
 
   .cta-section {

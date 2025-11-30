@@ -34,6 +34,9 @@ const jumbotronImages = [
   new URL('@/assets/7.jpg', import.meta.url).href,
 ]
 
+// Logo image
+const logoImage = new URL('/imageremove.png', import.meta.url).href
+
 onMounted(() => {
   setTimeout(() => {
     isVisible.value = true
@@ -109,11 +112,12 @@ const goToSlide = (index) => {
         </div>
 
         <div class="ornament-top"></div>
-        <h1 class="main-title">
-          <span class="title-line">{{ t('home.mainTitle') }}</span>
-          <span class="title-highlight">{{ t('home.restaurantName') }}</span>
-          <span class="title-location">{{ t('home.location') }}</span>
-        </h1>
+
+        <!-- Logo Image invece del testo -->
+        <div class="logo-container">
+          <img :src="logoImage" alt="Il Pesce d'Oro" class="header-logo" />
+        </div>
+
         <div class="ornament-bottom"></div>
       </div>
 
@@ -232,7 +236,7 @@ const goToSlide = (index) => {
 
 .hero-section {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1410 50%, #0a0a0a 100%);
+  background: linear-gradient(135deg, #f8f6f2 0%, #ebe8e1 50%, #f8f6f2 100%);
   position: relative;
   overflow: hidden;
   opacity: 0;
@@ -243,7 +247,7 @@ const goToSlide = (index) => {
   opacity: 1;
 }
 
-/* Sfondo elegante con più oro */
+/* Sfondo elegante con texture sottile */
 .elegant-bg {
   position: absolute;
   top: 0;
@@ -251,17 +255,10 @@ const goToSlide = (index) => {
   right: 0;
   bottom: 0;
   background:
-    radial-gradient(circle at 20% 30%, rgba(218, 165, 32, 0.12) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(218, 165, 32, 0.12) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
-  opacity: 0;
-  animation: bgFadeIn 2s ease-out 0.5s forwards;
-}
-
-@keyframes bgFadeIn {
-  to {
-    opacity: 1;
-  }
+    radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(218, 165, 32, 0.04) 0%, transparent 70%);
+  opacity: 1;
 }
 
 .elegant-bg::before {
@@ -275,29 +272,30 @@ const goToSlide = (index) => {
     0deg,
     transparent,
     transparent 2px,
-    rgba(218, 165, 32, 0.05) 2px,
-    rgba(218, 165, 32, 0.05) 4px
+    rgba(212, 175, 55, 0.02) 2px,
+    rgba(212, 175, 55, 0.02) 4px
   );
 }
 
 /* Header */
 .header-container {
   text-align: center;
-  margin-bottom: 5rem;
+  margin-bottom: 6rem;
   position: relative;
   z-index: 2;
   opacity: 0;
   transform: translateY(-30px);
   animation: headerSlide 1s ease-out 0.3s forwards;
   padding: 4rem 2rem;
-  border-radius: 4px;
   overflow: hidden;
-  border: 2px solid rgba(212, 175, 55, 0.4);
-  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.25);
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(212, 175, 55, 0.1) inset;
   min-height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 /* Background con immagini scorrevoli */
@@ -329,12 +327,12 @@ const goToSlide = (index) => {
   bottom: 0;
   background: linear-gradient(
     135deg,
-    rgba(10, 10, 10, 0.5) 0%,
-    rgba(26, 20, 16, 0.6) 50%,
-    rgba(10, 10, 10, 0.5) 100%
+    rgba(10, 10, 10, 0.65) 0%,
+    rgba(26, 20, 16, 0.7) 50%,
+    rgba(10, 10, 10, 0.65) 100%
   );
   backdrop-filter: blur(1px);
-  box-shadow: inset 0 0 100px rgba(212, 175, 55, 0.1);
+  box-shadow: inset 0 0 100px rgba(212, 175, 55, 0.15);
 }
 
 /* Transizione fade per le immagini header */
@@ -387,57 +385,41 @@ const goToSlide = (index) => {
   }
 }
 
-.main-title {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  font-family: 'Playfair Display', 'Georgia', serif;
+/* Logo Container */
+.logo-container {
   position: relative;
   z-index: 1;
-}
-
-.title-line {
-  color: #ffffff;
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 400;
-  letter-spacing: 4px;
-  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
   opacity: 0;
-  animation: titleFadeIn 1s ease-out 0.8s forwards;
-  text-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.8),
-    0 0 20px rgba(212, 175, 55, 0.3);
+  animation: logoFadeIn 1.5s ease-out 0.8s forwards;
 }
 
-.title-highlight {
-  color: #e19b1d;
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-shadow:
-    0 0 40px rgba(212, 175, 55, 0.8),
-    0 0 60px rgba(212, 175, 55, 0.5),
-    0 4px 8px rgba(0, 0, 0, 0.9);
-  opacity: 0;
-  animation: titleFadeIn 1s ease-out 1s forwards;
+.header-logo {
+  max-width: 500px;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.6))
+    drop-shadow(0 0 50px rgba(212, 175, 55, 0.4)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.8));
+  transition: all 0.6s ease;
 }
 
-.title-location {
-  color: #ffd700;
-  font-size: clamp(1.2rem, 2vw, 1.5rem);
-  font-weight: 300;
-  letter-spacing: 6px;
-  text-transform: uppercase;
-  opacity: 0;
-  animation: titleFadeIn 1s ease-out 1.2s forwards;
-  text-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.8),
-    0 0 20px rgba(212, 175, 55, 0.4);
+.header-logo:hover {
+  filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.8))
+    drop-shadow(0 0 60px rgba(212, 175, 55, 0.5)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.9));
+  transform: scale(1.02);
 }
 
-@keyframes titleFadeIn {
+@keyframes logoFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
   to {
     opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
 
@@ -451,7 +433,7 @@ const goToSlide = (index) => {
 
 /* ==================== SEZIONE PRINCIPALE - STORIA ==================== */
 .hero-story-section {
-  margin-bottom: 5rem;
+  margin-bottom: 6rem;
   opacity: 0;
   transform: translateY(30px);
   animation: storySlide 1s ease-out 1.4s forwards;
@@ -468,11 +450,13 @@ const goToSlide = (index) => {
   max-width: 950px;
   margin: 0 auto;
   padding: 5rem 4rem;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
-  border: 2px solid rgba(212, 175, 55, 0.4);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 246, 242, 0.9));
+  border: 2px solid rgba(212, 175, 55, 0.3);
   position: relative;
   text-align: center;
-  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(212, 175, 55, 0.1) inset;
 }
 
 .story-border-tl,
@@ -480,8 +464,8 @@ const goToSlide = (index) => {
   position: absolute;
   width: 90px;
   height: 90px;
-  border: 2px solid #e19b1d;
-  opacity: 0.8;
+  border: 2px solid #c9a028;
+  opacity: 0.6;
 }
 
 .story-border-tl {
@@ -499,29 +483,26 @@ const goToSlide = (index) => {
 }
 
 .story-ornament-top {
-  color: #e19b1d;
+  color: #c9a028;
   font-size: 2rem;
   margin-bottom: 1.5rem;
   opacity: 1;
-  text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
 }
 
 .story-title {
-  color: #e19b1d;
+  color: #8b6914;
   font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 400;
-  font-family: 'Playfair Display', 'Georgia', serif;
+  font-family: 'Lora', 'Georgia', serif;
   margin-bottom: 1.5rem;
   letter-spacing: 2px;
-  text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 .story-divider {
   width: 100px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
+  background: linear-gradient(90deg, transparent, #c9a028, transparent);
   margin: 2rem auto;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .story-content {
@@ -529,23 +510,22 @@ const goToSlide = (index) => {
 }
 
 .story-main-text {
-  color: #f0f0f0;
+  color: #2c2416;
   font-size: clamp(1.25rem, 2.5vw, 1.5rem);
   line-height: 2;
   font-weight: 300;
   margin-bottom: 2rem;
-  font-family: 'Playfair Display', 'Georgia', serif;
+  font-family: 'Lora', 'Georgia', serif;
 }
 
 .story-main-text :deep(strong) {
-  color: #e19b1d;
+  color: #8b6914;
   font-weight: 500;
   font-style: italic;
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 .story-secondary-text {
-  color: rgba(240, 240, 240, 0.9);
+  color: #4a4032;
   font-size: clamp(1.1rem, 2vw, 1.25rem);
   line-height: 1.9;
   font-weight: 300;
@@ -554,7 +534,7 @@ const goToSlide = (index) => {
 
 /* ==================== JUMBOTRON ==================== */
 .jumbotron-section {
-  margin-bottom: 5rem;
+  margin-bottom: 6rem;
   opacity: 0;
   transform: translateY(30px);
   animation: storySlide 1s ease-out 1.6s forwards;
@@ -565,9 +545,11 @@ const goToSlide = (index) => {
   margin: 0 auto;
   position: relative;
   padding: 2rem;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(218, 165, 32, 0.05));
-  border: 2px solid rgba(212, 175, 55, 0.4);
-  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 246, 242, 0.85));
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(212, 175, 55, 0.1) inset;
 }
 
 .jumbotron-border-tl,
@@ -575,8 +557,8 @@ const goToSlide = (index) => {
   position: absolute;
   width: 90px;
   height: 90px;
-  border: 2px solid #e19b1d;
-  opacity: 0.7;
+  border: 2px solid #c9a028;
+  opacity: 0.5;
   z-index: 2;
 }
 
@@ -602,6 +584,7 @@ const goToSlide = (index) => {
   margin-bottom: 2rem;
   background: #000;
   border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
 .jumbotron-image {
@@ -624,9 +607,9 @@ const goToSlide = (index) => {
   bottom: 0;
   background: linear-gradient(
     to bottom,
-    rgba(212, 175, 55, 0.15) 0%,
-    rgba(0, 0, 0, 0.2) 50%,
-    rgba(0, 0, 0, 0.6) 100%
+    rgba(212, 175, 55, 0.1) 0%,
+    rgba(0, 0, 0, 0.15) 50%,
+    rgba(0, 0, 0, 0.4) 100%
   );
   pointer-events: none;
 }
@@ -643,22 +626,23 @@ const goToSlide = (index) => {
   position: relative;
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  border: 2px solid rgba(212, 175, 55, 0.4);
+  border: 2px solid rgba(212, 175, 55, 0.3);
   cursor: pointer;
   transition: all 0.4s ease;
   background: #000;
   padding: 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .thumbnail:hover {
-  border-color: #e19b1d;
+  border-color: #c9a028;
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .thumbnail.active {
-  border-color: #e19b1d;
-  box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+  border-color: #c9a028;
+  box-shadow: 0 0 20px rgba(201, 160, 40, 0.4);
 }
 
 .thumbnail-image {
@@ -679,7 +663,7 @@ const goToSlide = (index) => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.2);
   transition: background 0.4s ease;
   pointer-events: none;
 }
@@ -689,12 +673,12 @@ const goToSlide = (index) => {
 }
 
 .thumbnail.active .thumbnail-overlay {
-  background: rgba(212, 175, 55, 0.3);
+  background: rgba(212, 175, 55, 0.2);
 }
 
 /* Cuisine section */
 .cuisine-section {
-  margin-bottom: 4rem;
+  margin-bottom: 5rem;
   opacity: 0;
   transform: translateY(30px);
   animation: contentSlide 1s ease-out 1.8s forwards;
@@ -711,11 +695,13 @@ const goToSlide = (index) => {
   text-align: center;
   max-width: 900px;
   margin: 0 auto;
-  padding: 3rem;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(218, 165, 32, 0.06));
-  border: 2px solid rgba(212, 175, 55, 0.4);
+  padding: 4rem 3rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 246, 242, 0.9));
+  border: 2px solid rgba(212, 175, 55, 0.3);
   position: relative;
-  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(212, 175, 55, 0.1) inset;
 }
 
 .cuisine-content::before {
@@ -725,29 +711,27 @@ const goToSlide = (index) => {
   left: 15px;
   right: 15px;
   bottom: 15px;
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  border: 1px solid rgba(212, 175, 55, 0.15);
   pointer-events: none;
 }
 
 .section-title {
-  color: #e19b1d;
+  color: #8b6914;
   font-size: clamp(1.8rem, 3vw, 2.5rem);
   font-weight: 400;
-  font-family: 'Playfair Display', 'Georgia', serif;
+  font-family: 'Lora', 'Georgia', serif;
   margin-bottom: 1rem;
-  text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
 }
 
 .divider {
   width: 80px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
+  background: linear-gradient(90deg, transparent, #c9a028, transparent);
   margin: 1.5rem auto;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .cuisine-text {
-  color: #f0f0f0;
+  color: #2c2416;
   font-size: 1.1rem;
   line-height: 1.9;
   font-weight: 300;
@@ -756,7 +740,7 @@ const goToSlide = (index) => {
 
 .specialty-badge {
   background: linear-gradient(135deg, #e19b1d, #c9a028);
-  color: #0a0a0a;
+  color: #ffffff;
   padding: 1.5rem 2rem;
   font-weight: 600;
   font-size: 1.05rem;
@@ -765,17 +749,17 @@ const goToSlide = (index) => {
   border-radius: 2px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 5px 20px rgba(201, 160, 40, 0.3);
 }
 
 .specialty-badge:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.5);
+  box-shadow: 0 8px 30px rgba(201, 160, 40, 0.4);
 }
 
 /* Intro section */
 .intro-section {
-  margin-bottom: 4rem;
+  margin-bottom: 5rem;
   opacity: 0;
   transform: translateY(30px);
   animation: contentSlide 1s ease-out 2s forwards;
@@ -783,14 +767,15 @@ const goToSlide = (index) => {
 
 .intro-content {
   text-align: center;
-  max-width: 800px;
   margin: 0 auto;
-  padding: 3rem;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(218, 165, 32, 0.05));
-  border: 2px solid rgba(212, 175, 55, 0.3);
+  padding: 4rem 3rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 246, 242, 0.85));
+  border: 2px solid rgba(212, 175, 55, 0.25);
   border-radius: 2px;
   position: relative;
-  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.12);
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.06),
+    0 0 0 1px rgba(212, 175, 55, 0.08) inset;
 }
 
 .intro-content::before,
@@ -799,7 +784,8 @@ const goToSlide = (index) => {
   position: absolute;
   width: 60px;
   height: 60px;
-  border: 2px solid #e19b1d;
+  border: 2px solid #c9a028;
+  opacity: 0.5;
 }
 
 .intro-content::before {
@@ -817,7 +803,7 @@ const goToSlide = (index) => {
 }
 
 .intro-text {
-  color: #f0f0f0;
+  color: #2c2416;
   font-size: 1.1rem;
   line-height: 1.8;
   font-weight: 300;
@@ -832,14 +818,16 @@ const goToSlide = (index) => {
 }
 
 .feature-box {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(218, 165, 32, 0.04));
-  border: 2px solid rgba(212, 175, 55, 0.3);
-  padding: 2.5rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(248, 246, 242, 0.8));
+  border: 2px solid rgba(212, 175, 55, 0.25);
+  padding: 3rem 2.5rem;
   position: relative;
   transition: all 0.4s ease;
   opacity: 0;
   transform: translateY(30px);
-  box-shadow: 0 5px 20px rgba(212, 175, 55, 0.1);
+  box-shadow:
+    0 5px 20px rgba(0, 0, 0, 0.05),
+    0 0 0 1px rgba(212, 175, 55, 0.08) inset;
 }
 
 .box-1 {
@@ -864,15 +852,17 @@ const goToSlide = (index) => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), transparent);
   opacity: 0;
   transition: opacity 0.4s ease;
 }
 
 .feature-box:hover {
-  border-color: rgba(212, 175, 55, 0.6);
+  border-color: rgba(212, 175, 55, 0.5);
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(212, 175, 55, 0.15) inset;
 }
 
 .feature-box:hover::before {
@@ -880,23 +870,21 @@ const goToSlide = (index) => {
 }
 
 .box-icon {
-  color: #e19b1d;
+  color: #c9a028;
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .feature-box h3 {
-  color: #e19b1d;
+  color: #8b6914;
   font-size: 1.5rem;
   font-weight: 400;
-  font-family: 'Playfair Display', 'Georgia', serif;
+  font-family: 'Lora', 'Georgia', serif;
   margin-bottom: 1rem;
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
 }
 
 .feature-box p {
-  color: #e0e0e0;
+  color: #4a4032;
   line-height: 1.8;
   font-weight: 300;
   margin-bottom: 1.5rem;
@@ -907,11 +895,11 @@ const goToSlide = (index) => {
   gap: 1rem;
   flex-wrap: wrap;
   padding-top: 1rem;
-  border-top: 1px solid rgba(212, 175, 55, 0.3);
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .services-list span {
-  color: #e19b1d;
+  color: #8b6914;
   font-size: 0.9rem;
   font-weight: 300;
   letter-spacing: 1px;
@@ -929,21 +917,25 @@ const goToSlide = (index) => {
 
 .ornament-line {
   height: 1px;
-  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
+  background: linear-gradient(90deg, transparent, #c9a028, transparent);
   opacity: 0;
   animation: ornamentFade 1s ease-out 2.6s forwards;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .hero-section.visible {
+  .hero-section {
     padding: 2rem 1.5rem;
   }
+
   .header-container {
     margin-bottom: 3rem;
     padding: 3rem 1.5rem;
-    min-height: 80vh;
+    min-height: 500px;
+  }
+
+  .header-logo {
+    max-width: 450px;
   }
 
   .story-container {
@@ -986,7 +978,7 @@ const goToSlide = (index) => {
 
   .intro-content,
   .cuisine-content {
-    padding: 2rem 1.5rem;
+    padding: 2.5rem 1.5rem;
   }
 
   .intro-content::before,
@@ -1013,7 +1005,11 @@ const goToSlide = (index) => {
 @media (max-width: 480px) {
   .header-container {
     padding: 2.5rem 1rem;
-    border: 0;
+    min-height: 400px;
+  }
+
+  .header-logo {
+    max-width: 300px;
   }
 
   .story-container {
