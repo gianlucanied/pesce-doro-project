@@ -130,11 +130,11 @@ const startHeroImageSlide = () => {
               <div class="time-slots">
                 <div class="time-slot">
                   <span class="slot-label">{{ t('contacts.lunch') }}</span>
-                  <span class="slot-time">{{ t('contacts.lunchTime') }}</span>
+                  <span class="slot-time">12:30 - 14:30</span>
                 </div>
                 <div class="time-slot">
                   <span class="slot-label">{{ t('contacts.dinner') }}</span>
-                  <span class="slot-time">{{ t('contacts.dinnerTime') }}</span>
+                  <span class="slot-time">19:30 - 23:00</span>
                 </div>
               </div>
             </div>
