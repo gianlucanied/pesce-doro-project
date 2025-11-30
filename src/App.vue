@@ -440,35 +440,67 @@ header {
   box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.2);
 }
 
-/* Mobile Menu Button */
+/* Mobile Menu Button - MODIFICATO */
 .mobile-menu-btn {
   display: none;
   flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
+  border: 2px solid rgba(212, 175, 55, 0.3);
   cursor: pointer;
-  padding: 0.5rem;
+  padding: 0.6rem;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.15);
+  position: relative;
+  width: 45px;
+  height: 45px;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
 }
 
 .mobile-menu-btn span {
-  width: 28px;
+  width: 25px;
   height: 2px;
   background: linear-gradient(90deg, #e19b1d, #ffa500);
   transition: all 0.3s ease;
   box-shadow: 0 0 5px rgba(212, 175, 55, 0.4);
+  display: block;
+  position: absolute;
 }
 
+.mobile-menu-btn span:nth-child(1) {
+  top: 12px;
+}
+
+.mobile-menu-btn span:nth-child(2) {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.mobile-menu-btn span:nth-child(3) {
+  bottom: 12px;
+}
+
+/* Stato APERTO - forma la X */
 .mobile-menu-btn span.open:nth-child(1) {
-  transform: rotate(45deg) translate(6px, 6px);
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
 }
 
 .mobile-menu-btn span.open:nth-child(2) {
   opacity: 0;
+  transform: translateY(-50%) scale(0);
 }
 
 .mobile-menu-btn span.open:nth-child(3) {
-  transform: rotate(-45deg) translate(7px, -7px);
+  bottom: 50%;
+  transform: translateY(50%) rotate(-45deg);
+}
+
+.mobile-menu-btn:hover {
+  border-color: #e19b1d;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.1));
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25);
 }
 
 /* Mobile Navigation */
