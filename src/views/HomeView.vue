@@ -352,7 +352,7 @@ const goToSlide = (index) => {
 
 .ornament-top,
 .ornament-bottom {
-  color: #d4af37;
+  color: #e19b1d;
   font-size: 2.5rem;
   margin: 1rem 0;
   opacity: 0;
@@ -402,7 +402,7 @@ const goToSlide = (index) => {
 }
 
 .title-highlight {
-  color: #d4af37;
+  color: #e19b1d;
   font-size: clamp(2.5rem, 5vw, 4.5rem);
   font-weight: 700;
   letter-spacing: 2px;
@@ -472,7 +472,7 @@ const goToSlide = (index) => {
   position: absolute;
   width: 90px;
   height: 90px;
-  border: 2px solid #d4af37;
+  border: 2px solid #e19b1d;
   opacity: 0.8;
 }
 
@@ -491,7 +491,7 @@ const goToSlide = (index) => {
 }
 
 .story-ornament-top {
-  color: #d4af37;
+  color: #e19b1d;
   font-size: 2rem;
   margin-bottom: 1.5rem;
   opacity: 1;
@@ -499,7 +499,7 @@ const goToSlide = (index) => {
 }
 
 .story-title {
-  color: #d4af37;
+  color: #e19b1d;
   font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 400;
   font-family: 'Playfair Display', 'Georgia', serif;
@@ -511,7 +511,7 @@ const goToSlide = (index) => {
 .story-divider {
   width: 100px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
   margin: 2rem auto;
   box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
@@ -530,7 +530,7 @@ const goToSlide = (index) => {
 }
 
 .story-main-text :deep(strong) {
-  color: #d4af37;
+  color: #e19b1d;
   font-weight: 500;
   font-style: italic;
   text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
@@ -567,7 +567,7 @@ const goToSlide = (index) => {
   position: absolute;
   width: 90px;
   height: 90px;
-  border: 2px solid #d4af37;
+  border: 2px solid #e19b1d;
   opacity: 0.7;
   z-index: 2;
 }
@@ -643,13 +643,13 @@ const goToSlide = (index) => {
 }
 
 .thumbnail:hover {
-  border-color: #d4af37;
+  border-color: #e19b1d;
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
 }
 
 .thumbnail.active {
-  border-color: #d4af37;
+  border-color: #e19b1d;
   box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
 }
 
@@ -722,7 +722,7 @@ const goToSlide = (index) => {
 }
 
 .section-title {
-  color: #d4af37;
+  color: #e19b1d;
   font-size: clamp(1.8rem, 3vw, 2.5rem);
   font-weight: 400;
   font-family: 'Playfair Display', 'Georgia', serif;
@@ -733,7 +733,7 @@ const goToSlide = (index) => {
 .divider {
   width: 80px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
   margin: 1.5rem auto;
   box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
@@ -747,7 +747,7 @@ const goToSlide = (index) => {
 }
 
 .specialty-badge {
-  background: linear-gradient(135deg, #d4af37, #c9a028);
+  background: linear-gradient(135deg, #e19b1d, #c9a028);
   color: #0a0a0a;
   padding: 1.5rem 2rem;
   font-weight: 600;
@@ -791,7 +791,7 @@ const goToSlide = (index) => {
   position: absolute;
   width: 60px;
   height: 60px;
-  border: 2px solid #d4af37;
+  border: 2px solid #e19b1d;
 }
 
 .intro-content::before {
@@ -872,14 +872,14 @@ const goToSlide = (index) => {
 }
 
 .box-icon {
-  color: #d4af37;
+  color: #e19b1d;
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
   text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .feature-box h3 {
-  color: #d4af37;
+  color: #e19b1d;
   font-size: 1.5rem;
   font-weight: 400;
   font-family: 'Playfair Display', 'Georgia', serif;
@@ -903,7 +903,7 @@ const goToSlide = (index) => {
 }
 
 .services-list span {
-  color: #d4af37;
+  color: #e19b1d;
   font-size: 0.9rem;
   font-weight: 300;
   letter-spacing: 1px;
@@ -921,7 +921,7 @@ const goToSlide = (index) => {
 
 .ornament-line {
   height: 1px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
   opacity: 0;
   animation: ornamentFade 1s ease-out 2.6s forwards;
   box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);

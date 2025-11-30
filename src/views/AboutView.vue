@@ -385,7 +385,7 @@ onMounted(() => {
 }
 
 .ornament {
-  color: #d4af37;
+  color: #e19b1d;
   font-size: 3rem;
   margin-bottom: 1rem;
   opacity: 1;
@@ -407,7 +407,7 @@ onMounted(() => {
 .title-divider {
   width: 120px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
   margin: 1.5rem auto;
   box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
 }
@@ -465,7 +465,7 @@ onMounted(() => {
   position: absolute;
   width: 60px;
   height: 60px;
-  border: 2px solid #d4af37;
+  border: 2px solid #e19b1d;
 }
 
 .intro-card::before {
@@ -483,7 +483,7 @@ onMounted(() => {
 }
 
 .card-ornament {
-  color: #d4af37;
+  color: #e19b1d;
   font-size: 2rem;
   margin-bottom: 1.5rem;
   opacity: 1;
@@ -493,7 +493,7 @@ onMounted(() => {
 .intro-card h2 {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 2.5rem;
-  color: #d4af37;
+  color: #e19b1d;
   font-weight: 400;
   margin-bottom: 1.5rem;
   letter-spacing: 2px;
@@ -503,7 +503,7 @@ onMounted(() => {
 .text-divider {
   width: 80px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
   margin: 1.5rem auto;
   box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
@@ -544,8 +544,8 @@ onMounted(() => {
   left: -1px;
   width: 80px;
   height: 80px;
-  border-top: 2px solid #d4af37;
-  border-left: 2px solid #d4af37;
+  border-top: 2px solid #e19b1d;
+  border-left: 2px solid #e19b1d;
 }
 
 .story-block-centered::after {
@@ -555,12 +555,12 @@ onMounted(() => {
   right: -1px;
   width: 80px;
   height: 80px;
-  border-bottom: 2px solid #d4af37;
-  border-right: 2px solid #d4af37;
+  border-bottom: 2px solid #e19b1d;
+  border-right: 2px solid #e19b1d;
 }
 
 .block-number-centered {
-  color: #d4af37;
+  color: #e19b1d;
   font-size: 2rem;
   margin-bottom: 1.5rem;
   opacity: 1;
@@ -570,7 +570,7 @@ onMounted(() => {
 .story-block-centered h3 {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 2rem;
-  color: #d4af37;
+  color: #e19b1d;
   font-weight: 400;
   margin-bottom: 1.5rem;
   letter-spacing: 1px;
@@ -580,7 +580,7 @@ onMounted(() => {
 .block-divider {
   width: 60px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
   margin: 1.5rem auto;
   box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
@@ -598,7 +598,7 @@ onMounted(() => {
 }
 
 .story-block-centered :deep(strong) {
-  color: #d4af37;
+  color: #e19b1d;
   font-weight: 500;
   text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
@@ -626,12 +626,12 @@ onMounted(() => {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
   box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
 }
 
 .mission-icon {
-  color: #d4af37;
+  color: #e19b1d;
   font-size: 3rem;
   margin-bottom: 1.5rem;
   opacity: 1;
@@ -641,7 +641,7 @@ onMounted(() => {
 .mission-content h3 {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 2.5rem;
-  color: #d4af37;
+  color: #e19b1d;
   font-weight: 400;
   margin-bottom: 1.5rem;
   letter-spacing: 2px;
@@ -651,7 +651,7 @@ onMounted(() => {
 .mission-divider {
   width: 100px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
   margin: 1.5rem auto;
   box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
@@ -686,7 +686,7 @@ onMounted(() => {
 
 .feature-item:hover {
   transform: translateY(-8px);
-  border-color: #d4af37;
+  border-color: #e19b1d;
   box-shadow: 0 15px 40px rgba(212, 175, 55, 0.25);
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
 }
@@ -699,7 +699,7 @@ onMounted(() => {
 
 .feature-item h4 {
   font-family: 'Playfair Display', Georgia, serif;
-  color: #d4af37;
+  color: #e19b1d;
   font-size: 1.4rem;
   margin-bottom: 0.8rem;
   font-weight: 500;
@@ -727,7 +727,7 @@ onMounted(() => {
 }
 
 .intro-ornament {
-  color: #d4af37;
+  color: #e19b1d;
   font-size: 3rem;
   margin-bottom: 1rem;
   opacity: 1;
@@ -737,7 +737,7 @@ onMounted(() => {
 .reviews-intro h3 {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 2.5rem;
-  color: #d4af37;
+  color: #e19b1d;
   font-weight: 400;
   margin-bottom: 1rem;
   letter-spacing: 2px;
@@ -747,7 +747,7 @@ onMounted(() => {
 .intro-line {
   width: 100px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
   margin: 1.5rem auto;
   box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
@@ -770,7 +770,7 @@ onMounted(() => {
 .carousel-nav {
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.1));
   border: 2px solid rgba(212, 175, 55, 0.4);
-  color: #d4af37;
+  color: #e19b1d;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -791,7 +791,7 @@ onMounted(() => {
 
 .carousel-nav:hover {
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(218, 165, 32, 0.15));
-  border-color: #d4af37;
+  border-color: #e19b1d;
   transform: scale(1.1);
   box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
 }
@@ -820,7 +820,7 @@ onMounted(() => {
   position: absolute;
   width: 60px;
   height: 60px;
-  border: 2px solid #d4af37;
+  border: 2px solid #e19b1d;
 }
 
 .showcase-border-tl {
@@ -849,7 +849,7 @@ onMounted(() => {
 }
 
 .star-icon {
-  color: #d4af37;
+  color: #e19b1d;
   font-size: 1.5rem;
   text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
@@ -902,13 +902,13 @@ onMounted(() => {
 .author-line {
   width: 60px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
   margin: 0 auto 1rem;
   box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
 }
 
 .author-name {
-  color: #d4af37;
+  color: #e19b1d;
   font-size: 1.1rem;
   font-weight: 500;
   margin-bottom: 0.3rem;
@@ -947,8 +947,8 @@ onMounted(() => {
 }
 
 .pagination-dot.active {
-  background: #d4af37;
-  border-color: #d4af37;
+  background: #e19b1d;
+  border-color: #e19b1d;
   transform: scale(1.3);
   box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
 }
@@ -968,7 +968,7 @@ onMounted(() => {
 }
 
 .stat-score {
-  color: #d4af37;
+  color: #e19b1d;
   font-weight: 600;
   font-size: 1.2rem;
   text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
@@ -979,7 +979,7 @@ onMounted(() => {
 }
 
 .tripadvisor-cta {
-  color: #d4af37;
+  color: #e19b1d;
   text-decoration: none;
   font-size: 1rem;
   font-weight: 300;
@@ -997,7 +997,7 @@ onMounted(() => {
   transform: translateX(-50%);
   width: 0;
   height: 1px;
-  background: #d4af37;
+  background: #e19b1d;
   transition: width 0.3s ease;
   box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
 }
@@ -1050,7 +1050,7 @@ onMounted(() => {
 }
 
 .cta-ornament {
-  color: #d4af37;
+  color: #e19b1d;
   font-size: 2rem;
   margin-bottom: 1.5rem;
   opacity: 1;
@@ -1060,7 +1060,7 @@ onMounted(() => {
 .cta-section h3 {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 2.5rem;
-  color: #d4af37;
+  color: #e19b1d;
   font-weight: 400;
   margin-bottom: 1rem;
   letter-spacing: 2px;
@@ -1076,7 +1076,7 @@ onMounted(() => {
 
 .cta-button {
   display: inline-block;
-  background: linear-gradient(135deg, #d4af37, #c9a028);
+  background: linear-gradient(135deg, #e19b1d, #c9a028);
   color: #0a0a0a;
   padding: 1rem 3rem;
   text-decoration: none;

@@ -248,7 +248,7 @@ header {
 
 .header-ornament-top {
   height: 3px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
   box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
@@ -303,13 +303,13 @@ header {
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #d4af37, #ffa500);
+  background: linear-gradient(90deg, #e19b1d, #ffa500);
   transition: width 0.3s ease;
   box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
 }
 
 .nav-link:hover {
-  color: #d4af37;
+  color: #e19b1d;
   text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
@@ -318,7 +318,7 @@ header {
 }
 
 .nav-link.router-link-active {
-  color: #d4af37;
+  color: #e19b1d;
   text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
@@ -327,7 +327,7 @@ header {
 }
 
 .btn-prenota {
-  background: linear-gradient(135deg, #d4af37, #c9a028);
+  background: linear-gradient(135deg, #e19b1d, #c9a028);
   color: #0a0a0a;
   padding: 0.8rem 2rem;
   border: none;
@@ -388,14 +388,14 @@ header {
 }
 
 .lang-btn:hover {
-  border-color: #d4af37;
+  border-color: #e19b1d;
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.1));
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25);
 }
 
 .lang-btn.active {
-  border-color: #d4af37;
+  border-color: #e19b1d;
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(218, 165, 32, 0.15));
   box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
 }
@@ -428,15 +428,15 @@ header {
 
 .mobile-lang-btn:hover {
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
-  color: #d4af37;
+  color: #e19b1d;
   padding-left: 3.5rem;
   text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
 }
 
 .mobile-lang-btn.active {
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
-  color: #d4af37;
-  border-left: 4px solid #d4af37;
+  color: #e19b1d;
+  border-left: 4px solid #e19b1d;
   box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.2);
 }
 
@@ -454,7 +454,7 @@ header {
 .mobile-menu-btn span {
   width: 28px;
   height: 2px;
-  background: linear-gradient(90deg, #d4af37, #ffa500);
+  background: linear-gradient(90deg, #e19b1d, #ffa500);
   transition: all 0.3s ease;
   box-shadow: 0 0 5px rgba(212, 175, 55, 0.4);
 }
@@ -499,15 +499,15 @@ header {
 
 .mobile-nav-link:hover {
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
-  color: #d4af37;
+  color: #e19b1d;
   padding-left: 3.5rem;
   text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
 }
 
 .mobile-nav-link.router-link-active {
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
-  color: #d4af37;
-  border-left: 4px solid #d4af37;
+  color: #e19b1d;
+  border-left: 4px solid #e19b1d;
 }
 
 /* ==================== MAIN ==================== */
@@ -540,7 +540,7 @@ footer::before {
 
 .footer-ornament {
   text-align: center;
-  color: #d4af37;
+  color: #e19b1d;
   font-size: 2rem;
   padding: 2rem 0 1rem;
   opacity: 1;
@@ -585,7 +585,7 @@ footer::before {
 .footer-divider {
   width: 100px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
   margin: 2rem auto 3rem;
   box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
@@ -601,7 +601,7 @@ footer::before {
 }
 
 .footer-column h4 {
-  color: #d4af37;
+  color: #e19b1d;
   font-size: 0.95rem;
   margin-bottom: 1rem;
   font-weight: 600;
@@ -612,7 +612,7 @@ footer::before {
 .column-divider {
   width: 40px;
   height: 2px;
-  background: linear-gradient(90deg, #d4af37, transparent);
+  background: linear-gradient(90deg, #e19b1d, transparent);
   margin-bottom: 1.2rem;
   box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
 }
@@ -629,7 +629,7 @@ footer::before {
 }
 
 .footer-column a:hover {
-  color: #d4af37;
+  color: #e19b1d;
   padding-left: 8px;
   text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
 }
@@ -647,7 +647,7 @@ footer::before {
 }
 
 .footer-column .closed {
-  color: #d4af37;
+  color: #e19b1d;
   font-style: italic;
   margin-top: 0.8rem;
   font-size: 0.85rem;
@@ -666,7 +666,7 @@ footer::before {
 }
 
 .social-link {
-  color: #d4af37;
+  color: #e19b1d;
   width: 38px;
   height: 38px;
   display: flex;
@@ -686,13 +686,13 @@ footer::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, #d4af37, #c9a028);
+  background: linear-gradient(135deg, #e19b1d, #c9a028);
   transform: scale(0);
   transition: transform 0.3s ease;
 }
 
 .social-link:hover {
-  border-color: #d4af37;
+  border-color: #e19b1d;
   box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
 }
 

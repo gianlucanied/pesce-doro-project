@@ -381,7 +381,7 @@ const startHeroImageSlide = () => {
 }
 
 .ornament {
-  color: #d4af37;
+  color: #e19b1d;
   font-size: 2.5rem;
   margin-bottom: 1rem;
   opacity: 0;
@@ -402,7 +402,7 @@ const startHeroImageSlide = () => {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: clamp(3rem, 6vw, 5rem);
   font-weight: 400;
-  color: #d4af37;
+  color: #e19b1d;
   margin-bottom: 1rem;
   letter-spacing: 3px;
   text-shadow:
@@ -416,7 +416,7 @@ const startHeroImageSlide = () => {
 .title-divider {
   width: 120px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
   margin: 1.5rem auto;
   opacity: 0;
   animation: expandLine 1s ease-out 0.7s forwards;
@@ -497,14 +497,14 @@ const startHeroImageSlide = () => {
 }
 
 .info-card:hover {
-  border-color: #d4af37;
+  border-color: #e19b1d;
   transform: translateY(-5px);
   box-shadow: 0 12px 40px rgba(212, 175, 55, 0.25);
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
 }
 
 .card-icon {
-  color: #d4af37;
+  color: #e19b1d;
   margin-bottom: 1.5rem;
   display: flex;
   justify-content: center;
@@ -512,13 +512,13 @@ const startHeroImageSlide = () => {
 }
 
 .card-icon svg {
-  color: #d4af37;
+  color: #e19b1d;
 }
 
 .info-card h2 {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 2rem;
-  color: #d4af37;
+  color: #e19b1d;
   font-weight: 500;
   margin-bottom: 1rem;
   letter-spacing: 1px;
@@ -528,7 +528,7 @@ const startHeroImageSlide = () => {
 .card-divider {
   width: 50px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
   margin-bottom: 2rem;
   box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
@@ -551,7 +551,7 @@ const startHeroImageSlide = () => {
 }
 
 .contact-link {
-  color: #d4af37;
+  color: #e19b1d;
   text-decoration: none;
   font-size: 1.3rem;
   font-weight: 400;
@@ -573,7 +573,7 @@ const startHeroImageSlide = () => {
 }
 
 .closure-day {
-  color: #d4af37;
+  color: #e19b1d;
   font-weight: 500;
   text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
 }
@@ -602,7 +602,7 @@ const startHeroImageSlide = () => {
   align-items: center;
   padding: 1rem;
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(218, 165, 32, 0.06));
-  border-left: 3px solid #d4af37;
+  border-left: 3px solid #e19b1d;
   box-shadow: 0 2px 10px rgba(212, 175, 55, 0.1);
   transition: all 0.3s ease;
 }
@@ -620,7 +620,7 @@ const startHeroImageSlide = () => {
 }
 
 .slot-time {
-  color: #d4af37;
+  color: #e19b1d;
   font-size: 1.1rem;
   font-weight: 500;
   font-family: 'Courier New', monospace;
@@ -628,7 +628,7 @@ const startHeroImageSlide = () => {
 }
 
 .closed-notice {
-  color: #d4af37;
+  color: #e19b1d;
   font-size: 0.95rem;
   font-style: italic;
   text-align: center;
@@ -649,7 +649,7 @@ const startHeroImageSlide = () => {
 }
 
 .header-ornament {
-  color: #d4af37;
+  color: #e19b1d;
   font-size: 1.8rem;
   margin-bottom: 1rem;
   text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
@@ -658,7 +658,7 @@ const startHeroImageSlide = () => {
 .location-header h2 {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 2.5rem;
-  color: #d4af37;
+  color: #e19b1d;
   font-weight: 400;
   margin-bottom: 1rem;
   letter-spacing: 2px;
@@ -668,7 +668,7 @@ const startHeroImageSlide = () => {
 .header-divider {
   width: 80px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
   margin: 0 auto;
   box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
@@ -705,7 +705,7 @@ const startHeroImageSlide = () => {
 }
 
 .address-icon {
-  color: #d4af37;
+  color: #e19b1d;
   flex-shrink: 0;
   display: flex;
   align-items: flex-start;
@@ -713,12 +713,12 @@ const startHeroImageSlide = () => {
 }
 
 .address-icon svg {
-  color: #d4af37;
+  color: #e19b1d;
 }
 
 .address-content h3 {
   font-family: 'Playfair Display', Georgia, serif;
-  color: #d4af37;
+  color: #e19b1d;
   font-size: 1.3rem;
   font-weight: 500;
   margin-bottom: 0.8rem;
@@ -735,7 +735,7 @@ const startHeroImageSlide = () => {
 
 .address {
   font-size: 1.2rem;
-  color: #d4af37;
+  color: #e19b1d;
   font-weight: 400;
   text-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
 }
@@ -804,7 +804,7 @@ const startHeroImageSlide = () => {
 
 .tradition-icon {
   font-size: 2.5rem;
-  color: #d4af37;
+  color: #e19b1d;
   margin-bottom: 1.5rem;
   text-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
 }
@@ -812,7 +812,7 @@ const startHeroImageSlide = () => {
 .tradition-content h3 {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 2.5rem;
-  color: #d4af37;
+  color: #e19b1d;
   font-weight: 400;
   margin-bottom: 1.5rem;
   letter-spacing: 2px;
@@ -822,7 +822,7 @@ const startHeroImageSlide = () => {
 .tradition-divider {
   width: 80px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
   margin: 1.5rem auto;
   box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
@@ -848,7 +848,7 @@ const startHeroImageSlide = () => {
 }
 
 .cta-ornament {
-  color: #d4af37;
+  color: #e19b1d;
   font-size: 2rem;
   margin-bottom: 1.5rem;
   opacity: 1;
@@ -858,7 +858,7 @@ const startHeroImageSlide = () => {
 .cta-section h3 {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 2.5rem;
-  color: #d4af37;
+  color: #e19b1d;
   font-weight: 400;
   margin-bottom: 1rem;
   letter-spacing: 2px;
@@ -892,15 +892,15 @@ const startHeroImageSlide = () => {
 }
 
 .cta-button.primary {
-  background: linear-gradient(135deg, #d4af37, #c9a028);
+  background: linear-gradient(135deg, #e19b1d, #c9a028);
   color: #0a0a0a;
   box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
 }
 
 .cta-button.secondary {
   background: transparent;
-  color: #d4af37;
-  border: 2px solid #d4af37;
+  color: #e19b1d;
+  border: 2px solid #e19b1d;
   box-shadow: 0 3px 15px rgba(212, 175, 55, 0.2);
 }
 
