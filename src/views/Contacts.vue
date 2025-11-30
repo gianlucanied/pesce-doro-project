@@ -5,24 +5,55 @@ import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 
 const isVisible = ref(false)
+const currentHeroImage = ref(0)
+let heroImageInterval = null
+
+// Array di immagini per l'hero
+const heroImages = [
+  'src/assets/8.jpg',
+  'src/assets/9.jpg',
+  'src/assets/10.jpg',
+  'src/assets/11.jpg',
+  'src/assets/12.jpg',
+  'src/assets/13.jpg',
+  'src/assets/14.jpg',
+]
 
 onMounted(() => {
   setTimeout(() => {
     isVisible.value = true
   }, 300)
+  startHeroImageSlide()
 })
+
+const startHeroImageSlide = () => {
+  heroImageInterval = setInterval(() => {
+    currentHeroImage.value = (currentHeroImage.value + 1) % heroImages.length
+  }, 5000) // Cambia immagine ogni 5 secondi
+}
 </script>
 
 <template>
   <div class="contacts-page" :class="{ visible: isVisible }">
     <!-- Hero Section -->
     <section class="hero-contacts">
+      <!-- Background con immagini scorrevoli -->
+      <div class="hero-background">
+        <transition name="hero-fade" mode="out-in">
+          <div
+            :key="currentHeroImage"
+            class="hero-bg-image"
+            :style="{ backgroundImage: `url(${heroImages[currentHeroImage]})` }"
+          ></div>
+        </transition>
+        <div class="hero-bg-overlay"></div>
+      </div>
+
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <div class="ornament"></div>
         <h1 class="main-title">{{ t('contacts.title') }}</h1>
         <div class="title-divider"></div>
-        <p class="subtitle">{{ t('contacts.subtitle') }}</p>
       </div>
     </section>
 
@@ -107,8 +138,6 @@ onMounted(() => {
                 </div>
               </div>
             </div>
-
-            <div class="closed-notice">{{ t('contacts.mondayClosed') }}</div>
           </div>
         </div>
 
@@ -124,8 +153,6 @@ onMounted(() => {
             <!-- Location Info -->
             <div class="location-info">
               <div class="location-text">
-                <p class="intro-text">{{ t('contacts.locationIntro') }}</p>
-
                 <div class="address-box">
                   <div class="address-icon">
                     <svg
@@ -149,8 +176,6 @@ onMounted(() => {
                     <p class="note">{{ t('contacts.nearPort') }}</p>
                   </div>
                 </div>
-
-                <p class="accessibility">{{ t('contacts.accessibility') }}</p>
               </div>
             </div>
 
@@ -170,14 +195,14 @@ onMounted(() => {
         </div>
 
         <!-- Tradition Section -->
-        <div class="tradition-section">
+        <!-- <div class="tradition-section">
           <div class="tradition-content">
             <div class="tradition-icon">★</div>
             <h3>{{ t('contacts.traditionTitle') }}</h3>
             <div class="tradition-divider"></div>
             <p class="tradition-text">{{ t('contacts.traditionText') }}</p>
           </div>
-        </div>
+        </div> -->
 
         <!-- CTA Section -->
         <div class="cta-section">
@@ -186,9 +211,6 @@ onMounted(() => {
           <p>{{ t('contacts.bookTableText') }}</p>
           <div class="cta-buttons">
             <a href="tel:+39079952602" class="cta-button primary">{{ t('contacts.callNow') }}</a>
-            <a href="mailto:info@pescedoroalghero.it" class="cta-button secondary">{{
-              t('contacts.sendEmail')
-            }}</a>
           </div>
         </div>
       </div>
@@ -206,10 +228,24 @@ onMounted(() => {
 }
 
 .contacts-page {
-  background: #0a0a0a;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1410 50%, #0a0a0a 100%);
   min-height: 100vh;
   opacity: 0;
   transition: opacity 1s ease-out;
+  position: relative;
+}
+
+.contacts-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 25% 30%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 70%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .contacts-page.visible {
@@ -219,13 +255,64 @@ onMounted(() => {
 /* ==================== HERO SECTION ==================== */
 .hero-contacts {
   position: relative;
-  height: 50vh;
+  height: 80vh;
   min-height: 350px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
   overflow: hidden;
+}
+
+/* Background con immagini scorrevoli */
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+}
+
+.hero-bg-image {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(10, 10, 10, 0.5) 0%,
+    rgba(26, 20, 16, 0.6) 50%,
+    rgba(10, 10, 10, 0.5) 100%
+  );
+  backdrop-filter: blur(1px);
+  box-shadow: inset 0 0 100px rgba(212, 175, 55, 0.1);
+}
+
+/* Transizione fade per le immagini hero */
+.hero-fade-enter-active,
+.hero-fade-leave-active {
+  transition: opacity 2s ease;
+}
+
+.hero-fade-enter-from {
+  opacity: 0;
+}
+
+.hero-fade-leave-to {
+  opacity: 0;
 }
 
 .hero-contacts::before {
@@ -236,9 +323,11 @@ onMounted(() => {
   right: 0;
   bottom: 0;
   background:
-    radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 70% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+    radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 70% 50%, rgba(212, 175, 55, 0.15) 0%, transparent 50%);
   animation: heroGlow 8s ease-in-out infinite;
+  z-index: 1;
+  pointer-events: none;
 }
 
 @keyframes heroGlow {
@@ -261,17 +350,23 @@ onMounted(() => {
     0deg,
     transparent,
     transparent 2px,
-    rgba(212, 175, 55, 0.02) 2px,
-    rgba(212, 175, 55, 0.02) 4px
+    rgba(212, 175, 55, 0.04) 2px,
+    rgba(212, 175, 55, 0.04) 4px
   );
+  z-index: 1;
+  pointer-events: none;
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
   text-align: center;
-  padding: 2rem;
+  padding: 3rem;
   animation: heroSlideUp 1s ease-out;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
+  border-radius: 4px;
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.2);
 }
 
 @keyframes heroSlideUp {
@@ -291,6 +386,10 @@ onMounted(() => {
   margin-bottom: 1rem;
   opacity: 0;
   animation: fadeIn 1s ease-out 0.3s forwards;
+  text-shadow:
+    0 0 30px rgba(212, 175, 55, 0.8),
+    0 0 50px rgba(212, 175, 55, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 @keyframes fadeIn {
@@ -306,7 +405,10 @@ onMounted(() => {
   color: #d4af37;
   margin-bottom: 1rem;
   letter-spacing: 3px;
-  text-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+  text-shadow:
+    0 0 40px rgba(212, 175, 55, 0.8),
+    0 0 60px rgba(212, 175, 55, 0.5),
+    0 4px 8px rgba(0, 0, 0, 0.9);
   opacity: 0;
   animation: fadeIn 1s ease-out 0.5s forwards;
 }
@@ -318,6 +420,7 @@ onMounted(() => {
   margin: 1.5rem auto;
   opacity: 0;
   animation: expandLine 1s ease-out 0.7s forwards;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
 }
 
 @keyframes expandLine {
@@ -333,17 +436,22 @@ onMounted(() => {
 .subtitle {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: clamp(1.2rem, 2vw, 1.5rem);
-  color: rgba(224, 224, 224, 0.8);
+  color: #ffd700;
   font-weight: 300;
   font-style: italic;
   letter-spacing: 2px;
   opacity: 0;
   animation: fadeIn 1s ease-out 0.9s forwards;
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(212, 175, 55, 0.4);
 }
 
 /* ==================== CONTENT SECTION ==================== */
 .content-section {
   padding: 5rem 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 .container {
@@ -360,12 +468,13 @@ onMounted(() => {
 }
 
 .info-card {
-  background: rgba(212, 175, 55, 0.02);
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(218, 165, 32, 0.05));
+  border: 2px solid rgba(212, 175, 55, 0.4);
   padding: 3rem;
   transition: all 0.4s ease;
   opacity: 0;
   animation: fadeInUp 1s ease-out forwards;
+  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.12);
 }
 
 .contact-card {
@@ -388,8 +497,10 @@ onMounted(() => {
 }
 
 .info-card:hover {
-  border-color: rgba(212, 175, 55, 0.4);
+  border-color: #d4af37;
   transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(212, 175, 55, 0.25);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
 }
 
 .card-icon {
@@ -397,6 +508,7 @@ onMounted(() => {
   margin-bottom: 1.5rem;
   display: flex;
   justify-content: center;
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
 }
 
 .card-icon svg {
@@ -410,13 +522,15 @@ onMounted(() => {
   font-weight: 500;
   margin-bottom: 1rem;
   letter-spacing: 1px;
+  text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
 }
 
 .card-divider {
   width: 50px;
   height: 2px;
-  background: #d4af37;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
   margin-bottom: 2rem;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .contact-item {
@@ -428,7 +542,7 @@ onMounted(() => {
 }
 
 .contact-item h4 {
-  color: rgba(224, 224, 224, 0.6);
+  color: #e6c77f;
   font-size: 0.85rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -448,10 +562,11 @@ onMounted(() => {
 .contact-link:hover {
   color: #ffa500;
   transform: translateX(5px);
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
 }
 
 .closure-info {
-  color: rgba(224, 224, 224, 0.7);
+  color: #e0e0e0;
   font-size: 1.05rem;
   line-height: 1.8;
   font-weight: 300;
@@ -460,6 +575,7 @@ onMounted(() => {
 .closure-day {
   color: #d4af37;
   font-weight: 500;
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
 }
 
 /* Hours Card */
@@ -468,7 +584,7 @@ onMounted(() => {
 }
 
 .day-label {
-  color: rgba(224, 224, 224, 0.8);
+  color: #e0e0e0;
   font-size: 1.1rem;
   font-weight: 400;
   margin-bottom: 1rem;
@@ -485,12 +601,19 @@ onMounted(() => {
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background: rgba(212, 175, 55, 0.05);
-  border-left: 2px solid #d4af37;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(218, 165, 32, 0.06));
+  border-left: 3px solid #d4af37;
+  box-shadow: 0 2px 10px rgba(212, 175, 55, 0.1);
+  transition: all 0.3s ease;
+}
+
+.time-slot:hover {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.18), rgba(218, 165, 32, 0.1));
+  transform: translateX(5px);
 }
 
 .slot-label {
-  color: rgba(224, 224, 224, 0.7);
+  color: #e6c77f;
   font-size: 0.95rem;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -501,6 +624,7 @@ onMounted(() => {
   font-size: 1.1rem;
   font-weight: 500;
   font-family: 'Courier New', monospace;
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
 }
 
 .closed-notice {
@@ -509,7 +633,7 @@ onMounted(() => {
   font-style: italic;
   text-align: center;
   padding-top: 1rem;
-  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  border-top: 1px solid rgba(212, 175, 55, 0.3);
 }
 
 /* Location Section */
@@ -528,6 +652,7 @@ onMounted(() => {
   color: #d4af37;
   font-size: 1.8rem;
   margin-bottom: 1rem;
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
 }
 
 .location-header h2 {
@@ -537,6 +662,7 @@ onMounted(() => {
   font-weight: 400;
   margin-bottom: 1rem;
   letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 .header-divider {
@@ -544,6 +670,7 @@ onMounted(() => {
   height: 2px;
   background: linear-gradient(90deg, transparent, #d4af37, transparent);
   margin: 0 auto;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .location-grid {
@@ -560,7 +687,7 @@ onMounted(() => {
 }
 
 .intro-text {
-  color: rgba(224, 224, 224, 0.75);
+  color: #e0e0e0;
   font-size: 1.05rem;
   line-height: 1.9;
   font-weight: 300;
@@ -568,12 +695,13 @@ onMounted(() => {
 }
 
 .address-box {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(218, 165, 32, 0.03));
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
+  border: 2px solid rgba(212, 175, 55, 0.4);
   padding: 2rem;
   display: flex;
   gap: 1.5rem;
   margin-bottom: 2rem;
+  box-shadow: 0 5px 20px rgba(212, 175, 55, 0.15);
 }
 
 .address-icon {
@@ -581,6 +709,7 @@ onMounted(() => {
   flex-shrink: 0;
   display: flex;
   align-items: flex-start;
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
 }
 
 .address-icon svg {
@@ -594,10 +723,11 @@ onMounted(() => {
   font-weight: 500;
   margin-bottom: 0.8rem;
   letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 .address-content p {
-  color: rgba(224, 224, 224, 0.8);
+  color: #e0e0e0;
   font-size: 1.05rem;
   line-height: 1.6;
   font-weight: 300;
@@ -607,16 +737,17 @@ onMounted(() => {
   font-size: 1.2rem;
   color: #d4af37;
   font-weight: 400;
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
 }
 
 .note {
   font-style: italic;
-  color: rgba(224, 224, 224, 0.65);
+  color: #e6c77f;
   margin-top: 0.5rem;
 }
 
 .accessibility {
-  color: rgba(224, 224, 224, 0.7);
+  color: #e0e0e0;
   font-size: 0.95rem;
   line-height: 1.6;
   font-weight: 300;
@@ -626,9 +757,10 @@ onMounted(() => {
 /* Map */
 .map-container {
   min-height: 400px;
-  border: 2px solid rgba(212, 175, 55, 0.3);
+  border: 3px solid rgba(212, 175, 55, 0.4);
   overflow: hidden;
   position: relative;
+  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.2);
 }
 
 .map-container::before {
@@ -638,7 +770,7 @@ onMounted(() => {
   left: 0;
   right: 0;
   bottom: 0;
-  border: 10px solid rgba(10, 10, 10, 0.2);
+  border: 10px solid rgba(212, 175, 55, 0.05);
   pointer-events: none;
   z-index: 1;
 }
@@ -651,11 +783,12 @@ onMounted(() => {
 }
 
 .tradition-content {
-  background: linear-gradient(135deg, rgba(10, 10, 10, 0.8), rgba(20, 20, 20, 0.6));
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(218, 165, 32, 0.06));
+  border: 2px solid rgba(212, 175, 55, 0.4);
   padding: 4rem 3rem;
   text-align: center;
   position: relative;
+  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
 }
 
 .tradition-content::before {
@@ -665,7 +798,7 @@ onMounted(() => {
   left: 15px;
   right: 15px;
   bottom: 15px;
-  border: 1px solid rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.2);
   pointer-events: none;
 }
 
@@ -673,6 +806,7 @@ onMounted(() => {
   font-size: 2.5rem;
   color: #d4af37;
   margin-bottom: 1.5rem;
+  text-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
 }
 
 .tradition-content h3 {
@@ -682,6 +816,7 @@ onMounted(() => {
   font-weight: 400;
   margin-bottom: 1.5rem;
   letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 .tradition-divider {
@@ -689,12 +824,13 @@ onMounted(() => {
   height: 2px;
   background: linear-gradient(90deg, transparent, #d4af37, transparent);
   margin: 1.5rem auto;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .tradition-text {
   font-size: 1.15rem;
   line-height: 2;
-  color: rgba(224, 224, 224, 0.8);
+  color: #f0f0f0;
   font-weight: 300;
   max-width: 900px;
   margin: 0 auto;
@@ -704,17 +840,19 @@ onMounted(() => {
 .cta-section {
   text-align: center;
   padding: 4rem 2rem;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(218, 165, 32, 0.02));
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
+  border: 2px solid rgba(212, 175, 55, 0.4);
   opacity: 0;
   animation: fadeInUp 1s ease-out 1.9s forwards;
+  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
 }
 
 .cta-ornament {
   color: #d4af37;
   font-size: 2rem;
   margin-bottom: 1.5rem;
-  opacity: 0.7;
+  opacity: 1;
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
 }
 
 .cta-section h3 {
@@ -724,10 +862,11 @@ onMounted(() => {
   font-weight: 400;
   margin-bottom: 1rem;
   letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 .cta-section p {
-  color: rgba(224, 224, 224, 0.7);
+  color: #e0e0e0;
   font-size: 1.1rem;
   margin-bottom: 2.5rem;
   font-weight: 300;
@@ -755,12 +894,14 @@ onMounted(() => {
 .cta-button.primary {
   background: linear-gradient(135deg, #d4af37, #c9a028);
   color: #0a0a0a;
+  box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
 }
 
 .cta-button.secondary {
   background: transparent;
   color: #d4af37;
   border: 2px solid #d4af37;
+  box-shadow: 0 3px 15px rgba(212, 175, 55, 0.2);
 }
 
 .cta-button::before {
@@ -788,11 +929,12 @@ onMounted(() => {
 }
 
 .cta-button.primary:hover {
-  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+  box-shadow: 0 10px 35px rgba(212, 175, 55, 0.5);
 }
 
 .cta-button.secondary:hover {
-  background: rgba(212, 175, 55, 0.1);
+  background: rgba(212, 175, 55, 0.15);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
 }
 
 /* ==================== RESPONSIVE ==================== */
@@ -835,6 +977,10 @@ onMounted(() => {
 @media (max-width: 640px) {
   .hero-contacts {
     height: 40vh;
+  }
+
+  .hero-content {
+    padding: 2rem 1.5rem;
   }
 
   .info-card {

@@ -8,7 +8,7 @@ const isVisible = ref(false)
 const currentReviewIndex = ref(0)
 const slideDirection = ref('slide-left')
 const currentHeroImage = ref(0)
-const isHoveringReview = ref(false) // Nuova variabile
+const isHoveringReview = ref(false)
 
 const heroImages = [
   new URL('@/assets/8.jpg', import.meta.url).href,
@@ -69,53 +69,53 @@ let heroSlideInterval = null
 const nextReview = () => {
   slideDirection.value = 'slide-left'
   currentReviewIndex.value = (currentReviewIndex.value + 1) % reviews.value.length
-  resetAutoSlide()
+  // Rimosso resetAutoSlide() dato che non usiamo più l'autoplay
 }
 
 const prevReview = () => {
   slideDirection.value = 'slide-right'
   currentReviewIndex.value =
     currentReviewIndex.value === 0 ? reviews.value.length - 1 : currentReviewIndex.value - 1
-  resetAutoSlide()
+  // Rimosso resetAutoSlide() dato che non usiamo più l'autoplay
 }
 
 const goToReview = (index) => {
   slideDirection.value = index > currentReviewIndex.value ? 'slide-left' : 'slide-right'
   currentReviewIndex.value = index
-  resetAutoSlide()
+  // Rimosso resetAutoSlide() dato che non usiamo più l'autoplay
 }
 
-const startAutoSlide = () => {
-  // Avvia solo se non siamo in hover
-  if (!isHoveringReview.value) {
-    autoSlideInterval = setInterval(() => {
-      if (!isHoveringReview.value) {
-        nextReview()
-      }
-    }, 2000)
-  }
-}
+// Puoi rimuovere o commentare queste funzioni se non le usi più
+// const startAutoSlide = () => {
+//   if (!isHoveringReview.value) {
+//     autoSlideInterval = setInterval(() => {
+//       if (!isHoveringReview.value) {
+//         nextReview()
+//       }
+//     }, 2000)
+//   }
+// }
 
-const resetAutoSlide = () => {
-  if (autoSlideInterval) {
-    clearInterval(autoSlideInterval)
-  }
-  startAutoSlide()
-}
+// const resetAutoSlide = () => {
+//   if (autoSlideInterval) {
+//     clearInterval(autoSlideInterval)
+//   }
+//   startAutoSlide()
+// }
 
-// Nuove funzioni per gestire l'hover
-const handleMouseEnter = () => {
-  isHoveringReview.value = true
-  if (autoSlideInterval) {
-    clearInterval(autoSlideInterval)
-    autoSlideInterval = null
-  }
-}
+// Puoi anche rimuovere queste funzioni per l'hover
+// const handleMouseEnter = () => {
+//   isHoveringReview.value = true
+//   if (autoSlideInterval) {
+//     clearInterval(autoSlideInterval)
+//     autoSlideInterval = null
+//   }
+// }
 
-const handleMouseLeave = () => {
-  isHoveringReview.value = false
-  startAutoSlide()
-}
+// const handleMouseLeave = () => {
+//   isHoveringReview.value = false
+//   startAutoSlide()
+// }
 
 const startHeroSlide = () => {
   heroSlideInterval = setInterval(() => {
@@ -127,8 +127,8 @@ onMounted(() => {
   setTimeout(() => {
     isVisible.value = true
   }, 150)
-  startAutoSlide()
-  startHeroSlide()
+  // startAutoSlide() // ← COMMENTATO: rimuove lo scorrimento automatico delle recensioni
+  startHeroSlide() // ← Mantiene lo scorrimento automatico delle immagini hero
 })
 </script>
 
@@ -187,7 +187,7 @@ onMounted(() => {
         </div>
 
         <!-- Features -->
-        <div class="features-section">
+        <!-- <div class="features-section">
           <div class="feature-item">
             <h4>{{ t('about.tradition') }}</h4>
             <p>{{ t('about.traditionText') }}</p>
@@ -204,7 +204,7 @@ onMounted(() => {
             <h4>{{ t('about.passion') }}</h4>
             <p>{{ t('about.passionText') }}</p>
           </div>
-        </div>
+        </div> -->
 
         <!-- Reviews Carousel -->
         <div class="reviews-wrapper">
@@ -215,7 +215,8 @@ onMounted(() => {
             <p class="reviews-description">{{ t('about.reviewsDescription') }}</p>
           </div>
 
-          <div class="carousel-main" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
+          <!-- RIMOSSI @mouseenter e @mouseleave -->
+          <div class="carousel-main">
             <button
               class="carousel-nav carousel-prev"
               @click="prevReview"
@@ -315,7 +316,7 @@ onMounted(() => {
 }
 
 .about-page {
-  background: #0a0a0a;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1410 50%, #0a0a0a 100%);
   min-height: 100vh;
   opacity: 0;
   transition: opacity 1s ease-out;
@@ -328,7 +329,7 @@ onMounted(() => {
 /* ==================== HERO SECTION WITH IMAGE CAROUSEL ==================== */
 .hero-about {
   position: relative;
-  height: 60vh;
+  height: 80vh;
   min-height: 400px;
   display: flex;
   align-items: center;
@@ -369,7 +370,7 @@ onMounted(() => {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
+  background: linear-gradient(rgba(212, 175, 55, 0.15), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8));
   z-index: 1;
 }
 
@@ -379,14 +380,17 @@ onMounted(() => {
   z-index: 2;
   opacity: 0;
   animation: fadeInUp 1.5s ease-out 0.3s forwards;
+  padding: 3rem;
+  border-radius: 4px;
 }
 
 .ornament {
   color: #d4af37;
   font-size: 3rem;
   margin-bottom: 1rem;
-  opacity: 0.8;
+  opacity: 1;
   animation: float 3s ease-in-out infinite;
+  text-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
 }
 
 .main-title {
@@ -397,6 +401,7 @@ onMounted(() => {
   letter-spacing: 8px;
   margin-bottom: 1rem;
   text-transform: uppercase;
+  text-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
 }
 
 .title-divider {
@@ -404,11 +409,12 @@ onMounted(() => {
   height: 2px;
   background: linear-gradient(90deg, transparent, #d4af37, transparent);
   margin: 1.5rem auto;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
 }
 
 .subtitle {
   font-size: 1.3rem;
-  color: rgba(224, 224, 224, 0.8);
+  color: #e6c77f;
   font-weight: 300;
   letter-spacing: 3px;
   font-style: italic;
@@ -417,11 +423,27 @@ onMounted(() => {
 /* ==================== CONTENT SECTION ==================== */
 .content-section {
   padding: 4rem 2rem;
+  position: relative;
+}
+
+.content-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 /* ==================== INTRO CARD ==================== */
@@ -429,11 +451,12 @@ onMounted(() => {
   position: relative;
   text-align: center;
   padding: 4rem 3rem;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.03), rgba(10, 10, 10, 0.5));
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(218, 165, 32, 0.06));
+  border: 2px solid rgba(212, 175, 55, 0.4);
   margin-bottom: 4rem;
   opacity: 0;
   animation: fadeInUp 1s ease-out 0.5s forwards;
+  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
 }
 
 .intro-card::before,
@@ -442,7 +465,7 @@ onMounted(() => {
   position: absolute;
   width: 60px;
   height: 60px;
-  border: 1px solid rgba(212, 175, 55, 0.4);
+  border: 2px solid #d4af37;
 }
 
 .intro-card::before {
@@ -463,7 +486,8 @@ onMounted(() => {
   color: #d4af37;
   font-size: 2rem;
   margin-bottom: 1.5rem;
-  opacity: 0.6;
+  opacity: 1;
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
 }
 
 .intro-card h2 {
@@ -473,18 +497,19 @@ onMounted(() => {
   font-weight: 400;
   margin-bottom: 1.5rem;
   letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 .text-divider {
   width: 80px;
-  height: 1px;
-  background: #d4af37;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
   margin: 1.5rem auto;
-  opacity: 0.5;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .lead-text {
-  color: rgba(224, 224, 224, 0.85);
+  color: #f0f0f0;
   font-size: 1.15rem;
   line-height: 1.9;
   font-weight: 300;
@@ -503,12 +528,13 @@ onMounted(() => {
 
 .story-block-centered {
   position: relative;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(10, 10, 10, 0.3));
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(218, 165, 32, 0.05));
   padding: 3rem;
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  border: 2px solid rgba(212, 175, 55, 0.4);
   max-width: 700px;
   width: 100%;
   text-align: center;
+  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
 }
 
 .story-block-centered::before {
@@ -518,8 +544,8 @@ onMounted(() => {
   left: -1px;
   width: 80px;
   height: 80px;
-  border-top: 2px solid rgba(212, 175, 55, 0.4);
-  border-left: 2px solid rgba(212, 175, 55, 0.4);
+  border-top: 2px solid #d4af37;
+  border-left: 2px solid #d4af37;
 }
 
 .story-block-centered::after {
@@ -529,15 +555,16 @@ onMounted(() => {
   right: -1px;
   width: 80px;
   height: 80px;
-  border-bottom: 2px solid rgba(212, 175, 55, 0.4);
-  border-right: 2px solid rgba(212, 175, 55, 0.4);
+  border-bottom: 2px solid #d4af37;
+  border-right: 2px solid #d4af37;
 }
 
 .block-number-centered {
   color: #d4af37;
   font-size: 2rem;
   margin-bottom: 1.5rem;
-  opacity: 0.5;
+  opacity: 1;
+  text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
 }
 
 .story-block-centered h3 {
@@ -547,17 +574,19 @@ onMounted(() => {
   font-weight: 400;
   margin-bottom: 1.5rem;
   letter-spacing: 1px;
+  text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
 }
 
 .block-divider {
   width: 60px;
-  height: 1px;
-  background: rgba(212, 175, 55, 0.5);
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
   margin: 1.5rem auto;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .story-block-centered p {
-  color: rgba(224, 224, 224, 0.8);
+  color: #f0f0f0;
   font-size: 1.05rem;
   line-height: 1.8;
   margin-bottom: 1rem;
@@ -571,6 +600,7 @@ onMounted(() => {
 .story-block-centered :deep(strong) {
   color: #d4af37;
   font-weight: 500;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 /* ==================== MISSION SECTION ==================== */
@@ -582,10 +612,11 @@ onMounted(() => {
 
 .mission-content {
   position: relative;
-  background: linear-gradient(135deg, rgba(10, 10, 10, 0.8), rgba(212, 175, 55, 0.03));
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(218, 165, 32, 0.06));
   padding: 4rem 3rem;
-  border: 1px solid rgba(212, 175, 55, 0.15);
+  border: 2px solid rgba(212, 175, 55, 0.3);
   text-align: center;
+  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
 }
 
 .mission-content::before {
@@ -594,15 +625,17 @@ onMounted(() => {
   top: 0;
   left: 0;
   right: 0;
-  height: 2px;
+  height: 3px;
   background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
 }
 
 .mission-icon {
   color: #d4af37;
   font-size: 3rem;
   margin-bottom: 1.5rem;
-  opacity: 0.7;
+  opacity: 1;
+  text-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
 }
 
 .mission-content h3 {
@@ -612,18 +645,19 @@ onMounted(() => {
   font-weight: 400;
   margin-bottom: 1.5rem;
   letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 .mission-divider {
   width: 100px;
-  height: 1px;
-  background: #d4af37;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
   margin: 1.5rem auto;
-  opacity: 0.5;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .mission-text {
-  color: rgba(224, 224, 224, 0.85);
+  color: #f0f0f0;
   font-size: 1.15rem;
   line-height: 1.9;
   max-width: 900px;
@@ -644,15 +678,17 @@ onMounted(() => {
 .feature-item {
   text-align: center;
   padding: 2.5rem 1.5rem;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.03), rgba(10, 10, 10, 0.5));
-  border: 1px solid rgba(212, 175, 55, 0.15);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(218, 165, 32, 0.05));
+  border: 2px solid rgba(212, 175, 55, 0.3);
   transition: all 0.4s ease;
+  box-shadow: 0 5px 20px rgba(212, 175, 55, 0.1);
 }
 
 .feature-item:hover {
   transform: translateY(-8px);
-  border-color: rgba(212, 175, 55, 0.4);
-  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
+  border-color: #d4af37;
+  box-shadow: 0 15px 40px rgba(212, 175, 55, 0.25);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
 }
 
 .feature-icon {
@@ -668,10 +704,11 @@ onMounted(() => {
   margin-bottom: 0.8rem;
   font-weight: 500;
   letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
 }
 
 .feature-item p {
-  color: rgba(224, 224, 224, 0.7);
+  color: #e0e0e0;
   font-size: 0.95rem;
   line-height: 1.6;
   font-weight: 300;
@@ -693,7 +730,8 @@ onMounted(() => {
   color: #d4af37;
   font-size: 3rem;
   margin-bottom: 1rem;
-  opacity: 0.6;
+  opacity: 1;
+  text-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
 }
 
 .reviews-intro h3 {
@@ -703,18 +741,19 @@ onMounted(() => {
   font-weight: 400;
   margin-bottom: 1rem;
   letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 .intro-line {
   width: 100px;
-  height: 1px;
-  background: #d4af37;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
   margin: 1.5rem auto;
-  opacity: 0.5;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .reviews-description {
-  color: rgba(224, 224, 224, 0.7);
+  color: #e6c77f;
   font-size: 1.1rem;
   font-weight: 300;
   font-style: italic;
@@ -729,8 +768,8 @@ onMounted(() => {
 }
 
 .carousel-nav {
-  background: rgba(212, 175, 55, 0.1);
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.1));
+  border: 2px solid rgba(212, 175, 55, 0.4);
   color: #d4af37;
   width: 50px;
   height: 50px;
@@ -741,17 +780,20 @@ onMounted(() => {
   cursor: pointer;
   transition: all 0.3s ease;
   flex-shrink: 0;
+  box-shadow: 0 3px 15px rgba(212, 175, 55, 0.2);
 }
 
 .carousel-nav span {
   font-size: 2rem;
   line-height: 1;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 .carousel-nav:hover {
-  background: rgba(212, 175, 55, 0.2);
-  border-color: rgba(212, 175, 55, 0.5);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(218, 165, 32, 0.15));
+  border-color: #d4af37;
   transform: scale(1.1);
+  box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
 }
 
 .carousel-stage {
@@ -763,13 +805,14 @@ onMounted(() => {
 
 .review-showcase {
   position: relative;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(10, 10, 10, 0.6));
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(218, 165, 32, 0.06));
   padding: 4rem 3rem;
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  border: 2px solid rgba(212, 175, 55, 0.4);
   min-height: 450px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
 }
 
 .showcase-border-tl,
@@ -777,7 +820,7 @@ onMounted(() => {
   position: absolute;
   width: 60px;
   height: 60px;
-  border: 2px solid rgba(212, 175, 55, 0.4);
+  border: 2px solid #d4af37;
 }
 
 .showcase-border-tl {
@@ -808,6 +851,7 @@ onMounted(() => {
 .star-icon {
   color: #d4af37;
   font-size: 1.5rem;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .review-body {
@@ -824,8 +868,9 @@ onMounted(() => {
   position: absolute;
   font-family: Georgia, serif;
   font-size: 5rem;
-  color: rgba(212, 175, 55, 0.2);
+  color: rgba(212, 175, 55, 0.25);
   line-height: 1;
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 .quotation-left {
@@ -839,7 +884,7 @@ onMounted(() => {
 }
 
 .review-quote {
-  color: rgba(224, 224, 224, 0.9);
+  color: #f0f0f0;
   font-size: 1.1rem;
   line-height: 1.9;
   text-align: center;
@@ -856,9 +901,10 @@ onMounted(() => {
 
 .author-line {
   width: 60px;
-  height: 1px;
-  background: rgba(212, 175, 55, 0.5);
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
   margin: 0 auto 1rem;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
 }
 
 .author-name {
@@ -867,10 +913,11 @@ onMounted(() => {
   font-weight: 500;
   margin-bottom: 0.3rem;
   letter-spacing: 0.5px;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 .author-source {
-  color: rgba(224, 224, 224, 0.5);
+  color: #e6c77f;
   font-size: 0.9rem;
   font-weight: 300;
 }
@@ -887,21 +934,23 @@ onMounted(() => {
   height: 10px;
   border-radius: 50%;
   background: rgba(212, 175, 55, 0.3);
-  border: 1px solid rgba(212, 175, 55, 0.4);
+  border: 2px solid rgba(212, 175, 55, 0.5);
   cursor: pointer;
   transition: all 0.3s ease;
   padding: 0;
 }
 
 .pagination-dot:hover {
-  background: rgba(212, 175, 55, 0.5);
+  background: rgba(212, 175, 55, 0.6);
   transform: scale(1.2);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
 }
 
 .pagination-dot.active {
   background: #d4af37;
   border-color: #d4af37;
   transform: scale(1.3);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
 }
 
 .reviews-footer {
@@ -914,7 +963,7 @@ onMounted(() => {
   justify-content: center;
   gap: 1rem;
   margin-bottom: 1.5rem;
-  color: rgba(224, 224, 224, 0.8);
+  color: #e0e0e0;
   font-size: 1rem;
 }
 
@@ -922,10 +971,11 @@ onMounted(() => {
   color: #d4af37;
   font-weight: 600;
   font-size: 1.2rem;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 .stat-divider {
-  color: rgba(212, 175, 55, 0.5);
+  color: rgba(212, 175, 55, 0.6);
 }
 
 .tripadvisor-cta {
@@ -936,7 +986,7 @@ onMounted(() => {
   letter-spacing: 0.5px;
   padding: 0.5rem 0;
   position: relative;
-  transition: opacity 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .tripadvisor-cta::after {
@@ -949,6 +999,7 @@ onMounted(() => {
   height: 1px;
   background: #d4af37;
   transition: width 0.3s ease;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
 }
 
 .tripadvisor-cta:hover::after {
@@ -956,7 +1007,7 @@ onMounted(() => {
 }
 
 .tripadvisor-cta:hover {
-  opacity: 0.8;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
 }
 
 /* Carousel Transitions */
@@ -991,17 +1042,19 @@ onMounted(() => {
 .cta-section {
   text-align: center;
   padding: 4rem 2rem;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(218, 165, 32, 0.02));
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
+  border: 2px solid rgba(212, 175, 55, 0.4);
   opacity: 0;
   animation: fadeInUp 1s ease-out 2.2s forwards;
+  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
 }
 
 .cta-ornament {
   color: #d4af37;
   font-size: 2rem;
   margin-bottom: 1.5rem;
-  opacity: 0.7;
+  opacity: 1;
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
 }
 
 .cta-section h3 {
@@ -1011,10 +1064,11 @@ onMounted(() => {
   font-weight: 400;
   margin-bottom: 1rem;
   letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 .cta-section p {
-  color: rgba(224, 224, 224, 0.7);
+  color: #e0e0e0;
   font-size: 1.1rem;
   margin-bottom: 2.5rem;
   font-weight: 300;
@@ -1032,6 +1086,7 @@ onMounted(() => {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
 }
 
 .cta-button::before {
@@ -1056,7 +1111,7 @@ onMounted(() => {
 
 .cta-button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+  box-shadow: 0 10px 35px rgba(212, 175, 55, 0.5);
 }
 
 /* ==================== ANIMATIONS ==================== */

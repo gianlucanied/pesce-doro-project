@@ -143,7 +143,6 @@ onMounted(() => {
             <div class="column-divider"></div>
             <p class="hours">{{ t('footer.lunch') }}</p>
             <p class="hours">{{ t('footer.dinner') }}</p>
-            <p class="closed">{{ t('footer.mondayClosed') }}</p>
           </div>
 
           <div class="footer-column">
@@ -189,7 +188,7 @@ onMounted(() => {
                   <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                 </svg>
               </a>
-              <a href="#" aria-label="TripAdvisor" class="social-link">
+              <!-- <a href="#" aria-label="TripAdvisor" class="social-link">
                 <svg
                   width="18"
                   height="18"
@@ -203,7 +202,7 @@ onMounted(() => {
                   <circle cx="12" cy="12" r="10" />
                   <circle cx="12" cy="12" r="3" />
                 </svg>
-              </a>
+              </a> -->
             </div>
             <p class="social-text">{{ t('footer.shareExperience') }}</p>
           </div>
@@ -232,23 +231,25 @@ onMounted(() => {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #0a0a0a;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1410 50%, #0a0a0a 100%);
   color: #fff;
   font-family: 'Playfair Display', 'Georgia', serif;
 }
 
 /* ==================== HEADER ==================== */
 header {
-  background: #0a0a0a;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1410 100%);
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  border-bottom: 2px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15);
 }
 
 .header-ornament-top {
-  height: 2px;
+  height: 3px;
   background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .header-content {
@@ -258,22 +259,24 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.03), transparent);
 }
 
 .logo a {
   display: block;
-  transition: opacity 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .logo a:hover {
   opacity: 0.85;
+  transform: scale(1.05);
 }
 
 .logo-img {
   height: 65px;
   width: auto;
   display: block;
-  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2));
+  filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
 }
 
 .desktop-nav {
@@ -283,14 +286,14 @@ header {
 }
 
 .nav-link {
-  color: #e0e0e0;
+  color: #e6c77f;
   text-decoration: none;
   font-size: 1rem;
   font-weight: 400;
   letter-spacing: 1px;
   position: relative;
   padding: 0.5rem 0;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .nav-link::before {
@@ -299,13 +302,15 @@ header {
   bottom: 0;
   left: 0;
   width: 0;
-  height: 1px;
-  background: #d4af37;
+  height: 2px;
+  background: linear-gradient(90deg, #d4af37, #ffa500);
   transition: width 0.3s ease;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
 }
 
 .nav-link:hover {
   color: #d4af37;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 .nav-link:hover::before {
@@ -314,6 +319,7 @@ header {
 
 .nav-link.router-link-active {
   color: #d4af37;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 .nav-link.router-link-active::before {
@@ -332,6 +338,7 @@ header {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
 }
 
 .btn-prenota::before {
@@ -356,7 +363,7 @@ header {
 
 .btn-prenota:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+  box-shadow: 0 6px 25px rgba(212, 175, 55, 0.5);
 }
 
 /* ==================== LANGUAGE SELECTOR ==================== */
@@ -365,30 +372,32 @@ header {
   gap: 0.5rem;
   align-items: center;
   padding-left: 1rem;
-  border-left: 1px solid rgba(212, 175, 55, 0.2);
+  border-left: 2px solid rgba(212, 175, 55, 0.3);
 }
 
 .lang-btn {
-  background: transparent;
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  color: #e0e0e0;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), transparent);
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  color: #e6c77f;
   padding: 0.5rem 0.7rem;
   font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.3s ease;
   border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.1);
 }
 
 .lang-btn:hover {
   border-color: #d4af37;
-  background: rgba(212, 175, 55, 0.1);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.1));
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25);
 }
 
 .lang-btn.active {
   border-color: #d4af37;
-  background: rgba(212, 175, 55, 0.15);
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(218, 165, 32, 0.15));
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
 }
 
 /* Mobile Language Selector */
@@ -396,15 +405,16 @@ header {
   display: flex;
   flex-direction: column;
   gap: 0;
-  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  border-top: 2px solid rgba(212, 175, 55, 0.3);
   margin-top: 1rem;
   padding-top: 1rem;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), transparent);
 }
 
 .mobile-lang-btn {
   background: transparent;
   border: none;
-  color: #e0e0e0;
+  color: #e6c77f;
   padding: 1rem 3rem;
   font-size: 1rem;
   font-weight: 400;
@@ -412,20 +422,22 @@ header {
   cursor: pointer;
   text-align: left;
   transition: all 0.3s ease;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.05);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
   font-family: 'Playfair Display', 'Georgia', serif;
 }
 
 .mobile-lang-btn:hover {
-  background: rgba(212, 175, 55, 0.05);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
   color: #d4af37;
   padding-left: 3.5rem;
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
 }
 
 .mobile-lang-btn.active {
-  background: rgba(212, 175, 55, 0.1);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
   color: #d4af37;
-  border-left: 3px solid #d4af37;
+  border-left: 4px solid #d4af37;
+  box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.2);
 }
 
 /* Mobile Menu Button */
@@ -442,8 +454,9 @@ header {
 .mobile-menu-btn span {
   width: 28px;
   height: 2px;
-  background: #d4af37;
+  background: linear-gradient(90deg, #d4af37, #ffa500);
   transition: all 0.3s ease;
+  box-shadow: 0 0 5px rgba(212, 175, 55, 0.4);
 }
 
 .mobile-menu-btn span.open:nth-child(1) {
@@ -463,35 +476,38 @@ header {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  background: #0a0a0a;
-  border-top: 1px solid rgba(212, 175, 55, 0.1);
+  background: linear-gradient(135deg, #0a0a0a, #1a1410);
+  border-top: 2px solid rgba(212, 175, 55, 0.2);
 }
 
 .mobile-nav.open {
   max-height: 700px;
+  box-shadow: inset 0 10px 20px rgba(212, 175, 55, 0.1);
 }
 
 .mobile-nav-link {
   display: block;
-  color: #e0e0e0;
+  color: #e6c77f;
   text-decoration: none;
   padding: 1.2rem 3rem;
   font-size: 1rem;
   font-weight: 400;
   letter-spacing: 1px;
   transition: all 0.3s ease;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.05);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
 }
 
 .mobile-nav-link:hover {
-  background: rgba(212, 175, 55, 0.05);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
   color: #d4af37;
   padding-left: 3.5rem;
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
 }
 
 .mobile-nav-link.router-link-active {
-  background: rgba(212, 175, 55, 0.08);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
   color: #d4af37;
+  border-left: 4px solid #d4af37;
 }
 
 /* ==================== MAIN ==================== */
@@ -502,10 +518,24 @@ main {
 
 /* ==================== FOOTER ==================== */
 footer {
-  background: #0a0a0a;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1410 100%);
   margin-top: auto;
-  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  border-top: 3px solid rgba(212, 175, 55, 0.4);
   position: relative;
+  box-shadow: 0 -4px 20px rgba(212, 175, 55, 0.15);
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 70% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .footer-ornament {
@@ -513,13 +543,18 @@ footer {
   color: #d4af37;
   font-size: 2rem;
   padding: 2rem 0 1rem;
-  opacity: 0.6;
+  opacity: 1;
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+  position: relative;
+  z-index: 1;
 }
 
 .footer-content {
   max-width: 1400px;
   margin: 0 auto;
   padding: 2rem 3rem 3rem;
+  position: relative;
+  z-index: 1;
 }
 
 .footer-section {
@@ -535,11 +570,11 @@ footer {
   width: auto;
   margin: 0 auto 1.5rem;
   display: block;
-  filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.2));
+  filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.4));
 }
 
 .footer-tagline {
-  color: rgba(224, 224, 224, 0.7);
+  color: #e6c77f;
   font-size: 1rem;
   font-weight: 300;
   letter-spacing: 0.5px;
@@ -549,9 +584,10 @@ footer {
 
 .footer-divider {
   width: 100px;
-  height: 1px;
+  height: 2px;
   background: linear-gradient(90deg, transparent, #d4af37, transparent);
   margin: 2rem auto 3rem;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .footer-grid {
@@ -570,18 +606,20 @@ footer {
   margin-bottom: 1rem;
   font-weight: 600;
   letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 .column-divider {
   width: 40px;
-  height: 1px;
-  background: #d4af37;
+  height: 2px;
+  background: linear-gradient(90deg, #d4af37, transparent);
   margin-bottom: 1.2rem;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
 }
 
 .footer-column a,
 .footer-column p {
-  color: rgba(224, 224, 224, 0.65);
+  color: #e0e0e0;
   text-decoration: none;
   font-size: 0.9rem;
   line-height: 2;
@@ -593,16 +631,17 @@ footer {
 .footer-column a:hover {
   color: #d4af37;
   padding-left: 8px;
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
 }
 
 .day-range {
-  color: rgba(224, 224, 224, 0.8);
+  color: #e6c77f;
   font-weight: 400;
   margin-bottom: 0.5rem;
 }
 
 .footer-column .hours {
-  color: rgba(224, 224, 224, 0.7);
+  color: #e0e0e0;
   font-weight: 300;
   line-height: 1.8;
 }
@@ -612,10 +651,11 @@ footer {
   font-style: italic;
   margin-top: 0.8rem;
   font-size: 0.85rem;
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
 }
 
 .footer-column .contact-info {
-  color: rgba(224, 224, 224, 0.75);
+  color: #e6c77f;
   font-weight: 400;
 }
 
@@ -632,9 +672,11 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  border: 2px solid rgba(212, 175, 55, 0.4);
   transition: all 0.3s ease;
   position: relative;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), transparent);
+  box-shadow: 0 2px 10px rgba(212, 175, 55, 0.1);
 }
 
 .social-link::before {
@@ -644,13 +686,14 @@ footer {
   left: 0;
   right: 0;
   bottom: 0;
-  background: #d4af37;
+  background: linear-gradient(135deg, #d4af37, #c9a028);
   transform: scale(0);
   transition: transform 0.3s ease;
 }
 
 .social-link:hover {
   border-color: #d4af37;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
 }
 
 .social-link:hover::before {
@@ -665,7 +708,7 @@ footer {
 
 .social-text {
   font-size: 0.8rem;
-  color: rgba(224, 224, 224, 0.5);
+  color: #e6c77f;
   font-style: italic;
 }
 
@@ -673,17 +716,21 @@ footer {
 .footer-bottom {
   padding: 2rem 3rem;
   text-align: center;
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), transparent);
 }
 
 .footer-bottom-divider {
   width: 200px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
   margin: 0 auto 2rem;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
 }
 
 .footer-bottom p {
-  color: rgba(224, 224, 224, 0.45);
+  color: #e6c77f;
   font-size: 0.85rem;
   font-weight: 300;
   letter-spacing: 0.5px;
@@ -692,7 +739,7 @@ footer {
 .footer-bottom .legal {
   font-size: 0.75rem;
   margin-top: 0.5rem;
-  color: rgba(224, 224, 224, 0.35);
+  color: rgba(230, 199, 127, 0.7);
 }
 
 /* ==================== RESPONSIVE ==================== */

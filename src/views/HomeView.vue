@@ -6,9 +6,22 @@ const { t } = useI18n()
 
 const isVisible = ref(false)
 const currentSlide = ref(0)
+const currentHeaderImage = ref(0) // Nuova ref per header
 const totalSlides = 7
 const isAutoPlaying = ref(true)
 let autoPlayInterval = null
+let headerImageInterval = null // Nuovo interval per header
+
+// Array di immagini per l'header
+const headerImages = [
+  'src/assets/1.jpg',
+  'src/assets/2.jpg',
+  'src/assets/3.jpg',
+  'src/assets/4.jpg',
+  'src/assets/5.jpg',
+  'src/assets/6.jpg',
+  'src/assets/7.jpg',
+]
 
 onMounted(() => {
   setTimeout(() => {
@@ -17,6 +30,8 @@ onMounted(() => {
 
   // Avvia autoplay
   startAutoPlay()
+  // Avvia cambio immagini header
+  startHeaderImageSlide()
 })
 
 const startAutoPlay = () => {
@@ -24,7 +39,13 @@ const startAutoPlay = () => {
     if (isAutoPlaying.value) {
       nextSlide()
     }
-  }, 4000) // Cambia slide ogni 4 secondi
+  }, 4000)
+}
+
+const startHeaderImageSlide = () => {
+  headerImageInterval = setInterval(() => {
+    currentHeaderImage.value = (currentHeaderImage.value + 1) % headerImages.length
+  }, 5000) // Cambia immagine ogni 3 secondi
 }
 
 const stopAutoPlay = () => {
@@ -66,6 +87,18 @@ const goToSlide = (index) => {
 
       <!-- Header elegante -->
       <div class="header-container">
+        <!-- Background con immagini scorrevoli -->
+        <div class="header-background">
+          <transition name="header-fade" mode="out-in">
+            <div
+              :key="currentHeaderImage"
+              class="header-bg-image"
+              :style="{ backgroundImage: `url(${headerImages[currentHeaderImage]})` }"
+            ></div>
+          </transition>
+          <div class="header-bg-overlay"></div>
+        </div>
+
         <div class="ornament-top"></div>
         <h1 class="main-title">
           <span class="title-line">{{ t('home.mainTitle') }}</span>
@@ -190,7 +223,7 @@ const goToSlide = (index) => {
 
 .hero-section {
   min-height: 100vh;
-  background: #0a0a0a;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1410 50%, #0a0a0a 100%);
   padding: 4rem 2rem;
   position: relative;
   overflow: hidden;
@@ -202,7 +235,7 @@ const goToSlide = (index) => {
   opacity: 1;
 }
 
-/* Sfondo elegante */
+/* Sfondo elegante con più oro */
 .elegant-bg {
   position: absolute;
   top: 0;
@@ -210,8 +243,9 @@ const goToSlide = (index) => {
   right: 0;
   bottom: 0;
   background:
-    radial-gradient(circle at 20% 30%, rgba(218, 165, 32, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(218, 165, 32, 0.05) 0%, transparent 50%);
+    radial-gradient(circle at 20% 30%, rgba(218, 165, 32, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(218, 165, 32, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
   opacity: 0;
   animation: bgFadeIn 2s ease-out 0.5s forwards;
 }
@@ -233,8 +267,8 @@ const goToSlide = (index) => {
     0deg,
     transparent,
     transparent 2px,
-    rgba(218, 165, 32, 0.03) 2px,
-    rgba(218, 165, 32, 0.03) 4px
+    rgba(218, 165, 32, 0.05) 2px,
+    rgba(218, 165, 32, 0.05) 4px
   );
 }
 
@@ -247,6 +281,66 @@ const goToSlide = (index) => {
   opacity: 0;
   transform: translateY(-30px);
   animation: headerSlide 1s ease-out 0.3s forwards;
+  padding: 4rem 2rem;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 2px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.25);
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Background con immagini scorrevoli */
+.header-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+}
+
+.header-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.header-bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(10, 10, 10, 0.5) 0%,
+    rgba(26, 20, 16, 0.6) 50%,
+    rgba(10, 10, 10, 0.5) 100%
+  );
+  backdrop-filter: blur(1px);
+  box-shadow: inset 0 0 100px rgba(212, 175, 55, 0.1);
+}
+
+/* Transizione fade per le immagini header */
+.header-fade-enter-active,
+.header-fade-leave-active {
+  transition: opacity 2s ease;
+}
+
+.header-fade-enter-from {
+  opacity: 0;
+}
+
+.header-fade-leave-to {
+  opacity: 0;
 }
 
 @keyframes headerSlide {
@@ -259,10 +353,16 @@ const goToSlide = (index) => {
 .ornament-top,
 .ornament-bottom {
   color: #d4af37;
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin: 1rem 0;
   opacity: 0;
   animation: ornamentFade 1s ease-out forwards;
+  text-shadow:
+    0 0 20px rgba(212, 175, 55, 0.8),
+    0 0 40px rgba(212, 175, 55, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.8);
+  position: relative;
+  z-index: 1;
 }
 
 .ornament-top {
@@ -284,6 +384,8 @@ const goToSlide = (index) => {
   flex-direction: column;
   gap: 0.5rem;
   font-family: 'Playfair Display', 'Georgia', serif;
+  position: relative;
+  z-index: 1;
 }
 
 .title-line {
@@ -294,6 +396,9 @@ const goToSlide = (index) => {
   text-transform: uppercase;
   opacity: 0;
   animation: titleFadeIn 1s ease-out 0.8s forwards;
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 .title-highlight {
@@ -301,19 +406,25 @@ const goToSlide = (index) => {
   font-size: clamp(2.5rem, 5vw, 4.5rem);
   font-weight: 700;
   letter-spacing: 2px;
-  text-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+  text-shadow:
+    0 0 40px rgba(212, 175, 55, 0.8),
+    0 0 60px rgba(212, 175, 55, 0.5),
+    0 4px 8px rgba(0, 0, 0, 0.9);
   opacity: 0;
   animation: titleFadeIn 1s ease-out 1s forwards;
 }
 
 .title-location {
-  color: #c0c0c0;
+  color: #ffd700;
   font-size: clamp(1.2rem, 2vw, 1.5rem);
   font-weight: 300;
   letter-spacing: 6px;
   text-transform: uppercase;
   opacity: 0;
   animation: titleFadeIn 1s ease-out 1.2s forwards;
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(212, 175, 55, 0.4);
 }
 
 @keyframes titleFadeIn {
@@ -349,10 +460,11 @@ const goToSlide = (index) => {
   max-width: 950px;
   margin: 0 auto;
   padding: 5rem 4rem;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(218, 165, 32, 0.03));
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
+  border: 2px solid rgba(212, 175, 55, 0.4);
   position: relative;
   text-align: center;
+  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
 }
 
 .story-border-tl,
@@ -361,7 +473,7 @@ const goToSlide = (index) => {
   width: 90px;
   height: 90px;
   border: 2px solid #d4af37;
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 .story-border-tl {
@@ -382,7 +494,8 @@ const goToSlide = (index) => {
   color: #d4af37;
   font-size: 2rem;
   margin-bottom: 1.5rem;
-  opacity: 0.9;
+  opacity: 1;
+  text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
 }
 
 .story-title {
@@ -392,6 +505,7 @@ const goToSlide = (index) => {
   font-family: 'Playfair Display', 'Georgia', serif;
   margin-bottom: 1.5rem;
   letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 .story-divider {
@@ -399,6 +513,7 @@ const goToSlide = (index) => {
   height: 2px;
   background: linear-gradient(90deg, transparent, #d4af37, transparent);
   margin: 2rem auto;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .story-content {
@@ -406,7 +521,7 @@ const goToSlide = (index) => {
 }
 
 .story-main-text {
-  color: #e0e0e0;
+  color: #f0f0f0;
   font-size: clamp(1.25rem, 2.5vw, 1.5rem);
   line-height: 2;
   font-weight: 300;
@@ -418,10 +533,11 @@ const goToSlide = (index) => {
   color: #d4af37;
   font-weight: 500;
   font-style: italic;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 .story-secondary-text {
-  color: rgba(224, 224, 224, 0.85);
+  color: rgba(240, 240, 240, 0.9);
   font-size: clamp(1.1rem, 2vw, 1.25rem);
   line-height: 1.9;
   font-weight: 300;
@@ -441,8 +557,9 @@ const goToSlide = (index) => {
   margin: 0 auto;
   position: relative;
   padding: 2rem;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(218, 165, 32, 0.02));
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(218, 165, 32, 0.05));
+  border: 2px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
 }
 
 .jumbotron-border-tl,
@@ -451,7 +568,7 @@ const goToSlide = (index) => {
   width: 90px;
   height: 90px;
   border: 2px solid #d4af37;
-  opacity: 0.5;
+  opacity: 0.7;
   z-index: 2;
 }
 
@@ -476,6 +593,7 @@ const goToSlide = (index) => {
   overflow: hidden;
   margin-bottom: 2rem;
   background: #000;
+  border: 1px solid rgba(212, 175, 55, 0.3);
 }
 
 .jumbotron-image {
@@ -498,54 +616,11 @@ const goToSlide = (index) => {
   bottom: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.4) 0%,
+    rgba(212, 175, 55, 0.15) 0%,
     rgba(0, 0, 0, 0.2) 50%,
     rgba(0, 0, 0, 0.6) 100%
   );
   pointer-events: none;
-}
-
-.jumbotron-content {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 3rem;
-  text-align: center;
-  z-index: 3;
-}
-
-.jumbotron-ornament {
-  color: #d4af37;
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  opacity: 0.9;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-}
-
-.jumbotron-title {
-  color: #ffffff;
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 400;
-  font-family: 'Playfair Display', 'Georgia', serif;
-  margin-bottom: 1rem;
-  letter-spacing: 3px;
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.7);
-}
-
-.jumbotron-divider {
-  width: 120px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
-  margin: 1.5rem auto;
-}
-
-.jumbotron-text {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: clamp(1.1rem, 2vw, 1.4rem);
-  font-weight: 300;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 /* Thumbnails */
@@ -560,7 +635,7 @@ const goToSlide = (index) => {
   position: relative;
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  border: 2px solid rgba(212, 175, 55, 0.3);
+  border: 2px solid rgba(212, 175, 55, 0.4);
   cursor: pointer;
   transition: all 0.4s ease;
   background: #000;
@@ -570,12 +645,12 @@ const goToSlide = (index) => {
 .thumbnail:hover {
   border-color: #d4af37;
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
 }
 
 .thumbnail.active {
   border-color: #d4af37;
-  box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
 }
 
 .thumbnail-image {
@@ -602,63 +677,11 @@ const goToSlide = (index) => {
 }
 
 .thumbnail:hover .thumbnail-overlay {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(212, 175, 55, 0.1);
 }
 
 .thumbnail.active .thumbnail-overlay {
-  background: rgba(212, 175, 55, 0.2);
-}
-
-/* Responsive Jumbotron */
-@media (max-width: 768px) {
-  .jumbotron-container {
-    padding: 1rem;
-  }
-
-  .jumbotron-border-tl,
-  .jumbotron-border-br {
-    width: 60px;
-    height: 60px;
-  }
-
-  .jumbotron-main {
-    height: 400px;
-  }
-
-  .jumbotron-content {
-    padding: 2rem 1.5rem;
-  }
-
-  .jumbotron-thumbnails {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 0.75rem;
-    padding: 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .jumbotron-main {
-    height: 300px;
-  }
-
-  .jumbotron-content {
-    padding: 1.5rem 1rem;
-  }
-
-  .jumbotron-title {
-    font-size: 2rem;
-  }
-
-  .jumbotron-thumbnails {
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    gap: 0.5rem;
-  }
-
-  .jumbotron-border-tl,
-  .jumbotron-border-br {
-    width: 45px;
-    height: 45px;
-  }
+  background: rgba(212, 175, 55, 0.3);
 }
 
 /* Cuisine section */
@@ -681,9 +704,10 @@ const goToSlide = (index) => {
   max-width: 900px;
   margin: 0 auto;
   padding: 3rem;
-  background: linear-gradient(135deg, rgba(10, 10, 10, 0.8), rgba(20, 20, 20, 0.6));
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(218, 165, 32, 0.06));
+  border: 2px solid rgba(212, 175, 55, 0.4);
   position: relative;
+  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
 }
 
 .cuisine-content::before {
@@ -693,7 +717,7 @@ const goToSlide = (index) => {
   left: 15px;
   right: 15px;
   bottom: 15px;
-  border: 1px solid rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.2);
   pointer-events: none;
 }
 
@@ -703,6 +727,7 @@ const goToSlide = (index) => {
   font-weight: 400;
   font-family: 'Playfair Display', 'Georgia', serif;
   margin-bottom: 1rem;
+  text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
 }
 
 .divider {
@@ -710,10 +735,11 @@ const goToSlide = (index) => {
   height: 2px;
   background: linear-gradient(90deg, transparent, #d4af37, transparent);
   margin: 1.5rem auto;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .cuisine-text {
-  color: #e0e0e0;
+  color: #f0f0f0;
   font-size: 1.1rem;
   line-height: 1.9;
   font-weight: 300;
@@ -731,11 +757,12 @@ const goToSlide = (index) => {
   border-radius: 2px;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
 }
 
 .specialty-badge:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.5);
 }
 
 /* Intro section */
@@ -751,10 +778,11 @@ const goToSlide = (index) => {
   max-width: 800px;
   margin: 0 auto;
   padding: 3rem;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(218, 165, 32, 0.02));
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(218, 165, 32, 0.05));
+  border: 2px solid rgba(212, 175, 55, 0.3);
   border-radius: 2px;
   position: relative;
+  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.12);
 }
 
 .intro-content::before,
@@ -781,7 +809,7 @@ const goToSlide = (index) => {
 }
 
 .intro-text {
-  color: #e0e0e0;
+  color: #f0f0f0;
   font-size: 1.1rem;
   line-height: 1.8;
   font-weight: 300;
@@ -796,13 +824,14 @@ const goToSlide = (index) => {
 }
 
 .feature-box {
-  background: rgba(212, 175, 55, 0.02);
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(218, 165, 32, 0.04));
+  border: 2px solid rgba(212, 175, 55, 0.3);
   padding: 2.5rem;
   position: relative;
   transition: all 0.4s ease;
   opacity: 0;
   transform: translateY(30px);
+  box-shadow: 0 5px 20px rgba(212, 175, 55, 0.1);
 }
 
 .box-1 {
@@ -827,14 +856,15 @@ const goToSlide = (index) => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), transparent);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
   opacity: 0;
   transition: opacity 0.4s ease;
 }
 
 .feature-box:hover {
-  border-color: rgba(212, 175, 55, 0.4);
+  border-color: rgba(212, 175, 55, 0.6);
   transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25);
 }
 
 .feature-box:hover::before {
@@ -845,6 +875,7 @@ const goToSlide = (index) => {
   color: #d4af37;
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 .feature-box h3 {
@@ -853,10 +884,11 @@ const goToSlide = (index) => {
   font-weight: 400;
   font-family: 'Playfair Display', 'Georgia', serif;
   margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
 }
 
 .feature-box p {
-  color: #c0c0c0;
+  color: #e0e0e0;
   line-height: 1.8;
   font-weight: 300;
   margin-bottom: 1.5rem;
@@ -867,7 +899,7 @@ const goToSlide = (index) => {
   gap: 1rem;
   flex-wrap: wrap;
   padding-top: 1rem;
-  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  border-top: 1px solid rgba(212, 175, 55, 0.3);
 }
 
 .services-list span {
@@ -892,6 +924,7 @@ const goToSlide = (index) => {
   background: linear-gradient(90deg, transparent, #d4af37, transparent);
   opacity: 0;
   animation: ornamentFade 1s ease-out 2.6s forwards;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 /* Responsive */
@@ -902,6 +935,8 @@ const goToSlide = (index) => {
 
   .header-container {
     margin-bottom: 3rem;
+    padding: 3rem 1.5rem;
+    min-height: 350px;
   }
 
   .story-container {
@@ -914,41 +949,24 @@ const goToSlide = (index) => {
     height: 60px;
   }
 
-  .carousel-container {
+  .jumbotron-container {
     padding: 1rem;
   }
 
-  .carousel-border-tl,
-  .carousel-border-br {
-    width: 50px;
-    height: 50px;
+  .jumbotron-border-tl,
+  .jumbotron-border-br {
+    width: 60px;
+    height: 60px;
   }
 
-  .carousel-btn {
-    width: 40px;
-    height: 40px;
+  .jumbotron-main {
+    height: 400px;
   }
 
-  .carousel-btn span {
-    font-size: 1.5rem;
-  }
-
-  .carousel-btn-prev {
-    left: 0.5rem;
-  }
-
-  .carousel-btn-next {
-    right: 0.5rem;
-  }
-
-  .carousel-indicators {
-    bottom: 1rem;
-    gap: 0.6rem;
-  }
-
-  .indicator {
-    width: 10px;
-    height: 10px;
+  .jumbotron-thumbnails {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 0.75rem;
+    padding: 0;
   }
 
   .story-main-text {
@@ -986,6 +1004,11 @@ const goToSlide = (index) => {
 }
 
 @media (max-width: 480px) {
+  .header-container {
+    padding: 2.5rem 1rem;
+    min-height: 300px;
+  }
+
   .story-container {
     padding: 2.5rem 1.5rem;
   }
@@ -996,8 +1019,19 @@ const goToSlide = (index) => {
     height: 45px;
   }
 
-  .carousel-wrapper {
-    aspect-ratio: 4 / 3;
+  .jumbotron-main {
+    height: 300px;
+  }
+
+  .jumbotron-thumbnails {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .jumbotron-border-tl,
+  .jumbotron-border-br {
+    width: 45px;
+    height: 45px;
   }
 
   .story-main-text {
