@@ -937,6 +937,9 @@ const goToSlide = (index) => {
 
 /* Responsive */
 @media (max-width: 768px) {
+  .hero-section.visible {
+    padding: 2rem 1.5rem;
+  }
   .header-container {
     margin-bottom: 3rem;
     padding: 3rem 1.5rem;
