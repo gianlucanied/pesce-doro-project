@@ -233,7 +233,6 @@ const goToSlide = (index) => {
 .hero-section {
   min-height: 100vh;
   background: linear-gradient(135deg, #0a0a0a 0%, #1a1410 50%, #0a0a0a 100%);
-  padding: 4rem 2rem;
   position: relative;
   overflow: hidden;
   opacity: 0;

@@ -141,8 +141,8 @@ onMounted(() => {
           <div class="footer-column">
             <h4>{{ t('footer.openingHours') }}</h4>
             <div class="column-divider"></div>
-            <p class="hours">{{ t('footer.lunch') }}</p>
-            <p class="hours">{{ t('footer.dinner') }}</p>
+            <p class="hours">12:30 - 14:30</p>
+            <p class="hours">19:30 - 23:00</p>
           </div>
 
           <div class="footer-column">
