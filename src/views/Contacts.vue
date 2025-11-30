@@ -976,7 +976,7 @@ const startHeroImageSlide = () => {
 
 @media (max-width: 640px) {
   .hero-contacts {
-    height: 40vh;
+    height: 80vh;
   }
 
   .hero-content {

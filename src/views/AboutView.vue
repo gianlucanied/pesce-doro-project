@@ -1227,7 +1227,7 @@ onMounted(() => {
 
 @media (max-width: 480px) {
   .hero-about {
-    height: 50vh;
+    height: 80vh;
   }
 
   .intro-card h2 {
