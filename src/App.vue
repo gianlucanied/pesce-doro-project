@@ -36,31 +36,11 @@ onMounted(() => {
           </RouterLink>
         </div>
 
-        <!-- Pulsante Download Menu - Desktop -->
-        <a href="/menu.pdf" download class="btn-menu-download desktop-menu-btn">
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-            <polyline points="7 10 12 15 17 10" />
-            <line x1="12" y1="15" x2="12" y2="3" />
-          </svg>
-          <span>{{ t('nav.downloadMenu') }}</span>
-        </a>
-
         <nav class="desktop-nav">
           <RouterLink to="/" class="nav-link">{{ t('nav.home') }}</RouterLink>
           <RouterLink to="/about" class="nav-link">{{ t('nav.about') }}</RouterLink>
           <RouterLink to="/contacts" class="btn-prenota">{{ t('nav.contacts') }}</RouterLink>
 
-          <!-- Language Selector -->
           <!-- Language Selector - Desktop con Dropdown -->
           <div class="language-selector">
             <div class="language-dropdown">
@@ -116,7 +96,7 @@ onMounted(() => {
       </div>
 
       <div class="mobile-nav" :class="{ open: mobileMenuOpen }">
-        <!-- Pulsante Download Menu - Mobile -->
+        <!-- Pulsante Download Menu - Solo Mobile -->
         <a href="/menu.pdf" download class="mobile-menu-download" @click="mobileMenuOpen = false">
           <svg
             width="18"
@@ -262,6 +242,7 @@ onMounted(() => {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -277,151 +258,198 @@ onMounted(() => {
   font-family: 'Lora', 'Georgia', serif;
 }
 
-/* ==================== HEADER ==================== */
+/* ==================== HEADER MODERNO ==================== */
 header {
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1410 100%);
+  background: black;
+  backdrop-filter: blur(10px);
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 2px solid rgba(212, 175, 55, 0.4);
-  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 2px 8px rgba(212, 175, 55, 0.1);
 }
 
 .header-ornament-top {
-  height: 3px;
-  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(225, 155, 29, 0.3) 25%,
+    #e19b1d 50%,
+    rgba(225, 155, 29, 0.3) 75%,
+    transparent 100%
+  );
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .header-content {
-  /* max-width: 1400px; */
-  height: 100px;
+  max-width: 1400px;
+  height: 90px;
   margin: 0 auto;
   padding: 0 3rem;
   display: flex;
-  background-color: black;
   justify-content: space-between;
   align-items: center;
-  /* background: linear-gradient(135deg, rgba(212, 175, 55, 0.03), transparent); */
+  position: relative;
+}
+
+.header-content::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(225, 155, 29, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.logo {
+  position: relative;
+  z-index: 2;
 }
 
 .logo a {
   display: block;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.logo a::after {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  background: radial-gradient(circle at center, rgba(225, 155, 29, 0.15) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: 50%;
+}
+
+.logo a:hover::after {
+  opacity: 1;
 }
 
 .logo a:hover {
-  opacity: 0.85;
-  transform: scale(1.05);
+  transform: translateY(-2px);
 }
 
 .logo-img {
-  height: 85px;
+  height: 75px;
   width: auto;
   display: block;
+  transition: filter 0.4s ease;
 }
 
-/* ==================== DOWNLOAD MENU BUTTON ==================== */
-.btn-menu-download {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(218, 165, 32, 0.06));
-  border: 2px solid rgba(212, 175, 55, 0.4);
-  color: #e19b1d;
-  padding: 0.7rem 1.5rem;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 0.9rem;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
-  border-radius: 2px;
-  box-shadow: 0 2px 10px rgba(212, 175, 55, 0.15);
+.logo a:hover .logo-img {
+  filter: drop-shadow(0 6px 20px rgba(225, 155, 29, 0.4));
 }
 
-.btn-menu-download svg {
-  transition: transform 0.3s ease;
-}
-
-.btn-menu-download:hover {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(218, 165, 32, 0.12));
-  border-color: #e19b1d;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-  color: #ffa500;
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
-}
-
-.btn-menu-download:hover svg {
-  transform: translateY(3px);
-}
-
-/* Mobile Menu Download Button */
+/* ==================== MOBILE MENU DOWNLOAD BUTTON - NO HOVER ==================== */
 .mobile-menu-download {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
+  background: linear-gradient(135deg, rgba(225, 155, 29, 0.12) 0%, rgba(225, 155, 29, 0.06) 100%);
   border: none;
-  border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
   color: #e19b1d;
-  padding: 1.5rem 3rem;
+  padding: 1.5rem 2rem;
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
+  letter-spacing: 0.8px;
   font-family: 'Lora', 'Georgia', serif;
-}
-
-.mobile-menu-download:hover {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(218, 165, 32, 0.15));
-  color: #ffa500;
-  padding-left: 3.5rem;
-  text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 2px 8px rgba(225, 155, 29, 0.1);
 }
 
 .mobile-menu-download svg {
-  transition: transform 0.3s ease;
+  filter: drop-shadow(0 2px 6px rgba(225, 155, 29, 0.4));
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.mobile-menu-download:hover svg {
-  transform: translateY(3px);
+.mobile-menu-download:active {
+  background: linear-gradient(135deg, rgba(225, 155, 29, 0.18) 0%, rgba(225, 155, 29, 0.1) 100%);
+  transform: scale(0.98);
 }
 
+.mobile-menu-download:active svg {
+  transform: translateY(2px);
+}
+
+/* ==================== DESKTOP NAV MODERNO ==================== */
 .desktop-nav {
   display: flex;
-  gap: 3rem;
+  gap: 2.5rem;
   align-items: center;
+  position: relative;
+  z-index: 2;
 }
 
 .nav-link {
-  color: #e6c77f;
+  color: rgba(230, 199, 127, 0.9);
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 400;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   position: relative;
   padding: 0.5rem 0;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-link::before {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #e19b1d, #ffa500);
-  transition: width 0.3s ease;
-  box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 10px rgba(225, 155, 29, 0.5);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(225, 155, 29, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  transition: all 0.4s ease;
+  opacity: 0;
+}
+
+.nav-link:hover::after {
+  width: 120px;
+  height: 120px;
+  opacity: 1;
 }
 
 .nav-link:hover {
   color: #e19b1d;
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+  transform: translateY(-1px);
 }
 
 .nav-link:hover::before {
@@ -430,57 +458,70 @@ header {
 
 .nav-link.router-link-active {
   color: #e19b1d;
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 .nav-link.router-link-active::before {
   width: 100%;
 }
 
+/* ==================== BTN PRENOTA MODERNO ==================== */
 .btn-prenota {
-  background: linear-gradient(135deg, #e19b1d, #c9a028);
+  background: linear-gradient(135deg, #e19b1d 0%, #d4af37 50%, #e19b1d 100%);
+  background-size: 200% 200%;
   color: #0a0a0a;
-  padding: 0.8rem 2rem;
+  padding: 0.85rem 2.2rem;
   border: none;
   text-decoration: none;
   font-weight: 600;
   font-size: 0.9rem;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+  box-shadow:
+    0 4px 15px rgba(225, 155, 29, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .btn-prenota::before {
   content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition:
-    width 0.5s ease,
-    height 0.5s ease;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
 }
 
 .btn-prenota:hover::before {
-  width: 300px;
-  height: 300px;
+  left: 100%;
 }
 
 .btn-prenota:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 25px rgba(212, 175, 55, 0.5);
+  transform: translateY(-3px);
+  box-shadow:
+    0 8px 25px rgba(225, 155, 29, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-/* ==================== LANGUAGE SELECTOR WITH DROPDOWN ==================== */
+/* ==================== LANGUAGE SELECTOR MODERNO ==================== */
 .language-selector {
-  padding-left: 1rem;
-  border-left: 2px solid rgba(212, 175, 55, 0.3);
+  padding-left: 1.5rem;
+  margin-left: 1rem;
+  border-left: 1px solid rgba(225, 155, 29, 0.2);
 }
 
 .language-dropdown {
@@ -491,48 +532,55 @@ header {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), transparent);
-  border: 2px solid rgba(212, 175, 55, 0.3);
+  background: linear-gradient(135deg, rgba(225, 155, 29, 0.08) 0%, rgba(225, 155, 29, 0.04) 100%);
+  border: 1.5px solid rgba(225, 175, 55, 0.25);
   color: #e6c77f;
-  padding: 0.5rem 0.9rem;
+  padding: 0.6rem 1rem;
   font-size: 1.2rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 6px;
+  box-shadow:
+    0 2px 8px rgba(225, 155, 29, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .dropdown-arrow {
   color: #e19b1d;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .current-lang-btn:hover {
-  border-color: #e19b1d;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.1));
-  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25);
+  border-color: rgba(225, 155, 29, 0.4);
+  background: linear-gradient(135deg, rgba(225, 155, 29, 0.12) 0%, rgba(225, 155, 29, 0.06) 100%);
+  box-shadow:
+    0 4px 12px rgba(225, 155, 29, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
 }
 
 .language-dropdown:hover .dropdown-arrow {
   transform: rotate(180deg);
 }
 
-/* Dropdown Menu */
+/* Dropdown Menu Moderno */
 .language-dropdown-menu {
   position: absolute;
-  top: calc(100% + 0.5rem);
+  top: calc(100% + 0.8rem);
   right: 0;
-  background: linear-gradient(135deg, #0a0a0a, #1a1410);
-  border: 2px solid rgba(212, 175, 55, 0.4);
-  border-radius: 2px;
+  background: rgba(10, 10, 10, 0.98);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(225, 155, 29, 0.3);
+  border-radius: 8px;
   box-shadow:
-    0 8px 25px rgba(0, 0, 0, 0.5),
-    0 0 20px rgba(212, 175, 55, 0.2);
-  min-width: 150px;
+    0 12px 40px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(225, 155, 29, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  min-width: 160px;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
+  transform: translateY(-10px) scale(0.95);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1000;
   overflow: hidden;
 }
@@ -540,7 +588,7 @@ header {
 .language-dropdown:hover .language-dropdown-menu {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
 .dropdown-lang-btn {
@@ -550,14 +598,30 @@ header {
   width: 100%;
   background: transparent;
   border: none;
-  color: #e6c77f;
-  padding: 0.9rem 1.2rem;
-  font-size: 1rem;
+  color: rgba(230, 199, 127, 0.9);
+  padding: 1rem 1.3rem;
+  font-size: 0.95rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: left;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+  border-bottom: 1px solid rgba(225, 155, 29, 0.08);
   font-family: 'Lora', 'Georgia', serif;
+  position: relative;
+}
+
+.dropdown-lang-btn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: linear-gradient(90deg, rgba(225, 155, 29, 0.15) 0%, transparent 100%);
+  transition: width 0.3s ease;
+}
+
+.dropdown-lang-btn:hover::before {
+  width: 100%;
 }
 
 .dropdown-lang-btn:last-child {
@@ -567,86 +631,125 @@ header {
 .dropdown-lang-btn span {
   font-size: 0.9rem;
   font-weight: 400;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
+  position: relative;
+  z-index: 1;
 }
 
 .dropdown-lang-btn:hover {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.1));
   color: #e19b1d;
-  padding-left: 1.5rem;
-  text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+  padding-left: 1.8rem;
 }
 
-/* Mobile Language Selector (invariato) */
+/* ==================== MOBILE LANGUAGE SELECTOR - NO HOVER ==================== */
 .mobile-language-selector {
   display: flex;
   flex-direction: column;
   gap: 0;
-  border-top: 2px solid rgba(212, 175, 55, 0.3);
-  margin-top: 1rem;
-  padding-top: 1rem;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), transparent);
+  border-top: 1px solid rgba(225, 155, 29, 0.25);
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  background: linear-gradient(135deg, rgba(225, 155, 29, 0.06) 0%, transparent 100%);
 }
 
 .mobile-lang-btn {
   background: transparent;
   border: none;
-  color: #e6c77f;
-  padding: 1rem 3rem;
+  color: rgba(230, 199, 127, 0.9);
+  padding: 1.2rem 2rem;
   font-size: 1rem;
   font-weight: 400;
-  letter-spacing: 1px;
+  letter-spacing: 0.6px;
   cursor: pointer;
   text-align: left;
-  transition: all 0.3s ease;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-bottom: 1px solid rgba(225, 155, 29, 0.1);
   font-family: 'Lora', 'Georgia', serif;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
 }
 
-.mobile-lang-btn:hover {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
-  color: #e19b1d;
-  padding-left: 3.5rem;
-  text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+.mobile-lang-btn::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: linear-gradient(180deg, #e19b1d, #ffa500);
+  transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 8px rgba(225, 155, 29, 0.6);
 }
 
 .mobile-lang-btn.active {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
+  background: linear-gradient(
+    90deg,
+    rgba(225, 155, 29, 0.15) 0%,
+    rgba(225, 155, 29, 0.05) 50%,
+    transparent 100%
+  );
   color: #e19b1d;
-  border-left: 4px solid #e19b1d;
-  box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.2);
+  box-shadow: inset 0 0 20px rgba(225, 155, 29, 0.1);
 }
 
-/* Mobile Menu Button */
+.mobile-lang-btn.active::after {
+  height: 70%;
+}
+
+.mobile-lang-btn:active {
+  background: linear-gradient(
+    90deg,
+    rgba(225, 155, 29, 0.2) 0%,
+    rgba(225, 155, 29, 0.08) 50%,
+    transparent 100%
+  );
+  transform: scale(0.98);
+}
+
+/* ==================== MOBILE MENU BUTTON MODERNO ==================== */
 .mobile-menu-btn {
   display: none;
   flex-direction: column;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
-  border: 2px solid rgba(212, 175, 55, 0.3);
+  background: linear-gradient(135deg, rgba(225, 155, 29, 0.1) 0%, rgba(225, 155, 29, 0.05) 100%);
+  border: 1.5px solid rgba(225, 155, 29, 0.3);
   cursor: pointer;
   padding: 0.6rem;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.15);
+  border-radius: 8px;
+  box-shadow:
+    0 2px 10px rgba(225, 155, 29, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
   position: relative;
-  width: 45px;
-  height: 45px;
+  width: 48px;
+  height: 48px;
   justify-content: center;
   align-items: center;
   gap: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-menu-btn:active {
+  transform: scale(0.95);
+  box-shadow:
+    0 1px 5px rgba(225, 155, 29, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .mobile-menu-btn span {
-  width: 25px;
-  height: 2px;
+  width: 26px;
+  height: 2.5px;
   background: linear-gradient(90deg, #e19b1d, #ffa500);
-  transition: all 0.3s ease;
-  box-shadow: 0 0 5px rgba(212, 175, 55, 0.4);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 0 0 8px rgba(225, 155, 29, 0.5);
   display: block;
   position: absolute;
+  border-radius: 3px;
 }
 
 .mobile-menu-btn span:nth-child(1) {
-  top: 12px;
+  top: 13px;
 }
 
 .mobile-menu-btn span:nth-child(2) {
@@ -655,68 +758,134 @@ header {
 }
 
 .mobile-menu-btn span:nth-child(3) {
-  bottom: 12px;
+  bottom: 13px;
 }
 
-/* Stato APERTO - forma la X */
+/* Stato APERTO - forma la X con animazione elastica */
 .mobile-menu-btn span.open:nth-child(1) {
   top: 50%;
   transform: translateY(-50%) rotate(45deg);
+  box-shadow: 0 0 12px rgba(225, 155, 29, 0.8);
 }
 
 .mobile-menu-btn span.open:nth-child(2) {
   opacity: 0;
-  transform: translateY(-50%) scale(0);
+  transform: translateY(-50%) scale(0) rotate(180deg);
 }
 
 .mobile-menu-btn span.open:nth-child(3) {
   bottom: 50%;
   transform: translateY(50%) rotate(-45deg);
+  box-shadow: 0 0 12px rgba(225, 155, 29, 0.8);
 }
 
-.mobile-menu-btn:hover {
-  border-color: #e19b1d;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.1));
-  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25);
-}
-
-/* Mobile Navigation */
+/* ==================== MOBILE NAV CON ANIMAZIONI FLUIDE ==================== */
 .mobile-nav {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  background: linear-gradient(135deg, #0a0a0a, #1a1410);
-  border-top: 2px solid rgba(212, 175, 55, 0.2);
+  transition:
+    max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.4s ease,
+    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(10, 10, 10, 0.98);
+  backdrop-filter: blur(15px);
+  border-top: 1px solid rgba(225, 155, 29, 0.15);
+  opacity: 0;
+  transform: translateY(-10px);
 }
 
 .mobile-nav.open {
   max-height: 800px;
-  box-shadow: inset 0 10px 20px rgba(212, 175, 55, 0.1);
+  opacity: 1;
+  transform: translateY(0);
+  box-shadow:
+    inset 0 10px 30px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(225, 155, 29, 0.1);
+}
+
+/* Animazione staggered per i link */
+.mobile-nav-link,
+.mobile-menu-download {
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: none;
+}
+
+.mobile-nav.open .mobile-menu-download {
+  animation: slideInLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
+}
+
+.mobile-nav.open .mobile-nav-link:nth-child(2) {
+  animation: slideInLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.15s forwards;
+}
+
+.mobile-nav.open .mobile-nav-link:nth-child(3) {
+  animation: slideInLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+}
+
+.mobile-nav.open .mobile-nav-link:nth-child(4) {
+  animation: slideInLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.25s forwards;
+}
+
+.mobile-nav.open .mobile-language-selector {
+  animation: slideInLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .mobile-nav-link {
   display: block;
-  color: #e6c77f;
+  color: rgba(230, 199, 127, 0.9);
   text-decoration: none;
-  padding: 1.2rem 3rem;
+  padding: 1.3rem 2rem;
   font-size: 1rem;
   font-weight: 400;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+  letter-spacing: 0.6px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-bottom: 1px solid rgba(225, 155, 29, 0.1);
+  position: relative;
 }
 
-.mobile-nav-link:hover {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
-  color: #e19b1d;
-  padding-left: 3.5rem;
-  text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+.mobile-nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: linear-gradient(180deg, #e19b1d, #ffa500);
+  transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 8px rgba(225, 155, 29, 0.6);
+}
+
+.mobile-nav-link:active {
+  background: linear-gradient(90deg, rgba(225, 155, 29, 0.15) 0%, transparent 100%);
+  transform: scale(0.98);
 }
 
 .mobile-nav-link.router-link-active {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(218, 165, 32, 0.08));
+  background: linear-gradient(
+    90deg,
+    rgba(225, 155, 29, 0.15) 0%,
+    rgba(225, 155, 29, 0.05) 50%,
+    transparent 100%
+  );
   color: #e19b1d;
-  border-left: 4px solid #e19b1d;
+  box-shadow: inset 0 0 20px rgba(225, 155, 29, 0.1);
+}
+
+.mobile-nav-link.router-link-active::after {
+  height: 70%;
 }
 
 /* ==================== MAIN ==================== */
@@ -968,16 +1137,13 @@ footer::before {
     display: flex;
   }
 
-  .desktop-menu-btn {
-    display: none;
-  }
-
   .header-content {
     padding: 1.2rem 2rem;
+    height: 80px;
   }
 
   .logo-img {
-    height: 70px;
+    height: 65px;
   }
 
   .footer-content {
@@ -997,34 +1163,23 @@ footer::before {
 @media (max-width: 640px) {
   .header-content {
     padding: 1rem 1.5rem;
+    height: 75px;
   }
 
   .mobile-nav-link {
-    padding: 1rem 1.5rem;
-  }
-
-  .mobile-nav-link:hover {
-    padding-left: 2rem;
+    padding: 1.2rem 1.5rem;
   }
 
   .mobile-lang-btn {
-    padding: 1rem 1.5rem;
-  }
-
-  .mobile-lang-btn:hover {
-    padding-left: 2rem;
+    padding: 1.1rem 1.5rem;
   }
 
   .mobile-menu-download {
-    padding: 1.5rem 1.5rem;
-  }
-
-  .mobile-menu-download:hover {
-    padding-left: 2rem;
+    padding: 1.4rem 1.5rem;
   }
 
   .logo-img {
-    height: 60px;
+    height: 55px;
   }
 
   .footer-content {

@@ -94,6 +94,12 @@ const startHeroImageSlide = () => {
                 >info@pescedoroalghero.it</a
               >
             </div>
+
+            <div class="card-divider"></div>
+
+            <div class="contact-link">
+              <h4>{{ t('contacts.prenotation') }}</h4>
+            </div>
           </div>
 
           <!-- Hours Card -->
@@ -816,7 +822,7 @@ const startHeroImageSlide = () => {
   .location-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
-    border: 3px solid rgba(212, 175, 55, 0.3);
+    /* border: 3px solid rgba(212, 175, 55, 0.3); */
   }
 
   .map-container {

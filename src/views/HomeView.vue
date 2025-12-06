@@ -7,6 +7,7 @@ const { t } = useI18n()
 const isVisible = ref(false)
 const currentSlide = ref(0)
 const currentHeaderImage = ref(0)
+const showFloatingButton = ref(false)
 const totalSlides = 7
 const isAutoPlaying = ref(true)
 let autoPlayInterval = null
@@ -37,6 +38,12 @@ const jumbotronImages = [
 // Logo image
 const logoImage = new URL('/imageremove.png', import.meta.url).href
 
+// Gestione scroll per il floating button
+const handleScroll = () => {
+  // Mostra il pulsante dopo 300px di scroll
+  showFloatingButton.value = window.scrollY > 300
+}
+
 onMounted(() => {
   setTimeout(() => {
     isVisible.value = true
@@ -44,6 +51,9 @@ onMounted(() => {
 
   startAutoPlay()
   startHeaderImageSlide()
+
+  // Aggiungi listener per lo scroll
+  window.addEventListener('scroll', handleScroll)
 })
 
 const startAutoPlay = () => {
@@ -224,6 +234,39 @@ const goToSlide = (index) => {
         <div class="ornament-line"></div>
       </div>
     </section>
+
+    <!-- Floating Menu Button - Solo Desktop -->
+    <transition name="float-fade">
+      <a
+        v-if="showFloatingButton"
+        href="/menu.pdf"
+        download
+        class="floating-menu-btn"
+        :aria-label="t('nav.downloadMenu')"
+      >
+        <div class="floating-btn-content">
+          <svg
+            class="floating-btn-icon"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          <span class="floating-btn-text">{{ t('nav.downloadMenu') }}</span>
+        </div>
+
+        <!-- Pulse ring effect -->
+        <div class="floating-btn-ring"></div>
+      </a>
+    </transition>
   </main>
 </template>
 
@@ -245,6 +288,202 @@ const goToSlide = (index) => {
 
 .hero-section.visible {
   opacity: 1;
+}
+
+/* ==================== FLOATING MENU BUTTON - NUOVO STILE ==================== */
+.floating-menu-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(248, 246, 242, 0.95));
+  color: #8b6914;
+  padding: 1.5rem;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  border-radius: 12px;
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(212, 175, 55, 0.3) inset,
+    0 0 0 2px rgba(255, 255, 255, 0.8);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  font-family: 'Lora', 'Georgia', serif;
+  border: 2px solid rgba(212, 175, 55, 0.4);
+  min-width: 80px;
+  backdrop-filter: blur(10px);
+}
+
+.floating-btn-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.floating-btn-icon {
+  color: #c9a028;
+  filter: drop-shadow(0 2px 4px rgba(201, 160, 40, 0.2));
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.floating-btn-text {
+  font-weight: 500;
+  /* text-transform: uppercase; */
+  font-size: 0.75rem;
+  color: #8b6914;
+  text-align: center;
+  line-height: 1.3;
+  max-width: 70px;
+}
+
+/* Pulse ring effect - più sottile */
+.floating-btn-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgba(201, 160, 40, 0.4);
+  border-radius: 12px;
+  animation: pulse-ring-subtle 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes pulse-ring-subtle {
+  0% {
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+  }
+  50% {
+    width: 110%;
+    height: 110%;
+    opacity: 0.3;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+  }
+}
+
+.floating-menu-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(201, 160, 40, 0.12));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: 12px;
+}
+
+.floating-menu-btn:hover::before {
+  opacity: 1;
+}
+
+.floating-menu-btn:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 15px 50px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(212, 175, 55, 0.5) inset,
+    0 0 0 2px rgba(255, 255, 255, 0.9);
+  border-color: rgba(212, 175, 55, 0.6);
+}
+
+.floating-menu-btn:hover .floating-btn-icon {
+  transform: translateY(5px) scale(1.1);
+  color: #e19b1d;
+  filter: drop-shadow(0 4px 8px rgba(225, 155, 29, 0.4));
+}
+
+.floating-menu-btn:hover .floating-btn-text {
+  color: #c9a028;
+}
+
+.floating-menu-btn:active {
+  transform: translateY(-5px) scale(0.98);
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(212, 175, 55, 0.4) inset,
+    0 0 0 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Decorazione angolare elegante */
+.floating-menu-btn::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  border-radius: 8px;
+  pointer-events: none;
+  transition: all 0.4s ease;
+}
+
+.floating-menu-btn:hover::after {
+  border-color: rgba(212, 175, 55, 0.3);
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+}
+
+/* Transition for floating button */
+.float-fade-enter-active,
+.float-fade-leave-active {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.float-fade-enter-from {
+  opacity: 0;
+  transform: translateY(30px) scale(0.9);
+}
+
+.float-fade-leave-to {
+  opacity: 0;
+  transform: translateY(30px) scale(0.9);
+}
+
+/* Nascondi su mobile e tablet */
+@media (max-width: 1024px) {
+  .floating-menu-btn {
+    display: none;
+  }
+}
+
+/* Responsive per desktop piccoli */
+@media (max-width: 1200px) and (min-width: 1025px) {
+  .floating-menu-btn {
+    bottom: 30px;
+    right: 30px;
+    padding: 1.2rem;
+    min-width: 70px;
+  }
+
+  .floating-btn-text {
+    font-size: 0.7rem;
+    max-width: 60px;
+  }
+
+  .floating-btn-icon {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 /* Sfondo elegante con texture sottile */
@@ -925,10 +1164,6 @@ const goToSlide = (index) => {
 
 /* Responsive */
 @media (max-width: 768px) {
-  /* .hero-section {
-    padding: 2rem 1.5rem;
-  } */
-
   .header-container {
     margin-bottom: 1rem;
     padding: 3rem 1.5rem;
