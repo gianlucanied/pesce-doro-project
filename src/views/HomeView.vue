@@ -427,6 +427,7 @@ const goToSlide = (index) => {
 .content-wrapper {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 3rem 1.5rem;
   position: relative;
   z-index: 2;
 }
@@ -924,12 +925,12 @@ const goToSlide = (index) => {
 
 /* Responsive */
 @media (max-width: 768px) {
-  .hero-section {
+  /* .hero-section {
     padding: 2rem 1.5rem;
-  }
+  } */
 
   .header-container {
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     padding: 3rem 1.5rem;
     min-height: 500px;
   }

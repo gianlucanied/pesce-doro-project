@@ -373,7 +373,7 @@ onMounted(() => {
 
 /* ==================== CONTENT SECTION ==================== */
 .content-section {
-  padding: 6rem 2rem;
+  padding: 4rem 2rem;
   position: relative;
 }
 
