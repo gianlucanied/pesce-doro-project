@@ -15,10 +15,10 @@ let headerImageInterval = null
 
 // Array di immagini per l'header
 const headerImages = [
-  new URL('@/assets/1.jpg', import.meta.url).href,
-  new URL('@/assets/2.jpg', import.meta.url).href,
-  new URL('@/assets/3.jpg', import.meta.url).href,
-  new URL('@/assets/4.jpg', import.meta.url).href,
+  new URL('@/assets/bastiano1.jpg', import.meta.url).href,
+  new URL('@/assets/bastiano2.jpg', import.meta.url).href,
+  new URL('@/assets/bastiano3.jpg', import.meta.url).href,
+  new URL('@/assets/bastiano4.jpg', import.meta.url).href,
   new URL('@/assets/5.jpg', import.meta.url).href,
   new URL('@/assets/6.jpg', import.meta.url).href,
   new URL('@/assets/7.jpg', import.meta.url).href,
@@ -26,10 +26,10 @@ const headerImages = [
 
 // Array di immagini per il jumbotron (stesso array)
 const jumbotronImages = [
-  new URL('@/assets/1.jpg', import.meta.url).href,
-  new URL('@/assets/2.jpg', import.meta.url).href,
-  new URL('@/assets/3.jpg', import.meta.url).href,
-  new URL('@/assets/4.jpg', import.meta.url).href,
+  new URL('@/assets/bastiano1.jpg', import.meta.url).href,
+  new URL('@/assets/bastiano2.jpg', import.meta.url).href,
+  new URL('@/assets/bastiano3.jpg', import.meta.url).href,
+  new URL('@/assets/bastiano4.jpg', import.meta.url).href,
   new URL('@/assets/5.jpg', import.meta.url).href,
   new URL('@/assets/6.jpg', import.meta.url).href,
   new URL('@/assets/7.jpg', import.meta.url).href,
@@ -1167,7 +1167,7 @@ const goToSlide = (index) => {
   .header-container {
     margin-bottom: 1rem;
     padding: 3rem 1.5rem;
-    min-height: 500px;
+    min-height: 100vh;
   }
 
   .header-logo {

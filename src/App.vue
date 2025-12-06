@@ -157,19 +157,15 @@ onMounted(() => {
     </main>
 
     <footer>
-      <div class="footer-ornament"></div>
-
       <div class="footer-content">
         <div class="footer-section footer-brand">
           <img src="/images1.png" alt="Il Pesce d'Oro" class="footer-logo" />
           <p class="footer-tagline">{{ t('footer.tagline') }}</p>
-          <div class="footer-divider"></div>
         </div>
 
         <div class="footer-grid">
           <div class="footer-column">
             <h4>{{ t('footer.navigation') }}</h4>
-            <div class="column-divider"></div>
             <RouterLink to="/">{{ t('nav.home') }}</RouterLink>
             <RouterLink to="/about">{{ t('nav.about') }}</RouterLink>
             <RouterLink to="/contacts">{{ t('nav.contacts') }}</RouterLink>
@@ -177,14 +173,12 @@ onMounted(() => {
 
           <div class="footer-column">
             <h4>{{ t('footer.openingHours') }}</h4>
-            <div class="column-divider"></div>
             <p class="hours">12:30 - 14:30</p>
             <p class="hours">19:30 - 23:00</p>
           </div>
 
           <div class="footer-column">
             <h4>{{ t('footer.whereToFindUs') }}</h4>
-            <div class="column-divider"></div>
             <p>{{ t('footer.address') }}</p>
             <p>{{ t('footer.city') }}</p>
             <p class="contact-info">☎ +39 079 952 602</p>
@@ -193,7 +187,6 @@ onMounted(() => {
 
           <div class="footer-column">
             <h4>{{ t('footer.followUs') }}</h4>
-            <div class="column-divider"></div>
             <div class="social-links">
               <a href="#" aria-label="Facebook" class="social-link">
                 <svg
@@ -232,7 +225,6 @@ onMounted(() => {
       </div>
 
       <div class="footer-bottom">
-        <div class="footer-bottom-divider"></div>
         <p>{{ t('footer.copyright') }}</p>
         <p class="legal">{{ t('footer.rights') }}</p>
       </div>
@@ -894,15 +886,15 @@ main {
   width: 100%;
 }
 
-/* ==================== FOOTER ==================== */
+/* ==================== FOOTER MODERNO E DISTINTIVO ==================== */
 footer {
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1410 100%);
+  background: #0a0a0a;
   margin-top: auto;
-  border-top: 3px solid rgba(212, 175, 55, 0.4);
   position: relative;
-  box-shadow: 0 -4px 20px rgba(212, 175, 55, 0.15);
+  overflow: hidden;
 }
 
+/* Effetto pattern geometrico di sfondo */
 footer::before {
   content: '';
   position: absolute;
@@ -910,221 +902,345 @@ footer::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background:
-    radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 70% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
+  background-image:
+    linear-gradient(
+      30deg,
+      rgba(225, 155, 29, 0.03) 12%,
+      transparent 12.5%,
+      transparent 87%,
+      rgba(225, 155, 29, 0.03) 87.5%,
+      rgba(225, 155, 29, 0.03)
+    ),
+    linear-gradient(
+      150deg,
+      rgba(225, 155, 29, 0.03) 12%,
+      transparent 12.5%,
+      transparent 87%,
+      rgba(225, 155, 29, 0.03) 87.5%,
+      rgba(225, 155, 29, 0.03)
+    ),
+    linear-gradient(
+      30deg,
+      rgba(225, 155, 29, 0.03) 12%,
+      transparent 12.5%,
+      transparent 87%,
+      rgba(225, 155, 29, 0.03) 87.5%,
+      rgba(225, 155, 29, 0.03)
+    ),
+    linear-gradient(
+      150deg,
+      rgba(225, 155, 29, 0.03) 12%,
+      transparent 12.5%,
+      transparent 87%,
+      rgba(225, 155, 29, 0.03) 87.5%,
+      rgba(225, 155, 29, 0.03)
+    );
+  background-size: 80px 140px;
+  background-position:
+    0 0,
+    0 0,
+    40px 70px,
+    40px 70px;
   pointer-events: none;
+  opacity: 0.5;
 }
 
-.footer-ornament {
-  text-align: center;
-  color: #e19b1d;
-  font-size: 2rem;
-  padding: 2rem 0 1rem;
-  opacity: 1;
-  text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
-  position: relative;
-  z-index: 1;
+/* Linea decorativa superiore animata */
+footer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e19b1d 20%, #e19b1d 80%, transparent);
+  box-shadow: 0 0 20px rgba(225, 155, 29, 0.6);
+  animation: shimmer 3s ease-in-out infinite;
 }
 
 .footer-content {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem 3rem 3rem;
+  padding: 4rem 3rem 2rem;
   position: relative;
   z-index: 1;
 }
 
 .footer-section {
   margin-bottom: 3rem;
+  text-align: center;
+  position: relative;
 }
 
 .footer-brand {
-  text-align: center;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(225, 155, 29, 0.15);
 }
 
 .footer-logo {
-  height: 90px;
+  height: 100px;
   width: auto;
   margin: 0 auto 1.5rem;
   display: block;
-  filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.4));
+  filter: drop-shadow(0 0 30px rgba(225, 155, 29, 0.4)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+  transition: all 0.4s ease;
+}
+
+.footer-logo:hover {
+  filter: drop-shadow(0 0 40px rgba(225, 155, 29, 0.6)) drop-shadow(0 6px 20px rgba(0, 0, 0, 0.6));
+  transform: scale(1.05);
 }
 
 .footer-tagline {
   color: #e6c77f;
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 300;
-  letter-spacing: 0.5px;
-  line-height: 1.6;
+  letter-spacing: 1px;
+  line-height: 1.8;
   font-style: italic;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.footer-divider {
-  width: 100px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
-  margin: 2rem auto 3rem;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-}
-
+/* Grid moderna con card style */
 .footer-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 3rem;
+  gap: 2rem;
+  margin-top: 3rem;
 }
 
 .footer-column {
-  text-align: left;
-}
-
-.footer-column h4 {
-  color: #e19b1d;
-  font-size: 0.95rem;
-  margin-bottom: 1rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
-}
-
-.column-divider {
-  width: 40px;
-  height: 2px;
-  background: linear-gradient(90deg, #e19b1d, transparent);
-  margin-bottom: 1.2rem;
-  box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
-}
-
-.footer-column a,
-.footer-column p {
-  color: #e0e0e0;
-  text-decoration: none;
-  font-size: 0.9rem;
-  line-height: 2;
-  font-weight: 300;
-  transition: all 0.3s ease;
-  display: block;
-}
-
-.footer-column a:hover {
-  color: #e19b1d;
-  padding-left: 8px;
-  text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
-}
-
-.day-range {
-  color: #e6c77f;
-  font-weight: 400;
-  margin-bottom: 0.5rem;
-}
-
-.footer-column .hours {
-  color: #e0e0e0;
-  font-weight: 300;
-  line-height: 1.8;
-}
-
-.footer-column .closed {
-  color: #e19b1d;
-  font-style: italic;
-  margin-top: 0.8rem;
-  font-size: 0.85rem;
-  text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
-}
-
-.footer-column .contact-info {
-  color: #e6c77f;
-  font-weight: 400;
-}
-
-.social-links {
-  display: flex;
-  gap: 0.8rem;
-  margin-bottom: 1rem;
-}
-
-.social-link {
-  color: #e19b1d;
-  width: 38px;
-  height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid rgba(212, 175, 55, 0.4);
-  transition: all 0.3s ease;
+  background: linear-gradient(135deg, rgba(225, 155, 29, 0.05) 0%, rgba(10, 10, 10, 0.3) 100%);
+  padding: 2rem 1.5rem;
+  border-radius: 8px;
+  border: 1px solid rgba(225, 155, 29, 0.15);
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), transparent);
-  box-shadow: 0 2px 10px rgba(212, 175, 55, 0.1);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
 }
 
-.social-link::before {
+.footer-column::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+
+.footer-column:hover::before {
+  transform: scaleX(1);
+}
+
+.footer-column:hover {
+  transform: translateY(-5px);
+  border-color: rgba(225, 155, 29, 0.4);
+  background: linear-gradient(135deg, rgba(225, 155, 29, 0.08) 0%, rgba(10, 10, 10, 0.4) 100%);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(225, 155, 29, 0.15);
+}
+
+.footer-column h4 {
+  color: #e19b1d;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(225, 155, 29, 0.4);
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.footer-column h4::after {
+  content: '';
+  position: absolute;
   bottom: 0;
-  background: linear-gradient(135deg, #e19b1d, #c9a028);
-  transform: scale(0);
-  transition: transform 0.3s ease;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
+  box-shadow: 0 0 8px rgba(225, 155, 29, 0.5);
+}
+
+.footer-column a,
+.footer-column p {
+  color: rgba(230, 199, 127, 0.85);
+  text-decoration: none;
+  font-size: 0.95rem;
+  line-height: 2.2;
+  font-weight: 300;
+  transition: all 0.3s ease;
+  display: block;
+  position: relative;
+}
+
+.footer-column a {
+  padding: 0.3rem 0;
+}
+
+.footer-column a::before {
+  content: '→';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateX(-60px);
+  opacity: 0;
+  color: #e19b1d;
+  transition: all 0.3s ease;
+}
+
+.footer-column a:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateX(-50px);
+}
+
+.footer-column a:hover {
+  color: #e19b1d;
+  text-shadow: 0 0 8px rgba(225, 155, 29, 0.3);
+  letter-spacing: 0.5px;
+}
+
+.footer-column .hours {
+  color: rgba(230, 199, 127, 0.9);
+  font-weight: 400;
+  line-height: 2;
+  font-size: 1.05rem;
+}
+
+.footer-column .contact-info {
+  color: #e6c77f;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  transition: all 0.3s ease;
+}
+
+.footer-column .contact-info:hover {
+  color: #e19b1d;
+  transform: scale(1.05);
+}
+
+/* Social links modernizzati */
+.social-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.social-link {
+  color: #e19b1d;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(225, 155, 29, 0.3);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  background: rgba(10, 10, 10, 0.5);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.social-link::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(225, 155, 29, 0.2), rgba(201, 160, 40, 0.3));
+  border-radius: 50%;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social-link:hover::before {
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .social-link:hover {
   border-color: #e19b1d;
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+  box-shadow:
+    0 0 20px rgba(225, 155, 29, 0.5),
+    0 4px 15px rgba(0, 0, 0, 0.4);
+  transform: translateY(-5px) rotate(360deg);
+  color: #ffa500;
 }
 
-.social-link:hover::before {
-  transform: scale(1);
+.social-link svg {
+  position: relative;
+  z-index: 1;
+  transition: all 0.4s ease;
+  color: inherit;
 }
 
 .social-link:hover svg {
-  position: relative;
-  z-index: 1;
-  color: #0a0a0a;
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 8px rgba(225, 155, 29, 0.6));
 }
 
 .social-text {
-  font-size: 0.8rem;
-  color: #e6c77f;
-  font-style: italic;
-}
-
-/* Footer Bottom */
-.footer-bottom {
-  padding: 2rem 3rem;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), transparent);
-}
-
-.footer-bottom-divider {
-  width: 200px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
-  margin: 0 auto 2rem;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
-}
-
-.footer-bottom p {
-  color: #e6c77f;
   font-size: 0.85rem;
-  font-weight: 300;
+  color: rgba(230, 199, 127, 0.7);
+  font-style: italic;
   letter-spacing: 0.5px;
 }
 
-.footer-bottom .legal {
-  font-size: 0.75rem;
-  margin-top: 0.5rem;
+/* Footer Bottom modernizzato */
+.footer-bottom {
+  padding: 2.5rem 3rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(225, 155, 29, 0.1);
+  margin-top: 2rem;
+}
+
+.footer-bottom p {
   color: rgba(230, 199, 127, 0.7);
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  line-height: 1.8;
+}
+
+.footer-bottom .legal {
+  font-size: 0.8rem;
+  margin-top: 0.8rem;
+  color: rgba(230, 199, 127, 0.5);
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  background: rgba(225, 155, 29, 0.05);
+  border: 1px solid rgba(225, 155, 29, 0.1);
+  transition: all 0.3s ease;
+}
+
+.footer-bottom .legal:hover {
+  background: rgba(225, 155, 29, 0.1);
+  border-color: rgba(225, 155, 29, 0.2);
+  color: rgba(230, 199, 127, 0.8);
 }
 
 /* ==================== RESPONSIVE ==================== */
 @media (max-width: 1200px) {
   .footer-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem;
+    gap: 1.5rem;
   }
 }
 
@@ -1147,16 +1263,20 @@ footer::before {
   }
 
   .footer-content {
-    padding: 2rem 2rem 3rem;
+    padding: 3rem 2rem 2rem;
   }
 
   .footer-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    gap: 1.5rem;
+  }
+
+  .footer-column {
+    padding: 1.5rem 1rem;
   }
 
   .footer-bottom {
-    padding: 1.5rem 2rem;
+    padding: 2rem;
   }
 }
 
@@ -1183,38 +1303,55 @@ footer::before {
   }
 
   .footer-content {
-    padding: 2rem 1.5rem 2rem;
+    padding: 2.5rem 1.5rem 2rem;
   }
 
   .footer-logo {
-    height: 70px;
+    height: 80px;
+  }
+
+  .footer-tagline {
+    font-size: 1rem;
   }
 
   .footer-grid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 1.5rem;
   }
 
   .footer-column {
-    text-align: center;
+    padding: 1.5rem 1.2rem;
   }
 
-  .column-divider {
-    margin-left: auto;
-    margin-right: auto;
+  .footer-column h4 {
+    font-size: 0.95rem;
+  }
+
+  .footer-column a::before {
+    display: none;
   }
 
   .social-links {
-    justify-content: center;
+    gap: 1.2rem;
+  }
+
+  .social-link {
+    width: 42px;
+    height: 42px;
   }
 
   .footer-bottom {
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
   }
 
   .footer-bottom p {
-    font-size: 0.8rem;
-    line-height: 1.6;
+    font-size: 0.85rem;
+  }
+
+  .footer-bottom .legal {
+    font-size: 0.75rem;
+    display: block;
+    margin-top: 1rem;
   }
 }
 
