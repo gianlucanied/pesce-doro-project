@@ -564,13 +564,13 @@ const goToSlide = (index) => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
+  /* background: linear-gradient(
     135deg,
     rgba(10, 10, 10, 0.65) 0%,
     rgba(26, 20, 16, 0.7) 50%,
     rgba(10, 10, 10, 0.65) 100%
-  );
-  backdrop-filter: blur(1px);
+  ); */
+  /* backdrop-filter: blur(1px); */
   box-shadow: inset 0 0 100px rgba(212, 175, 55, 0.15);
 }
 
@@ -835,9 +835,9 @@ const goToSlide = (index) => {
   transition: transform 0.6s ease;
 }
 
-.jumbotron-main:hover .jumbotron-image {
+/* .jumbotron-main:hover .jumbotron-image {
   transform: scale(1.05);
-}
+} */
 
 .jumbotron-overlay {
   position: absolute;
@@ -876,7 +876,6 @@ const goToSlide = (index) => {
 
 .thumbnail:hover {
   border-color: #c9a028;
-  transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -893,9 +892,9 @@ const goToSlide = (index) => {
   transition: transform 0.4s ease;
 }
 
-.thumbnail:hover .thumbnail-image {
+/* .thumbnail:hover .thumbnail-image {
   transform: scale(1.1);
-}
+} */
 
 .thumbnail-overlay {
   position: absolute;

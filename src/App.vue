@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { RouterLink, RouterView } from 'vue-router'
 
@@ -15,6 +15,15 @@ const changeLanguage = (lang) => {
   localStorage.setItem('language', lang)
   mobileMenuOpen.value = false
 }
+
+// Watch per bloccare lo scroll quando il menu è aperto
+watch(mobileMenuOpen, (isOpen) => {
+  if (isOpen) {
+    document.body.style.overflow = 'hidden'
+  } else {
+    document.body.style.overflow = ''
+  }
+})
 
 // Carica lingua salvata al mount
 onMounted(() => {
@@ -239,6 +248,13 @@ onMounted(() => {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+/* Blocca scroll quando menu mobile è aperto */
+body.menu-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
 }
 
 .page-wrapper {

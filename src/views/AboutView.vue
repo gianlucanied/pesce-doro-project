@@ -603,9 +603,9 @@ onMounted(() => {
   transition: transform 0.6s ease;
 }
 
-.story-image-block:hover .story-image {
+/* .story-image-block:hover .story-image {
   transform: scale(1.05);
-}
+} */
 
 .image-overlay {
   position: absolute;
