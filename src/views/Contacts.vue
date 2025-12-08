@@ -98,7 +98,7 @@ const startHeroImageSlide = () => {
             <div class="card-divider"></div>
 
             <div class="contact-link">
-              <h4>{{ t('contacts.prenotation') }}</h4>
+              <h4 id="prenotation">{{ t('contacts.prenotation') }}</h4>
             </div>
           </div>
 
@@ -186,7 +186,7 @@ const startHeroImageSlide = () => {
             <!-- Map -->
             <div class="map-container">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2992.3622847654586!2d8.31622!3d40.55823!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12da3425c9f3e9e9%3A0x9e6e8e9f3e9e9e9e!2sVia%20Catalogna%2C%2007041%20Alghero%20SS!5e0!3m2!1sit!2sit!4v1234567890"
+                src="https://www.google.com/maps?q=Via+Catalogna+12,+Alghero&output=embed"
                 width="100%"
                 height="100%"
                 style="border: 0"
@@ -504,6 +504,10 @@ const startHeroImageSlide = () => {
   font-weight: 400;
   transition: all 0.3s ease;
   display: inline-block;
+}
+
+#prenotation {
+  font-size: 1.05rem;
 }
 
 .contact-link:hover {

@@ -76,21 +76,21 @@ onMounted(() => {
                   @click="changeLanguage('it')"
                   class="dropdown-lang-btn"
                 >
-                  🇮🇹 <span>Italiano</span>
+                  🇮🇹
                 </button>
                 <button
                   v-if="locale !== 'en'"
                   @click="changeLanguage('en')"
                   class="dropdown-lang-btn"
                 >
-                  🇬🇧 <span>English</span>
+                  🇬🇧
                 </button>
                 <button
                   v-if="locale !== 'es'"
                   @click="changeLanguage('es')"
                   class="dropdown-lang-btn"
                 >
-                  🇪🇸 <span>Español</span>
+                  🇪🇸
                 </button>
               </div>
             </div>
@@ -141,21 +141,21 @@ onMounted(() => {
             :class="{ active: locale === 'it' }"
             class="mobile-lang-btn"
           >
-            🇮🇹 Italiano
+            🇮🇹
           </button>
           <button
             @click="changeLanguage('en')"
             :class="{ active: locale === 'en' }"
             class="mobile-lang-btn"
           >
-            🇬🇧 English
+            🇬🇧
           </button>
           <button
             @click="changeLanguage('es')"
             :class="{ active: locale === 'es' }"
             class="mobile-lang-btn"
           >
-            🇪🇸 Español
+            🇪🇸
           </button>
         </div>
       </div>
@@ -337,7 +337,7 @@ header {
   position: relative;
 }
 
-.logo a::after {
+/* .logo a::after {
   content: '';
   position: absolute;
   inset: -10px;
@@ -345,26 +345,25 @@ header {
   opacity: 0;
   transition: opacity 0.4s ease;
   border-radius: 50%;
-}
-
+} */
+/* 
 .logo a:hover::after {
   opacity: 1;
-}
+} */
 
-.logo a:hover {
+/* .logo a:hover {
   transform: translateY(-2px);
-}
+} */
 
 .logo-img {
   height: 75px;
   width: auto;
   display: block;
-  transition: filter 0.4s ease;
 }
 
-.logo a:hover .logo-img {
+/* .logo a:hover .logo-img {
   filter: drop-shadow(0 6px 20px rgba(225, 155, 29, 0.4));
-}
+} */
 
 /* ==================== MOBILE MENU DOWNLOAD BUTTON - NO HOVER ==================== */
 .mobile-menu-download {
@@ -584,7 +583,6 @@ header {
     0 12px 40px rgba(0, 0, 0, 0.6),
     0 0 0 1px rgba(225, 155, 29, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  min-width: 160px;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px) scale(0.95);
