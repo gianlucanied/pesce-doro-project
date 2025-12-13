@@ -193,7 +193,9 @@ const goToSlide = (index) => {
             <h2 class="section-title">{{ t('home.cuisineTitle') }}</h2>
             <div class="divider"></div>
             <p class="cuisine-text">{{ t('home.cuisineText') }}</p>
-            <div class="specialty-badge">{{ t('home.downloadMenu') }}</div>
+            <div class="specialty-badge">
+              <a href="/Menu2026.pdf" download>{{ t('home.downloadMenu') }}</a>
+            </div>
           </div>
         </div>
 
@@ -239,7 +241,7 @@ const goToSlide = (index) => {
     <transition name="float-fade">
       <a
         v-if="showFloatingButton"
-        href="/menu.pdf"
+        href="/Menu2026.pdf"
         download
         class="floating-menu-btn"
         :aria-label="t('nav.downloadMenu')"
@@ -978,6 +980,7 @@ const goToSlide = (index) => {
 }
 
 .specialty-badge {
+  display: inline-block;
   background: linear-gradient(135deg, #e19b1d, #c9a028);
   color: #ffffff;
   padding: 1.5rem 2rem;
@@ -987,8 +990,15 @@ const goToSlide = (index) => {
   position: relative;
   border-radius: 2px;
   cursor: pointer;
+  width: 90%;
   transition: all 0.3s ease;
   box-shadow: 0 5px 20px rgba(201, 160, 40, 0.3);
+}
+
+.specialty-badge a {
+  color: #ffffff;
+  text-decoration: none;
+  display: block;
 }
 
 .specialty-badge:hover {
@@ -1240,7 +1250,7 @@ const goToSlide = (index) => {
 @media (max-width: 480px) {
   .header-container {
     padding: 2.5rem 1rem;
-    min-height: 400px;
+    min-height: 100vh;
   }
 
   .header-logo {

@@ -106,7 +106,12 @@ onMounted(() => {
 
       <div class="mobile-nav" :class="{ open: mobileMenuOpen }">
         <!-- Pulsante Download Menu - Solo Mobile -->
-        <a href="/menu.pdf" download class="mobile-menu-download" @click="mobileMenuOpen = false">
+        <a
+          href="/Menu2026.pdf"
+          download
+          class="mobile-menu-download"
+          @click="mobileMenuOpen = false"
+        >
           <svg
             width="18"
             height="18"
@@ -190,14 +195,22 @@ onMounted(() => {
             <h4>{{ t('footer.whereToFindUs') }}</h4>
             <p>{{ t('footer.address') }}</p>
             <p>{{ t('footer.city') }}</p>
-            <p class="contact-info">☎ +39 079 952 602</p>
-            <p class="contact-info">✉ info@pescedoroalghero.it</p>
+            <a href="tel:+39079952602" class="contact-info"> ☎ +39 079 952 602 </a>
+            <a href="mailto:info@pescedoroalghero.it" class="contact-info">
+              ✉ info@pescedoroalghero.it
+            </a>
           </div>
 
           <div class="footer-column">
             <h4>{{ t('footer.followUs') }}</h4>
             <div class="social-links">
-              <a href="#" aria-label="Facebook" class="social-link">
+              <a
+                href="https://www.facebook.com/ilpescedoroalghero"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                class="social-link"
+              >
                 <svg
                   width="18"
                   height="18"
@@ -211,7 +224,13 @@ onMounted(() => {
                   <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
                 </svg>
               </a>
-              <a href="#" aria-label="Instagram" class="social-link">
+              <a
+                href="https://www.instagram.com/ilpescedoroalghero"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                class="social-link"
+              >
                 <svg
                   width="18"
                   height="18"
@@ -231,16 +250,34 @@ onMounted(() => {
             <p class="social-text">{{ t('footer.shareExperience') }}</p>
           </div>
         </div>
-      </div>
 
-      <div class="footer-bottom">
-        <p>{{ t('footer.copyright') }}</p>
-        <p class="legal">{{ t('footer.rights') }}</p>
+        <!-- Nuova sezione crediti fotografici -->
+        <div class="photo-credits">
+          <div class="credits-links">
+            <a
+              href="https://www.instagram.com/sebastianocanu"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="credit-link"
+            >
+              ph: @sebastianocanu
+            </a>
+            <span class="credits-separator">•</span>
+
+            <a
+              href="https://www.instagram.com/gianlucanied"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="credit-link"
+            >
+              @gianlucanied
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
   </div>
 </template>
-
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap');
 
@@ -1102,7 +1139,6 @@ footer::after {
 }
 
 .footer-column a::before {
-  content: '→';
   position: absolute;
   left: 50%;
   transform: translateX(-50%) translateX(-60px);
@@ -1376,6 +1412,100 @@ footer::after {
 
   .mobile-menu-download {
     display: none;
+  }
+}
+/* ==================== PHOTO CREDITS ==================== */
+.photo-credits {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(225, 155, 29, 0.15);
+  text-align: center;
+}
+
+.credits-title {
+  color: #e19b1d;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(225, 155, 29, 0.3);
+}
+
+.credits-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  line-height: 1;
+}
+
+.credit-link {
+  color: rgba(230, 199, 127, 0.8);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.3rem 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.credit-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e19b1d, transparent);
+  transition: width 0.3s ease;
+}
+
+.credit-link:hover {
+  color: #e19b1d;
+  text-shadow: 0 0 8px rgba(225, 155, 29, 0.4);
+}
+
+.credit-link:hover::after {
+  width: 100%;
+}
+
+.credits-separator {
+  color: rgba(225, 155, 29, 0.4);
+  font-size: 0.9rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  height: 1em;
+}
+
+/* Responsive per credits */
+@media (max-width: 640px) {
+  .photo-credits {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
+
+  .credits-title {
+    font-size: 0.8rem;
+  }
+
+  .credits-links {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .credits-separator {
+    display: none;
+  }
+
+  .credit-link {
+    font-size: 0.85rem;
   }
 }
 </style>
