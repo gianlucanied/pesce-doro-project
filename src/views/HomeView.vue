@@ -982,14 +982,9 @@ const goToSlide = (index) => {
 .specialty-badge {
   display: inline-block;
   background: linear-gradient(135deg, #e19b1d, #c9a028);
-  color: #ffffff;
-  padding: 1.5rem 2rem;
-  font-weight: 600;
-  font-size: 1.05rem;
-  line-height: 1.6;
+  padding: 2rem;
   position: relative;
   border-radius: 2px;
-  cursor: pointer;
   width: 90%;
   transition: all 0.3s ease;
   box-shadow: 0 5px 20px rgba(201, 160, 40, 0.3);
@@ -998,7 +993,20 @@ const goToSlide = (index) => {
 .specialty-badge a {
   color: #ffffff;
   text-decoration: none;
-  display: block;
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.6;
+
+  /* Fa sì che il link copra tutto il badge */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .specialty-badge:hover {
