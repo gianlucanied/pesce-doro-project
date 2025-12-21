@@ -248,7 +248,7 @@ const startHeroImageSlide = () => {
 /* ==================== HERO SECTION ==================== */
 .hero-contacts {
   position: relative;
-  height: 80vh;
+  height: 100vh;
   min-height: 350px;
   display: flex;
   align-items: center;
