@@ -281,7 +281,7 @@ onMounted(() => {
 /* ==================== HERO SECTION WITH IMAGE CAROUSEL ==================== */
 .hero-about {
   position: relative;
-  height: 80vh;
+  height: 100vh;
   min-height: 400px;
   display: flex;
   align-items: center;
@@ -1190,7 +1190,7 @@ onMounted(() => {
 
 @media (max-width: 480px) {
   .hero-about {
-    height: 70vh;
+    height: 100vh;
   }
 
   .intro-card h2 {

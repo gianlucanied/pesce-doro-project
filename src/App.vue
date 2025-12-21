@@ -186,12 +186,6 @@ onMounted(() => {
           </div>
 
           <div class="footer-column">
-            <h4>{{ t('footer.openingHours') }}</h4>
-            <p class="hours">12:30 - 14:30</p>
-            <p class="hours">19:30 - 23:00</p>
-          </div>
-
-          <div class="footer-column">
             <h4>{{ t('footer.whereToFindUs') }}</h4>
             <p>{{ t('footer.address') }}</p>
             <p>{{ t('footer.city') }}</p>
@@ -1056,9 +1050,12 @@ footer::after {
 /* Grid moderna con card style */
 .footer-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   margin-top: 3rem;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .footer-column {
