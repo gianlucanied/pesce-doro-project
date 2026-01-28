@@ -15,24 +15,21 @@ let headerImageInterval = null
 
 // Array di immagini per l'header
 const headerImages = [
-  new URL('@/assets/bastiano1.jpg', import.meta.url).href,
-  new URL('@/assets/bastiano2.jpg', import.meta.url).href,
-  new URL('@/assets/bastiano3.jpg', import.meta.url).href,
-  new URL('@/assets/bastiano4.jpg', import.meta.url).href,
-  new URL('@/assets/5.jpg', import.meta.url).href,
-  new URL('@/assets/6.jpg', import.meta.url).href,
-  new URL('@/assets/7.jpg', import.meta.url).href,
+  new URL('@/assets/foto-nuove/_6301331.jpg', import.meta.url).href,
+  new URL('@/assets/foto-nuove/_SA36030-Modifica.jpg', import.meta.url).href,
+  new URL('@/assets/foto-nuove/_SA36054-Modifica.jpg', import.meta.url).href,
+  new URL('@/assets/foto-nuove/_SA36035-2.jpg', import.meta.url).href,
 ]
 
 // Array di immagini per il jumbotron (stesso array)
 const jumbotronImages = [
-  new URL('@/assets/bastiano1.jpg', import.meta.url).href,
-  new URL('@/assets/bastiano2.jpg', import.meta.url).href,
-  new URL('@/assets/bastiano3.jpg', import.meta.url).href,
-  new URL('@/assets/bastiano4.jpg', import.meta.url).href,
-  new URL('@/assets/5.jpg', import.meta.url).href,
-  new URL('@/assets/6.jpg', import.meta.url).href,
-  new URL('@/assets/7.jpg', import.meta.url).href,
+  new URL('@/assets/foto-nuove/_6301331.jpg', import.meta.url).href,
+  new URL('@/assets/foto-nuove/_SA36030-Modifica.jpg', import.meta.url).href,
+  new URL('@/assets/foto-nuove/_SA36054-Modifica.jpg', import.meta.url).href,
+  new URL('@/assets/foto-nuove/_SA36035-2.jpg', import.meta.url).href,
+  new URL('@/assets/foto-nuove/_SA36044-Modifica-Modifica.jpg', import.meta.url).href,
+
+  new URL('@/assets/foto-nuove/_SA36052-Modifica-Modifica.jpg', import.meta.url).href,
 ]
 
 // Logo image
@@ -210,18 +207,6 @@ const goToSlide = (index) => {
 
         <!-- Grid elegante -->
         <div class="features-grid">
-          <!-- Eventi -->
-          <div class="feature-box box-1">
-            <div class="box-icon">◆</div>
-            <h3>{{ t('home.eventsTitle') }}</h3>
-            <p>{{ t('home.eventsText') }}</p>
-            <div class="services-list">
-              <span>{{ t('home.birthdays') }}</span>
-              <span>{{ t('home.communions') }}</span>
-              <span>{{ t('home.businessLunches') }}</span>
-            </div>
-          </div>
-
           <!-- Atmosfera -->
           <div class="feature-box box-2">
             <div class="box-icon">◆</div>
@@ -1071,6 +1056,8 @@ const goToSlide = (index) => {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
   margin-bottom: 4rem;
 }
 
@@ -1079,6 +1066,7 @@ const goToSlide = (index) => {
   border: 2px solid rgba(212, 175, 55, 0.25);
   padding: 3rem 2.5rem;
   position: relative;
+  text-align: center;
   transition: all 0.4s ease;
   opacity: 0;
   transform: translateY(30px);
@@ -1134,7 +1122,7 @@ const goToSlide = (index) => {
 
 .feature-box h3 {
   color: #8b6914;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   font-weight: 400;
   font-family: 'Lora', 'Georgia', serif;
   margin-bottom: 1rem;
