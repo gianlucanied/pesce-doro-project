@@ -9,6 +9,8 @@ const currentReviewIndex = ref(0)
 const slideDirection = ref('slide-left')
 
 const staticHeroImage = '/foto-nuove/_6301331.jpg'
+const staticHeroImage2 = '/foto-nuove/_SA36051-Modifica.jpg'
+
 const reviews = ref([
   {
     text: "L'antipasto della casa è pazzesco: si compone di 10 piccoli assaggi, un connubio di sapori. Come primo abbiamo mangiato spaghetti con vongole perfettamente al dente con vongole grandissime. Il branzino al sale, cotto divinamente e servito magistralmente. Ottimo rapporto qualità/prezzo!",
@@ -115,7 +117,7 @@ onMounted(() => {
             <div class="story-image-block">
               <div class="image-border-tl"></div>
               <div class="image-border-br"></div>
-              <img :src="staticHeroImage" alt="Il Pesce d'Oro - Gli Spazi" class="story-image" />
+              <img :src="staticHeroImage2" alt="Il Pesce d'Oro - Gli Spazi" class="story-image" />
               <div class="image-overlay"></div>
             </div>
           </div>
