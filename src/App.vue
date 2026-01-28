@@ -1031,11 +1031,6 @@ footer::after {
   transition: all 0.4s ease;
 }
 
-.footer-logo:hover {
-  filter: drop-shadow(0 0 40px rgba(225, 155, 29, 0.6)) drop-shadow(0 6px 20px rgba(0, 0, 0, 0.6));
-  transform: scale(1.05);
-}
-
 .footer-tagline {
   color: #e6c77f;
   font-size: 1.1rem;

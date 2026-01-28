@@ -7,18 +7,8 @@ const { t } = useI18n()
 const isVisible = ref(false)
 const currentReviewIndex = ref(0)
 const slideDirection = ref('slide-left')
-const currentHeroImage = ref(0)
-const isHoveringReview = ref(false)
 
-const heroImages = [
-  new URL('@/assets/8.jpg', import.meta.url).href,
-  new URL('@/assets/9.jpg', import.meta.url).href,
-  new URL('@/assets/10.jpg', import.meta.url).href,
-  new URL('@/assets/11.jpg', import.meta.url).href,
-  new URL('@/assets/12.jpg', import.meta.url).href,
-  new URL('@/assets/13.jpg', import.meta.url).href,
-  new URL('@/assets/14.jpg', import.meta.url).href,
-]
+const staticHeroImage = new URL('@/assets/foto-nuove/_6301331.jpg', import.meta.url).href
 
 const reviews = ref([
   {
@@ -63,8 +53,6 @@ const reviews = ref([
   },
 ])
 
-let heroSlideInterval = null
-
 const nextReview = () => {
   slideDirection.value = 'slide-left'
   currentReviewIndex.value = (currentReviewIndex.value + 1) % reviews.value.length
@@ -81,34 +69,18 @@ const goToReview = (index) => {
   currentReviewIndex.value = index
 }
 
-const startHeroSlide = () => {
-  heroSlideInterval = setInterval(() => {
-    currentHeroImage.value = (currentHeroImage.value + 1) % heroImages.length
-  }, 2000)
-}
-
 onMounted(() => {
   setTimeout(() => {
     isVisible.value = true
   }, 150)
-  startHeroSlide()
 })
 </script>
 
 <template>
   <div class="about-page" :class="{ visible: isVisible }">
-    <!-- Hero Section with Image Carousel -->
+    <!-- Hero Section con immagine statica -->
     <section class="hero-about">
-      <div class="hero-images-container">
-        <transition name="hero-fade" mode="out-in">
-          <div
-            :key="currentHeroImage"
-            class="hero-image"
-            :style="{ backgroundImage: `url(${heroImages[currentHeroImage]})` }"
-          ></div>
-        </transition>
-      </div>
-      <div class="hero-overlay"></div>
+      <div class="hero-image-static" :style="{ backgroundImage: `url(${staticHeroImage})` }"></div>
       <div class="hero-content">
         <div class="ornament"></div>
         <h1 class="main-title">{{ t('about.title') }}</h1>
@@ -144,7 +116,7 @@ onMounted(() => {
             <div class="story-image-block">
               <div class="image-border-tl"></div>
               <div class="image-border-br"></div>
-              <img :src="heroImages[0]" alt="Il Pesce d'Oro - Gli Spazi" class="story-image" />
+              <img :src="staticHeroImage" alt="Il Pesce d'Oro - Gli Spazi" class="story-image" />
               <div class="image-overlay"></div>
             </div>
           </div>
@@ -163,7 +135,6 @@ onMounted(() => {
         <!-- Reviews Carousel -->
         <div class="reviews-wrapper">
           <div class="reviews-intro">
-            <!-- <div class="intro-ornament">★</div> -->
             <h3>{{ t('about.reviewsTitle') }}</h3>
             <div class="intro-line"></div>
             <p class="reviews-description">{{ t('about.reviewsDescription') }}</p>
@@ -278,7 +249,7 @@ onMounted(() => {
   opacity: 1;
 }
 
-/* ==================== HERO SECTION WITH IMAGE CAROUSEL ==================== */
+/* ==================== HERO SECTION STATICO SENZA FILTRI ==================== */
 .hero-about {
   position: relative;
   height: 100vh;
@@ -289,14 +260,7 @@ onMounted(() => {
   overflow: hidden;
 }
 
-.hero-images-container {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.hero-image {
+.hero-image-static {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -304,26 +268,6 @@ onMounted(() => {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-}
-
-.hero-fade-enter-active,
-.hero-fade-leave-active {
-  transition: opacity 2s ease;
-}
-
-.hero-fade-enter-from {
-  opacity: 0;
-}
-
-.hero-fade-leave-to {
-  opacity: 0;
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(rgba(212, 175, 55, 0.1), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
-  z-index: 1;
 }
 
 .hero-content {
@@ -603,10 +547,6 @@ onMounted(() => {
   transition: transform 0.6s ease;
 }
 
-/* .story-image-block:hover .story-image {
-  transform: scale(1.05);
-} */
-
 .image-overlay {
   position: absolute;
   top: 0;
@@ -693,13 +633,6 @@ onMounted(() => {
 .reviews-intro {
   text-align: center;
   margin-bottom: 4rem;
-}
-
-.intro-ornament {
-  color: #c9a028;
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  opacity: 1;
 }
 
 .reviews-intro h3 {

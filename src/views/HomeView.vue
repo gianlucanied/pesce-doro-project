@@ -6,30 +6,26 @@ const { t } = useI18n()
 
 const isVisible = ref(false)
 const currentSlide = ref(0)
-const currentHeaderImage = ref(0)
 const showFloatingButton = ref(false)
-const totalSlides = 7
+const totalSlides = 6
 const isAutoPlaying = ref(true)
 let autoPlayInterval = null
-let headerImageInterval = null
 
-// Array di immagini per l'header
-const headerImages = [
-  new URL('@/assets/foto-nuove/_6301331.jpg', import.meta.url).href,
-  new URL('@/assets/foto-nuove/_SA36030-Modifica.jpg', import.meta.url).href,
-  new URL('@/assets/foto-nuove/_SA36054-Modifica.jpg', import.meta.url).href,
-  new URL('@/assets/foto-nuove/_SA36035-2.jpg', import.meta.url).href,
-]
+// Immagine statica per l'header
+const staticHeaderImage = new URL('@/assets/foto-nuove/_SA36040-Modifica.jpg', import.meta.url).href
 
-// Array di immagini per il jumbotron (stesso array)
+// Array di immagini per il jumbotron (carosello)
 const jumbotronImages = [
   new URL('@/assets/foto-nuove/_6301331.jpg', import.meta.url).href,
   new URL('@/assets/foto-nuove/_SA36030-Modifica.jpg', import.meta.url).href,
-  new URL('@/assets/foto-nuove/_SA36054-Modifica.jpg', import.meta.url).href,
-  new URL('@/assets/foto-nuove/_SA36035-2.jpg', import.meta.url).href,
+  new URL('@/assets/foto-nuove/_SA36057-Modifica.jpg', import.meta.url).href,
+  new URL('@/assets/foto-nuove/_SA36035-Modifica.jpg', import.meta.url).href,
   new URL('@/assets/foto-nuove/_SA36044-Modifica-Modifica.jpg', import.meta.url).href,
-
   new URL('@/assets/foto-nuove/_SA36052-Modifica-Modifica.jpg', import.meta.url).href,
+  new URL('@/assets/foto-nuove/_SA36032-Modifica-2.jpg', import.meta.url).href,
+  new URL('@/assets/foto-nuove/_SA36056-Modifica.jpg', import.meta.url).href,
+  new URL('@/assets/foto-nuove/_SA36035-2.jpg', import.meta.url).href,
+  new URL('@/assets/foto-nuove/_SA36051-Modifica.jpg', import.meta.url).href,
 ]
 
 // Logo image
@@ -47,7 +43,6 @@ onMounted(() => {
   }, 300)
 
   startAutoPlay()
-  startHeaderImageSlide()
 
   // Aggiungi listener per lo scroll
   window.addEventListener('scroll', handleScroll)
@@ -59,12 +54,6 @@ const startAutoPlay = () => {
       nextSlide()
     }
   }, 4000)
-}
-
-const startHeaderImageSlide = () => {
-  headerImageInterval = setInterval(() => {
-    currentHeaderImage.value = (currentHeaderImage.value + 1) % headerImages.length
-  }, 5000)
 }
 
 const stopAutoPlay = () => {
@@ -104,18 +93,14 @@ const goToSlide = (index) => {
       <!-- Sfondo decorativo -->
       <div class="elegant-bg"></div>
 
-      <!-- Header elegante -->
+      <!-- Header elegante con immagine statica -->
       <div class="header-container">
-        <!-- Background con immagini scorrevoli -->
+        <!-- Background statico senza filtri -->
         <div class="header-background">
-          <transition name="header-fade" mode="out-in">
-            <div
-              :key="currentHeaderImage"
-              class="header-bg-image"
-              :style="{ backgroundImage: `url(${headerImages[currentHeaderImage]})` }"
-            ></div>
-          </transition>
-          <div class="header-bg-overlay"></div>
+          <div
+            class="header-bg-image-static"
+            :style="{ backgroundImage: `url(${staticHeaderImage})` }"
+          ></div>
         </div>
 
         <div class="ornament-top"></div>
@@ -147,7 +132,7 @@ const goToSlide = (index) => {
           </div>
         </div>
 
-        <!-- JUMBOTRON FOTO -->
+        <!-- JUMBOTRON FOTO CON CAROSELLO -->
         <div class="jumbotron-section">
           <div class="jumbotron-container">
             <div class="jumbotron-border-tl"></div>
@@ -325,7 +310,6 @@ const goToSlide = (index) => {
 
 .floating-btn-text {
   font-weight: 500;
-  /* text-transform: uppercase; */
   font-size: 0.75rem;
   color: #8b6914;
   text-align: center;
@@ -503,7 +487,7 @@ const goToSlide = (index) => {
   );
 }
 
-/* Header */
+/* ==================== HEADER STATICO SENZA FILTRI ==================== */
 .header-container {
   text-align: center;
   margin-bottom: 6rem;
@@ -517,14 +501,14 @@ const goToSlide = (index) => {
   box-shadow:
     0 10px 40px rgba(0, 0, 0, 0.15),
     0 0 0 1px rgba(212, 175, 55, 0.1) inset;
-  min-height: 600px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-/* Background con immagini scorrevoli */
+/* Background statico */
 .header-background {
   position: absolute;
   top: 0;
@@ -534,7 +518,7 @@ const goToSlide = (index) => {
   z-index: 0;
 }
 
-.header-bg-image {
+.header-bg-image-static {
   position: absolute;
   top: 0;
   left: 0;
@@ -543,36 +527,6 @@ const goToSlide = (index) => {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-}
-
-.header-bg-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  /* background: linear-gradient(
-    135deg,
-    rgba(10, 10, 10, 0.65) 0%,
-    rgba(26, 20, 16, 0.7) 50%,
-    rgba(10, 10, 10, 0.65) 100%
-  ); */
-  /* backdrop-filter: blur(1px); */
-  box-shadow: inset 0 0 100px rgba(212, 175, 55, 0.15);
-}
-
-/* Transizione fade per le immagini header */
-.header-fade-enter-active,
-.header-fade-leave-active {
-  transition: opacity 2s ease;
-}
-
-.header-fade-enter-from {
-  opacity: 0;
-}
-
-.header-fade-leave-to {
-  opacity: 0;
 }
 
 @keyframes headerSlide {
@@ -630,12 +584,6 @@ const goToSlide = (index) => {
   filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.6))
     drop-shadow(0 0 50px rgba(212, 175, 55, 0.4)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.8));
   transition: all 0.6s ease;
-}
-
-.header-logo:hover {
-  filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.8))
-    drop-shadow(0 0 60px rgba(212, 175, 55, 0.5)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.9));
-  transform: scale(1.02);
 }
 
 @keyframes logoFadeIn {
@@ -759,7 +707,7 @@ const goToSlide = (index) => {
   margin-bottom: 0;
 }
 
-/* ==================== JUMBOTRON ==================== */
+/* ==================== JUMBOTRON CON CAROSELLO ==================== */
 .jumbotron-section {
   margin-bottom: 6rem;
   opacity: 0;
@@ -822,10 +770,6 @@ const goToSlide = (index) => {
   transition: transform 0.6s ease;
 }
 
-/* .jumbotron-main:hover .jumbotron-image {
-  transform: scale(1.05);
-} */
-
 .jumbotron-overlay {
   position: absolute;
   top: 0;
@@ -878,10 +822,6 @@ const goToSlide = (index) => {
   display: block;
   transition: transform 0.4s ease;
 }
-
-/* .thumbnail:hover .thumbnail-image {
-  transform: scale(1.1);
-} */
 
 .thumbnail-overlay {
   position: absolute;
@@ -1075,10 +1015,6 @@ const goToSlide = (index) => {
     0 0 0 1px rgba(212, 175, 55, 0.08) inset;
 }
 
-.box-1 {
-  animation: boxSlide 1s ease-out 2.2s forwards;
-}
-
 .box-2 {
   animation: boxSlide 1s ease-out 2.4s forwards;
 }
@@ -1133,21 +1069,6 @@ const goToSlide = (index) => {
   line-height: 1.8;
   font-weight: 300;
   margin-bottom: 1.5rem;
-}
-
-.services-list {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(212, 175, 55, 0.2);
-}
-
-.services-list span {
-  color: #8b6914;
-  font-size: 0.9rem;
-  font-weight: 300;
-  letter-spacing: 1px;
 }
 
 /* Footer ornament */
@@ -1235,11 +1156,6 @@ const goToSlide = (index) => {
 
   .feature-box {
     padding: 2rem;
-  }
-
-  .services-list {
-    flex-direction: column;
-    gap: 0.5rem;
   }
 }
 

@@ -5,49 +5,22 @@ import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 
 const isVisible = ref(false)
-const currentHeroImage = ref(0)
 let heroImageInterval = null
 
-// Array di immagini per l'hero - USA NEW URL INVECE DI PERCORSI RELATIVI
-const heroImages = [
-  new URL('@/assets/8.jpg', import.meta.url).href,
-  new URL('@/assets/9.jpg', import.meta.url).href,
-  new URL('@/assets/10.jpg', import.meta.url).href,
-  new URL('@/assets/11.jpg', import.meta.url).href,
-  new URL('@/assets/12.jpg', import.meta.url).href,
-  new URL('@/assets/13.jpg', import.meta.url).href,
-  new URL('@/assets/14.jpg', import.meta.url).href,
-]
+const staticHeroImage = new URL('@/assets/foto-nuove/_SA36054.jpg', import.meta.url).href
 
 onMounted(() => {
   setTimeout(() => {
     isVisible.value = true
   }, 300)
-  startHeroImageSlide()
 })
-
-const startHeroImageSlide = () => {
-  heroImageInterval = setInterval(() => {
-    currentHeroImage.value = (currentHeroImage.value + 1) % heroImages.length
-  }, 5000) // Cambia immagine ogni 5 secondi
-}
 </script>
 
 <template>
   <div class="contacts-page" :class="{ visible: isVisible }">
     <!-- Hero Section -->
     <section class="hero-contacts">
-      <!-- Background con immagini scorrevoli -->
-      <div class="hero-background">
-        <transition name="hero-fade" mode="out-in">
-          <div
-            :key="currentHeroImage"
-            class="hero-bg-image"
-            :style="{ backgroundImage: `url(${heroImages[currentHeroImage]})` }"
-          ></div>
-        </transition>
-        <div class="hero-bg-overlay"></div>
-      </div>
+      <div class="hero-image-static" :style="{ backgroundImage: `url(${staticHeroImage})` }"></div>
 
       <div class="hero-overlay"></div>
       <div class="hero-content">
@@ -254,6 +227,15 @@ const startHeroImageSlide = () => {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+}
+.hero-image-static {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* Background con immagini scorrevoli */
