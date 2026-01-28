@@ -7,8 +7,7 @@ const { t } = useI18n()
 const isVisible = ref(false)
 let heroImageInterval = null
 
-const staticHeroImage = new URL('@/assets/foto-nuove/_SA36054.jpg', import.meta.url).href
-
+const staticHeroImage = '/foto-nuove/_SA36054.jpg'
 onMounted(() => {
   setTimeout(() => {
     isVisible.value = true

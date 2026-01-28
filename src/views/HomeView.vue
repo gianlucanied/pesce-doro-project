@@ -12,25 +12,23 @@ const isAutoPlaying = ref(true)
 let autoPlayInterval = null
 
 // Immagine statica per l'header
-const staticHeaderImage = new URL('@/assets/foto-nuove/_SA36040-Modifica.jpg', import.meta.url).href
-
+const staticHeaderImage = '/foto-nuove/_SA36040-Modifica.jpg'
 // Array di immagini per il jumbotron (carosello)
 const jumbotronImages = [
-  new URL('@/assets/foto-nuove/_6301331.jpg', import.meta.url).href,
-  new URL('@/assets/foto-nuove/_SA36030-Modifica.jpg', import.meta.url).href,
-  new URL('@/assets/foto-nuove/_SA36057-Modifica.jpg', import.meta.url).href,
-  new URL('@/assets/foto-nuove/_SA36035-Modifica.jpg', import.meta.url).href,
-  new URL('@/assets/foto-nuove/_SA36044-Modifica-Modifica.jpg', import.meta.url).href,
-  new URL('@/assets/foto-nuove/_SA36052-Modifica-Modifica.jpg', import.meta.url).href,
-  new URL('@/assets/foto-nuove/_SA36032-Modifica-2.jpg', import.meta.url).href,
-  new URL('@/assets/foto-nuove/_SA36056-Modifica.jpg', import.meta.url).href,
-  new URL('@/assets/foto-nuove/_SA36035-2.jpg', import.meta.url).href,
-  new URL('@/assets/foto-nuove/_SA36051-Modifica.jpg', import.meta.url).href,
+  '/foto-nuove/_6301331.jpg',
+  '/foto-nuove/_SA36030-Modifica.jpg',
+  '/foto-nuove/_SA36057-Modifica.jpg',
+  '/foto-nuove/_SA36035-Modifica.jpg',
+  '/foto-nuove/_SA36044-Modifica-Modifica.jpg',
+  '/foto-nuove/_SA36052-Modifica-Modifica.jpg',
+  '/foto-nuove/_SA36032-Modifica-2.jpg',
+  '/foto-nuove/_SA36056-Modifica.jpg',
+  '/foto-nuove/_SA36035-2.jpg',
+  '/foto-nuove/_SA36051-Modifica.jpg',
 ]
 
 // Logo image
-const logoImage = new URL('/imageremove.png', import.meta.url).href
-
+const logoImage = '/imageremove.png'
 // Gestione scroll per il floating button
 const handleScroll = () => {
   // Mostra il pulsante dopo 300px di scroll
