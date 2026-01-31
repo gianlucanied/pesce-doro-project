@@ -12,19 +12,19 @@ const isAutoPlaying = ref(true)
 let autoPlayInterval = null
 
 // Immagine statica per l'header
-const staticHeaderImage = '/foto-nuove/_SA36040-Modifica.jpg'
+const staticHeaderImage = '/foto-nuove/_SA36040-Modifica.webp'
 // Array di immagini per il jumbotron (carosello)
 const jumbotronImages = [
-  '/foto-nuove/_6301331.jpg',
-  '/foto-nuove/_SA36030-Modifica.jpg',
-  '/foto-nuove/_SA36057-Modifica.jpg',
-  '/foto-nuove/_SA36035-Modifica.jpg',
-  '/foto-nuove/_SA36044-Modifica-Modifica.jpg',
-  '/foto-nuove/_SA36052-Modifica-Modifica.jpg',
-  '/foto-nuove/_SA36032-Modifica-2.jpg',
-  '/foto-nuove/_SA36056-Modifica.jpg',
-  '/foto-nuove/_SA36035-2.jpg',
-  '/foto-nuove/_SA36051-Modifica.jpg',
+  '/foto-nuove/_6301331.webp',
+  '/foto-nuove/_SA36030-Modifica.webp',
+  '/foto-nuove/_SA36057-Modifica.webp',
+  '/foto-nuove/_SA36035-Modifica.webp',
+  '/foto-nuove/_SA36044-Modifica-Modifica.webp',
+  '/foto-nuove/_SA36052-Modifica-Modifica.webp',
+  '/foto-nuove/_SA36032-Modifica-2.webp',
+  '/foto-nuove/_SA36056-Modifica.webp',
+  '/foto-nuove/_SA36035-2.webp',
+  '/foto-nuove/_SA36051-Modifica.webp',
 ]
 
 // Logo image
@@ -563,25 +563,67 @@ const goToSlide = (index) => {
   }
 }
 
-/* Logo Container */
+/* Logo Container - Stile elegante con cornice trasparente */
 .logo-container {
   position: relative;
   z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
-  opacity: 0;
-  animation: logoFadeIn 1.5s ease-out 0.8s forwards;
+  padding: 1rem 2rem;
+  opacity: 1;
+}
+
+/* Sfondo con doppia cornice elegante - più trasparente */
+.logo-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 40px);
+  height: calc(100% - 40px);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(248, 246, 242, 0.2) 50%,
+    rgba(255, 255, 255, 0.25) 100%
+  );
+  border: 3px solid rgba(212, 175, 55, 0.5);
+  box-shadow:
+    0 0 40px rgba(212, 175, 55, 0.4),
+    inset 0 0 30px rgba(255, 255, 255, 0.2),
+    0 8px 32px rgba(0, 0, 0, 0.15);
+  z-index: -1;
+  backdrop-filter: blur(8px);
+}
+
+/* Cornice esterna decorativa */
+.logo-container::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  border: 1px solid rgba(212, 175, 55, 0.7);
+  box-shadow:
+    0 0 25px rgba(212, 175, 55, 0.5),
+    inset 0 0 20px rgba(212, 175, 55, 0.15);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .header-logo {
-  max-width: 500px;
+  max-width: 400px;
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.6))
-    drop-shadow(0 0 50px rgba(212, 175, 55, 0.4)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.8));
-  transition: all 0.6s ease;
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  filter: drop-shadow(0 4px 12px rgba(139, 105, 20, 0.4))
+    drop-shadow(0 2px 8px rgba(201, 160, 40, 0.3));
 }
 
 @keyframes logoFadeIn {
@@ -919,8 +961,6 @@ const goToSlide = (index) => {
   font-weight: 600;
   font-size: 1.05rem;
   line-height: 1.6;
-
-  /* Fa sì che il link copra tutto il badge */
   position: absolute;
   top: 0;
   left: 0;
@@ -1094,8 +1134,23 @@ const goToSlide = (index) => {
     min-height: 100vh;
   }
 
+  .logo-container {
+    padding: 2rem;
+  }
+
+  .logo-container::before {
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
+  }
+
+  .logo-container::after {
+    width: calc(100% - 15px);
+    height: calc(100% - 15px);
+  }
+
   .header-logo {
     max-width: 450px;
+    padding: 1.5rem;
   }
 
   .story-container {
@@ -1163,8 +1218,24 @@ const goToSlide = (index) => {
     min-height: 100vh;
   }
 
+  .logo-container {
+    padding: 1.5rem;
+  }
+
+  .logo-container::before {
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    border-width: 2px;
+  }
+
+  .logo-container::after {
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+  }
+
   .header-logo {
     max-width: 300px;
+    padding: 1rem;
   }
 
   .story-container {

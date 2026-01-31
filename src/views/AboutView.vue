@@ -8,8 +8,8 @@ const isVisible = ref(false)
 const currentReviewIndex = ref(0)
 const slideDirection = ref('slide-left')
 
-const staticHeroImage = '/foto-nuove/_6301331.jpg'
-const staticHeroImage2 = '/foto-nuove/_SA36051-Modifica.jpg'
+const staticHeroImage = '/foto-nuove/_6301331.webp'
+const staticHeroImage2 = '/foto-nuove/_SA36051-Modifica.webp'
 
 const reviews = ref([
   {

@@ -7,7 +7,7 @@ const { t } = useI18n()
 const isVisible = ref(false)
 let heroImageInterval = null
 
-const staticHeroImage = '/foto-nuove/_SA36054.jpg'
+const staticHeroImage = '/foto-nuove/_SA36054.webp'
 onMounted(() => {
   setTimeout(() => {
     isVisible.value = true
