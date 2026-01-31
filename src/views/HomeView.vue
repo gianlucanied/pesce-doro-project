@@ -783,7 +783,7 @@ const goToSlide = (index) => {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 0.5rem 1rem;
   opacity: 1;
 }
 
@@ -829,7 +829,7 @@ const goToSlide = (index) => {
 }
 
 .header-logo {
-  max-width: 400px;
+  max-width: 300px;
   width: 100%;
   height: auto;
   position: relative;
