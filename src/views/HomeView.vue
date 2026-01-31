@@ -11,6 +11,72 @@ const totalSlides = 6
 const isAutoPlaying = ref(true)
 let autoPlayInterval = null
 
+const isLoading = ref(true)
+const imagesLoaded = ref(0)
+const totalImages = ref(0)
+
+// Funzione per controllare quando tutte le immagini sono caricate
+const checkImagesLoaded = () => {
+  const images = document.querySelectorAll('img')
+  totalImages.value = images.length
+
+  if (totalImages.value === 0) {
+    isLoading.value = false
+    return
+  }
+
+  let loadedCount = 0
+
+  images.forEach((img) => {
+    if (img.complete) {
+      loadedCount++
+      imagesLoaded.value = loadedCount
+    } else {
+      img.addEventListener('load', () => {
+        loadedCount++
+        imagesLoaded.value = loadedCount
+
+        if (loadedCount === totalImages.value) {
+          setTimeout(() => {
+            isLoading.value = false
+          }, 500) // Piccolo delay per transizione smooth
+        }
+      })
+
+      img.addEventListener('error', () => {
+        loadedCount++
+        imagesLoaded.value = loadedCount
+
+        if (loadedCount === totalImages.value) {
+          setTimeout(() => {
+            isLoading.value = false
+          }, 500)
+        }
+      })
+    }
+  })
+
+  if (loadedCount === totalImages.value) {
+    setTimeout(() => {
+      isLoading.value = false
+    }, 500)
+  }
+}
+
+onMounted(() => {
+  setTimeout(() => {
+    isVisible.value = true
+  }, 300)
+
+  // Controlla il caricamento delle immagini
+  checkImagesLoaded()
+
+  startAutoPlay()
+
+  // Aggiungi listener per lo scroll
+  window.addEventListener('scroll', handleScroll)
+})
+
 // Immagine statica per l'header
 const staticHeaderImage = '/foto-nuove/_SA36040-Modifica.webp'
 // Array di immagini per il jumbotron (carosello)
@@ -87,6 +153,22 @@ const goToSlide = (index) => {
 
 <template>
   <main>
+    <!-- Loader -->
+    <transition name="loader-fade">
+      <div v-if="isLoading" class="loader-overlay">
+        <div class="loader-container">
+          <div class="loader-logo">
+            <img :src="logoImage" alt="Il Pesce d'Oro" />
+          </div>
+          <div class="loader-spinner">
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+          </div>
+          <div class="loader-text">{{ Math.round((imagesLoaded / totalImages) * 100) }}%</div>
+        </div>
+      </div>
+    </transition>
     <section class="hero-section" :class="{ visible: isVisible }">
       <!-- Sfondo decorativo -->
       <div class="elegant-bg"></div>
@@ -245,6 +327,137 @@ const goToSlide = (index) => {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+/* ==================== LOADER ==================== */
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #f8f6f2 0%, #ebe8e1 50%, #f8f6f2 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.loader-logo {
+  width: 250px;
+  animation: logoFloat 2s ease-in-out infinite;
+}
+
+.loader-logo img {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 4px 12px rgba(139, 105, 20, 0.4))
+    drop-shadow(0 2px 8px rgba(201, 160, 40, 0.3));
+}
+
+@keyframes logoFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.loader-spinner {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.spinner-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 3px solid transparent;
+  border-top-color: #c9a028;
+  border-radius: 50%;
+  animation: spin 1.5s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+.spinner-ring:nth-child(1) {
+  animation-delay: -0.45s;
+  border-top-color: #e19b1d;
+}
+
+.spinner-ring:nth-child(2) {
+  animation-delay: -0.3s;
+  border-top-color: #d4af37;
+}
+
+.spinner-ring:nth-child(3) {
+  animation-delay: -0.15s;
+  border-top-color: #c9a028;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader-text {
+  color: #8b6914;
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-family: 'Lora', 'Georgia', serif;
+  letter-spacing: 2px;
+}
+
+.loader-fade-enter-active,
+.loader-fade-leave-active {
+  transition: opacity 0.6s ease;
+}
+
+.loader-fade-enter-from {
+  opacity: 0;
+}
+
+.loader-fade-leave-to {
+  opacity: 0;
+}
+
+/* Responsive loader */
+@media (max-width: 768px) {
+  .loader-logo {
+    width: 200px;
+  }
+
+  .loader-spinner {
+    width: 60px;
+    height: 60px;
+  }
+
+  .loader-text {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .loader-logo {
+    width: 150px;
+  }
+
+  .loader-spinner {
+    width: 50px;
+    height: 50px;
+  }
 }
 
 .hero-section {
