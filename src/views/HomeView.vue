@@ -1447,7 +1447,7 @@ const goToSlide = (index) => {
   }
 
   .header-logo {
-    max-width: 300px;
+    max-width: 200px;
     padding: 1rem;
   }
 
