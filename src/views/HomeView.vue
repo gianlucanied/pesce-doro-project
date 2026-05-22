@@ -875,7 +875,6 @@ const goToSlide = (index) => {
 }
 
 .story-container {
-  max-width: 950px;
   margin: 0 auto;
   padding: 5rem 4rem;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 246, 242, 0.9));
@@ -1112,7 +1111,6 @@ const goToSlide = (index) => {
 
 .cuisine-content {
   text-align: center;
-  max-width: 900px;
   margin: 0 auto;
   padding: 4rem 3rem;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 246, 242, 0.9));
@@ -1247,7 +1245,6 @@ const goToSlide = (index) => {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
-  max-width: 900px;
   margin: 0 auto;
   margin-bottom: 4rem;
 }
