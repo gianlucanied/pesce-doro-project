@@ -244,7 +244,12 @@ onMounted(() => {
             <p class="social-text">{{ t('footer.shareExperience') }}</p>
           </div>
         </div>
-
+        <!-- Dati societari obbligatori -->
+        <div class="footer-bottom">
+          <p class="company-name">SANT'ERASMO S.r.l.</p>
+          <p>Via Catalogna 12 — 07041 Alghero (SS)</p>
+          <p>P. IVA 02700160902 &nbsp;|&nbsp; PEC: santerasmosrlc@legalmail.it &nbsp;</p>
+        </div>
         <!-- Nuova sezione crediti fotografici -->
         <div class="photo-credits">
           <div class="credits-links">
@@ -1258,6 +1263,12 @@ footer::after {
   font-weight: 300;
   letter-spacing: 0.5px;
   line-height: 1.8;
+}
+
+.footer-bottom .company-name {
+  color: rgba(230, 199, 127, 0.9);
+  font-weight: 500;
+  letter-spacing: 1px;
 }
 
 .footer-bottom .legal {
